@@ -1,0 +1,423 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-mt-4-account-heading"
+        data-cy="Mt4AccountCreateUpdateHeading"
+        jhiTranslate="propfirmApp.mt4Account.home.createOrEditLabel"
+      >
+        Create or edit a Mt 4 Account
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountType" for="field_accountType">Account Type</label>
+          <select class="form-control" name="accountType" formControlName="accountType" id="field_accountType" data-cy="accountType">
+            <option [ngValue]="null">{{ 'propfirmApp.ACCOUNTTYPE.null' | translate }}</option>
+            <option value="REAL">{{ 'propfirmApp.ACCOUNTTYPE.REAL' | translate }}</option>
+            <option value="DEMO">{{ 'propfirmApp.ACCOUNTTYPE.DEMO' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountBroker" for="field_accountBroker"
+            >Account Broker</label
+          >
+          <select
+            class="form-control"
+            name="accountBroker"
+            formControlName="accountBroker"
+            id="field_accountBroker"
+            data-cy="accountBroker"
+          >
+            <option [ngValue]="null">{{ 'propfirmApp.BROKER.null' | translate }}</option>
+            <option value="FXPRO">{{ 'propfirmApp.BROKER.FXPRO' | translate }}</option>
+            <option value="ALPARI">{{ 'propfirmApp.BROKER.ALPARI' | translate }}</option>
+            <option value="THINKMARKETS">{{ 'propfirmApp.BROKER.THINKMARKETS' | translate }}</option>
+            <option value="PEPPERSTONE">{{ 'propfirmApp.BROKER.PEPPERSTONE' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountLogin" for="field_accountLogin"
+            >Account Login</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountLogin"
+            id="field_accountLogin"
+            data-cy="accountLogin"
+            formControlName="accountLogin"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountPassword" for="field_accountPassword"
+            >Account Password</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountPassword"
+            id="field_accountPassword"
+            data-cy="accountPassword"
+            formControlName="accountPassword"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountInvestorLogin" for="field_accountInvestorLogin"
+            >Account Investor Login</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountInvestorLogin"
+            id="field_accountInvestorLogin"
+            data-cy="accountInvestorLogin"
+            formControlName="accountInvestorLogin"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.mt4Account.accountInvestorPassword"
+            for="field_accountInvestorPassword"
+            >Account Investor Password</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountInvestorPassword"
+            id="field_accountInvestorPassword"
+            data-cy="accountInvestorPassword"
+            formControlName="accountInvestorPassword"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountReal" for="field_accountReal">Account Real</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="accountReal"
+            id="field_accountReal"
+            data-cy="accountReal"
+            formControlName="accountReal"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountInfoDouble" for="field_accountInfoDouble"
+            >Account Info Double</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountInfoDouble"
+            id="field_accountInfoDouble"
+            data-cy="accountInfoDouble"
+            formControlName="accountInfoDouble"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountInfoInteger" for="field_accountInfoInteger"
+            >Account Info Integer</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountInfoInteger"
+            id="field_accountInfoInteger"
+            data-cy="accountInfoInteger"
+            formControlName="accountInfoInteger"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountInfoString" for="field_accountInfoString"
+            >Account Info String</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountInfoString"
+            id="field_accountInfoString"
+            data-cy="accountInfoString"
+            formControlName="accountInfoString"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountBalance" for="field_accountBalance"
+            >Account Balance</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountBalance"
+            id="field_accountBalance"
+            data-cy="accountBalance"
+            formControlName="accountBalance"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountCredit" for="field_accountCredit"
+            >Account Credit</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountCredit"
+            id="field_accountCredit"
+            data-cy="accountCredit"
+            formControlName="accountCredit"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountCompany" for="field_accountCompany"
+            >Account Company</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountCompany"
+            id="field_accountCompany"
+            data-cy="accountCompany"
+            formControlName="accountCompany"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountCurrency" for="field_accountCurrency"
+            >Account Currency</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountCurrency"
+            id="field_accountCurrency"
+            data-cy="accountCurrency"
+            formControlName="accountCurrency"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountEquity" for="field_accountEquity"
+            >Account Equity</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountEquity"
+            id="field_accountEquity"
+            data-cy="accountEquity"
+            formControlName="accountEquity"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountFreeMargin" for="field_accountFreeMargin"
+            >Account Free Margin</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountFreeMargin"
+            id="field_accountFreeMargin"
+            data-cy="accountFreeMargin"
+            formControlName="accountFreeMargin"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountFreeMarginCheck" for="field_accountFreeMarginCheck"
+            >Account Free Margin Check</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountFreeMarginCheck"
+            id="field_accountFreeMarginCheck"
+            data-cy="accountFreeMarginCheck"
+            formControlName="accountFreeMarginCheck"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountFreeMarginMode" for="field_accountFreeMarginMode"
+            >Account Free Margin Mode</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountFreeMarginMode"
+            id="field_accountFreeMarginMode"
+            data-cy="accountFreeMarginMode"
+            formControlName="accountFreeMarginMode"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountLeverage" for="field_accountLeverage"
+            >Account Leverage</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountLeverage"
+            id="field_accountLeverage"
+            data-cy="accountLeverage"
+            formControlName="accountLeverage"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountMargin" for="field_accountMargin"
+            >Account Margin</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountMargin"
+            id="field_accountMargin"
+            data-cy="accountMargin"
+            formControlName="accountMargin"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountName" for="field_accountName">Account Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="accountName"
+            id="field_accountName"
+            data-cy="accountName"
+            formControlName="accountName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountNumber" for="field_accountNumber"
+            >Account Number</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountNumber"
+            id="field_accountNumber"
+            data-cy="accountNumber"
+            formControlName="accountNumber"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountProfit" for="field_accountProfit"
+            >Account Profit</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountProfit"
+            id="field_accountProfit"
+            data-cy="accountProfit"
+            formControlName="accountProfit"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountServer" for="field_accountServer"
+            >Account Server</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="accountServer"
+            id="field_accountServer"
+            data-cy="accountServer"
+            formControlName="accountServer"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountStopoutLevel" for="field_accountStopoutLevel"
+            >Account Stopout Level</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountStopoutLevel"
+            id="field_accountStopoutLevel"
+            data-cy="accountStopoutLevel"
+            formControlName="accountStopoutLevel"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.accountStopoutMode" for="field_accountStopoutMode"
+            >Account Stopout Mode</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="accountStopoutMode"
+            id="field_accountStopoutMode"
+            data-cy="accountStopoutMode"
+            formControlName="accountStopoutMode"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.inActive" for="field_inActive">In Active</label>
+          <input type="checkbox" class="form-check" name="inActive" id="field_inActive" data-cy="inActive" formControlName="inActive" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Account.inActiveDate" for="field_inActiveDate"
+            >In Active Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_inActiveDate"
+              data-cy="inActiveDate"
+              type="datetime-local"
+              class="form-control"
+              name="inActiveDate"
+              formControlName="inActiveDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

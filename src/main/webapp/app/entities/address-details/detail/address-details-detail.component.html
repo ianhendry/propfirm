@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="addressDetails">
+      <h2 data-cy="addressDetailsDetailsHeading"><span jhiTranslate="propfirmApp.addressDetails.detail.title">Address Details</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ addressDetails.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.contactName">Contact Name</span></dt>
+        <dd>
+          <span>{{ addressDetails.contactName }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.address1">Address 1</span></dt>
+        <dd>
+          <span>{{ addressDetails.address1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.address2">Address 2</span></dt>
+        <dd>
+          <span>{{ addressDetails.address2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.address3">Address 3</span></dt>
+        <dd>
+          <span>{{ addressDetails.address3 }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.address4">Address 4</span></dt>
+        <dd>
+          <span>{{ addressDetails.address4 }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.address5">Address 5</span></dt>
+        <dd>
+          <span>{{ addressDetails.address5 }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.address6">Address 6</span></dt>
+        <dd>
+          <span>{{ addressDetails.address6 }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.dialCode">Dial Code</span></dt>
+        <dd>
+          <span>{{ addressDetails.dialCode }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ addressDetails.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.messengerId">Messenger Id</span></dt>
+        <dd>
+          <span>{{ addressDetails.messengerId }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.dateAdded">Date Added</span></dt>
+        <dd>
+          <span>{{ addressDetails.dateAdded | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.inActive">In Active</span></dt>
+        <dd>
+          <span>{{ addressDetails.inActive }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.addressDetails.inActiveDate">In Active Date</span></dt>
+        <dd>
+          <span>{{ addressDetails.inActiveDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/address-details', addressDetails.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

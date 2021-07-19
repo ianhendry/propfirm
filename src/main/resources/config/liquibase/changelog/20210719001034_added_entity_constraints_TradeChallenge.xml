@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity TradeChallenge.
+    -->
+    <changeSet id="20210719001034-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="mt4account_id"
+                                 baseTableName="trade_challenge"
+                                 constraintName="fk_trade_challenge__mt4account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mt_4_account"/>
+
+        <addForeignKeyConstraint baseColumnNames="site_account_id"
+                                 baseTableName="trade_challenge"
+                                 constraintName="fk_trade_challenge__site_account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="site_account"/>
+
+        <addForeignKeyConstraint baseColumnNames="challenge_type_id"
+                                 baseTableName="trade_challenge"
+                                 constraintName="fk_trade_challenge__challenge_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="challenge_type"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,97 @@
+{
+  "name": "Mt4Trade",
+  "fields": [
+    {
+      "fieldName": "ticket",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "openTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "directionType",
+      "fieldType": "TRADEDIRECTION",
+      "fieldValues": "BUY,SELL"
+    },
+    {
+      "fieldName": "positionSize",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "symbol",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "openPrice",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "stopLossPrice",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "takeProfitPrice",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "closeTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "closePrice",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "commission",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "taxes",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "swap",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "profit",
+      "fieldType": "Double"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "tradeJournalPost",
+      "otherEntityRelationshipName": "mt4Trade",
+      "relationshipName": "tradeJournalPost",
+      "otherEntityField": "postTitle",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "mt4Account",
+      "otherEntityRelationshipName": "mt4Trade",
+      "relationshipName": "mt4Account",
+      "otherEntityField": "accountLogin"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "instrument",
+      "otherEntityRelationshipName": "mt4Trade",
+      "relationshipName": "instrument",
+      "otherEntityField": "ticker"
+    }
+  ],
+  "entityTableName": "mt_4_trade",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001039"
+}

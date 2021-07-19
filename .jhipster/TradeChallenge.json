@@ -1,0 +1,67 @@
+{
+  "name": "TradeChallenge",
+  "fields": [
+    {
+      "fieldName": "tradeChallengeName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "runningMaxTotalDrawdown",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "runningMaxDailyDrawdown",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "rulesViolated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "ruleViolated",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ruleViolatedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "mt4Account",
+      "otherEntityRelationshipName": "tradeChallenge",
+      "relationshipName": "mt4Account",
+      "otherEntityField": "accountLogin",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "siteAccount",
+      "otherEntityRelationshipName": "tradeChallenge",
+      "relationshipName": "siteAccount",
+      "otherEntityField": "accountName"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "challengeType",
+      "otherEntityRelationshipName": "tradeChallenge",
+      "relationshipName": "challengeType",
+      "otherEntityField": "challengeTypeName"
+    }
+  ],
+  "entityTableName": "trade_challenge",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001034"
+}

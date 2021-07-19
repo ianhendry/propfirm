@@ -48,6 +48,26 @@ public class CacheConfiguration {
             createCache(cm, com.gracefl.propfirm.domain.User.class.getName());
             createCache(cm, com.gracefl.propfirm.domain.Authority.class.getName());
             createCache(cm, com.gracefl.propfirm.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.gracefl.propfirm.domain.SiteAccount.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.SiteAccount.class.getName() + ".tradeChallenges");
+            createCache(cm, com.gracefl.propfirm.domain.ChallengeType.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.ChallengeType.class.getName() + ".tradeChallenges");
+            createCache(cm, com.gracefl.propfirm.domain.Mt4Account.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.Mt4Account.class.getName() + ".mt4Trades");
+            createCache(cm, com.gracefl.propfirm.domain.Mt4Account.class.getName() + ".accountDataTimeSeries");
+            createCache(cm, com.gracefl.propfirm.domain.AddressDetails.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.AddressDetails.class.getName() + ".siteAccounts");
+            createCache(cm, com.gracefl.propfirm.domain.TradeChallenge.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.TradeJournalPost.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.TradeJournalPost.class.getName() + ".userComments");
+            createCache(cm, com.gracefl.propfirm.domain.Instrument.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.Instrument.class.getName() + ".mt4Trades");
+            createCache(cm, com.gracefl.propfirm.domain.Instrument.class.getName() + ".dailyAnalysisPosts");
+            createCache(cm, com.gracefl.propfirm.domain.DailyAnalysisPost.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.DailyAnalysisPost.class.getName() + ".userComments");
+            createCache(cm, com.gracefl.propfirm.domain.UserComment.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.Mt4Trade.class.getName());
+            createCache(cm, com.gracefl.propfirm.domain.AccountDataTimeSeries.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

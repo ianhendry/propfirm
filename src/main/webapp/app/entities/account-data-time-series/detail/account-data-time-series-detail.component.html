@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="accountDataTimeSeries">
+      <h2 data-cy="accountDataTimeSeriesDetailsHeading">
+        <span jhiTranslate="propfirmApp.accountDataTimeSeries.detail.title">Account Data Time Series</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.dateStamp">Date Stamp</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.dateStamp | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountBalance">Account Balance</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.accountBalance }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountEquity">Account Equity</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.accountEquity }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountCredit">Account Credit</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.accountCredit }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountFreeMargin">Account Free Margin</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.accountFreeMargin }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountStopoutLevel">Account Stopout Level</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.accountStopoutLevel }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.openLots">Open Lots</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.openLots }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.openNumberOfTrades">Open Number Of Trades</span></dt>
+        <dd>
+          <span>{{ accountDataTimeSeries.openNumberOfTrades }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.accountDataTimeSeries.mt4Account">Mt 4 Account</span></dt>
+        <dd>
+          <div *ngIf="accountDataTimeSeries.mt4Account">
+            <a [routerLink]="['/mt-4-account', accountDataTimeSeries.mt4Account?.id, 'view']">{{
+              accountDataTimeSeries.mt4Account?.accountLogin
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/account-data-time-series', accountDataTimeSeries.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

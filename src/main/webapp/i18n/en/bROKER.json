@@ -1,0 +1,11 @@
+{
+  "propfirmApp": {
+    "BROKER": {
+      "null": "",
+      "FXPRO": "FXPRO",
+      "ALPARI": "ALPARI",
+      "THINKMARKETS": "THINKMARKETS",
+      "PEPPERSTONE": "PEPPERSTONE"
+    }
+  }
+}

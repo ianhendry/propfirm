@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tradeChallenge">
+      <h2 data-cy="tradeChallengeDetailsHeading"><span jhiTranslate="propfirmApp.tradeChallenge.detail.title">Trade Challenge</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.tradeChallengeName">Trade Challenge Name</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.tradeChallengeName }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.startDate">Start Date</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.startDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.runningMaxTotalDrawdown">Running Max Total Drawdown</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.runningMaxTotalDrawdown }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.runningMaxDailyDrawdown">Running Max Daily Drawdown</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.runningMaxDailyDrawdown }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.rulesViolated">Rules Violated</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.rulesViolated }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.ruleViolated">Rule Violated</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.ruleViolated }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.ruleViolatedDate">Rule Violated Date</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.ruleViolatedDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.mt4Account">Mt 4 Account</span></dt>
+        <dd>
+          <div *ngIf="tradeChallenge.mt4Account">
+            <a [routerLink]="['/mt-4-account', tradeChallenge.mt4Account?.id, 'view']">{{ tradeChallenge.mt4Account?.accountLogin }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.siteAccount">Site Account</span></dt>
+        <dd>
+          <div *ngIf="tradeChallenge.siteAccount">
+            <a [routerLink]="['/site-account', tradeChallenge.siteAccount?.id, 'view']">{{ tradeChallenge.siteAccount?.accountName }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.challengeType">Challenge Type</span></dt>
+        <dd>
+          <div *ngIf="tradeChallenge.challengeType">
+            <a [routerLink]="['/challenge-type', tradeChallenge.challengeType?.id, 'view']">{{
+              tradeChallenge.challengeType?.challengeTypeName
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/trade-challenge', tradeChallenge.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

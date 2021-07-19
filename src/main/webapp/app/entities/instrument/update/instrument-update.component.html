@@ -1,0 +1,114 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-instrument-heading" data-cy="InstrumentCreateUpdateHeading" jhiTranslate="propfirmApp.instrument.home.createOrEditLabel">
+        Create or edit a Instrument
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.instrument.ticker" for="field_ticker">Ticker</label>
+          <input type="text" class="form-control" name="ticker" id="field_ticker" data-cy="ticker" formControlName="ticker" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.instrument.instrumentType" for="field_instrumentType"
+            >Instrument Type</label
+          >
+          <select
+            class="form-control"
+            name="instrumentType"
+            formControlName="instrumentType"
+            id="field_instrumentType"
+            data-cy="instrumentType"
+          >
+            <option [ngValue]="null">{{ 'propfirmApp.INSTRUMENTTYPE.null' | translate }}</option>
+            <option value="CFD">{{ 'propfirmApp.INSTRUMENTTYPE.CFD' | translate }}</option>
+            <option value="CRYPTO">{{ 'propfirmApp.INSTRUMENTTYPE.CRYPTO' | translate }}</option>
+            <option value="FOREX">{{ 'propfirmApp.INSTRUMENTTYPE.FOREX' | translate }}</option>
+            <option value="FUTURES">{{ 'propfirmApp.INSTRUMENTTYPE.FUTURES' | translate }}</option>
+            <option value="METALS">{{ 'propfirmApp.INSTRUMENTTYPE.METALS' | translate }}</option>
+            <option value="STOCKS">{{ 'propfirmApp.INSTRUMENTTYPE.STOCKS' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.instrument.exchange" for="field_exchange">Exchange</label>
+          <input type="text" class="form-control" name="exchange" id="field_exchange" data-cy="exchange" formControlName="exchange" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.instrument.averageSpread" for="field_averageSpread"
+            >Average Spread</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="averageSpread"
+            id="field_averageSpread"
+            data-cy="averageSpread"
+            formControlName="averageSpread"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.instrument.tradeRestrictions" for="field_tradeRestrictions"
+            >Trade Restrictions</label
+          >
+          <textarea
+            class="form-control"
+            name="tradeRestrictions"
+            id="field_tradeRestrictions"
+            data-cy="tradeRestrictions"
+            formControlName="tradeRestrictions"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.instrument.inActive" for="field_inActive">In Active</label>
+          <input type="checkbox" class="form-check" name="inActive" id="field_inActive" data-cy="inActive" formControlName="inActive" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.instrument.inActiveDate" for="field_inActiveDate"
+            >In Active Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_inActiveDate"
+              data-cy="inActiveDate"
+              type="datetime-local"
+              class="form-control"
+              name="inActiveDate"
+              formControlName="inActiveDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

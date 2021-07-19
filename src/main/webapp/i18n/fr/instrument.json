@@ -1,0 +1,32 @@
+{
+  "propfirmApp": {
+    "instrument": {
+      "home": {
+        "title": "Instruments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Instrument",
+        "createOrEditLabel": "Créer ou éditer un Instrument",
+        "notFound": "Aucun Instrument trouvé"
+      },
+      "created": "Un nouveau Instrument a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Instrument avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Instrument avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Instrument {{ id }} ?"
+      },
+      "detail": {
+        "title": "Instrument"
+      },
+      "id": "ID",
+      "ticker": "Ticker",
+      "instrumentType": "Instrument Type",
+      "exchange": "Exchange",
+      "averageSpread": "Average Spread",
+      "tradeRestrictions": "Trade Restrictions",
+      "inActive": "In Active",
+      "inActiveDate": "In Active Date",
+      "mt4Trade": "Mt 4 Trade",
+      "dailyAnalysisPost": "Daily Analysis Post"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "propfirmApp": {
+    "addressDetails": {
+      "home": {
+        "title": "Address Details",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Address Details",
+        "createOrEditLabel": "创建或编辑 Address Details",
+        "notFound": "No Address Details found"
+      },
+      "created": "Address Details {{ param }} 创建成功",
+      "updated": "Address Details {{ param }} 更新成功",
+      "deleted": "Address Details {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Address Details {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Address Details"
+      },
+      "id": "ID",
+      "contactName": "Contact Name",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "address3": "Address 3",
+      "address4": "Address 4",
+      "address5": "Address 5",
+      "address6": "Address 6",
+      "dialCode": "Dial Code",
+      "phoneNumber": "Phone Number",
+      "messengerId": "Messenger Id",
+      "dateAdded": "Date Added",
+      "inActive": "In Active",
+      "inActiveDate": "In Active Date",
+      "siteAccount": "Site Account"
+    }
+  }
+}

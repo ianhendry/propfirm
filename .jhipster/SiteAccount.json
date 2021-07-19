@@ -1,0 +1,60 @@
+{
+  "name": "SiteAccount",
+  "fields": [
+    {
+      "fieldName": "accountName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userPicture",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "userBio",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "inActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "inActiveDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "siteAccount",
+      "relationshipName": "user",
+      "otherEntityField": "login",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "addressDetails",
+      "otherEntityRelationshipName": "siteAccount",
+      "relationshipName": "addressDetails",
+      "otherEntityField": "contactName"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "tradeChallenge",
+      "otherEntityRelationshipName": "siteAccount",
+      "relationshipName": "tradeChallenge"
+    }
+  ],
+  "entityTableName": "site_account",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001030"
+}

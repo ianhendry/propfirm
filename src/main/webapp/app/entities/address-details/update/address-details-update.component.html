@@ -1,0 +1,152 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-address-details-heading"
+        data-cy="AddressDetailsCreateUpdateHeading"
+        jhiTranslate="propfirmApp.addressDetails.home.createOrEditLabel"
+      >
+        Create or edit a Address Details
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.contactName" for="field_contactName"
+            >Contact Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="contactName"
+            id="field_contactName"
+            data-cy="contactName"
+            formControlName="contactName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.address1" for="field_address1">Address 1</label>
+          <input type="text" class="form-control" name="address1" id="field_address1" data-cy="address1" formControlName="address1" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.address2" for="field_address2">Address 2</label>
+          <input type="text" class="form-control" name="address2" id="field_address2" data-cy="address2" formControlName="address2" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.address3" for="field_address3">Address 3</label>
+          <input type="text" class="form-control" name="address3" id="field_address3" data-cy="address3" formControlName="address3" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.address4" for="field_address4">Address 4</label>
+          <input type="text" class="form-control" name="address4" id="field_address4" data-cy="address4" formControlName="address4" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.address5" for="field_address5">Address 5</label>
+          <input type="text" class="form-control" name="address5" id="field_address5" data-cy="address5" formControlName="address5" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.address6" for="field_address6">Address 6</label>
+          <input type="text" class="form-control" name="address6" id="field_address6" data-cy="address6" formControlName="address6" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.dialCode" for="field_dialCode">Dial Code</label>
+          <input type="text" class="form-control" name="dialCode" id="field_dialCode" data-cy="dialCode" formControlName="dialCode" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.phoneNumber" for="field_phoneNumber"
+            >Phone Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.messengerId" for="field_messengerId"
+            >Messenger Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="messengerId"
+            id="field_messengerId"
+            data-cy="messengerId"
+            formControlName="messengerId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.dateAdded" for="field_dateAdded">Date Added</label>
+          <div class="d-flex">
+            <input
+              id="field_dateAdded"
+              data-cy="dateAdded"
+              type="datetime-local"
+              class="form-control"
+              name="dateAdded"
+              formControlName="dateAdded"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.inActive" for="field_inActive">In Active</label>
+          <input type="checkbox" class="form-check" name="inActive" id="field_inActive" data-cy="inActive" formControlName="inActive" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.addressDetails.inActiveDate" for="field_inActiveDate"
+            >In Active Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_inActiveDate"
+              data-cy="inActiveDate"
+              type="datetime-local"
+              class="form-control"
+              name="inActiveDate"
+              formControlName="inActiveDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

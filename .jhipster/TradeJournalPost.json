@@ -1,0 +1,87 @@
+{
+  "name": "TradeJournalPost",
+  "fields": [
+    {
+      "fieldName": "postTitle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateAdded",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "thoughtsOnPsychology",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "thoughtsOnTradeProcessAccuracy",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "thoughtsOnAreasOfStrength",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "thoughtsOnAreasForImprovement",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "areaOfFocusForTomorrow",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "makePublicVisibleOnSite",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "anyMedia",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "anyImage",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "tradeJournalPost",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "mt4Trade",
+      "otherEntityRelationshipName": "tradeJournalPost",
+      "relationshipName": "mt4Trade",
+      "otherEntityField": "ticket",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "userComment",
+      "otherEntityRelationshipName": "tradeJournalPost",
+      "relationshipName": "userComment"
+    }
+  ],
+  "entityTableName": "trade_journal_post",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001035"
+}

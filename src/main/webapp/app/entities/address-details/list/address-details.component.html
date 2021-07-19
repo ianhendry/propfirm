@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="AddressDetailsHeading">
+    <span jhiTranslate="propfirmApp.addressDetails.home.title">Address Details</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="propfirmApp.addressDetails.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-address-details"
+        [routerLink]="['/address-details/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="propfirmApp.addressDetails.home.createLabel"> Create a new Address Details </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="addressDetails?.length === 0">
+    <span jhiTranslate="propfirmApp.addressDetails.home.notFound">No addressDetails found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="addressDetails && addressDetails.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.contactName">Contact Name</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.address1">Address 1</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.address2">Address 2</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.address3">Address 3</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.address4">Address 4</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.address5">Address 5</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.address6">Address 6</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.dialCode">Dial Code</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.phoneNumber">Phone Number</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.messengerId">Messenger Id</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.dateAdded">Date Added</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.inActive">In Active</span></th>
+          <th scope="col"><span jhiTranslate="propfirmApp.addressDetails.inActiveDate">In Active Date</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let addressDetails of addressDetails; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/address-details', addressDetails.id, 'view']">{{ addressDetails.id }}</a>
+          </td>
+          <td>{{ addressDetails.contactName }}</td>
+          <td>{{ addressDetails.address1 }}</td>
+          <td>{{ addressDetails.address2 }}</td>
+          <td>{{ addressDetails.address3 }}</td>
+          <td>{{ addressDetails.address4 }}</td>
+          <td>{{ addressDetails.address5 }}</td>
+          <td>{{ addressDetails.address6 }}</td>
+          <td>{{ addressDetails.dialCode }}</td>
+          <td>{{ addressDetails.phoneNumber }}</td>
+          <td>{{ addressDetails.messengerId }}</td>
+          <td>{{ addressDetails.dateAdded | formatMediumDatetime }}</td>
+          <td>{{ addressDetails.inActive }}</td>
+          <td>{{ addressDetails.inActiveDate | formatMediumDatetime }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/address-details', addressDetails.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/address-details', addressDetails.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(addressDetails)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

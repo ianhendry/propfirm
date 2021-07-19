@@ -1,0 +1,63 @@
+{
+  "name": "UserComment",
+  "fields": [
+    {
+      "fieldName": "commentTitle",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "commentBody",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "commentMedia",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "dateAdded",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "makePublicVisibleOnSite",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tradeJournalPost",
+      "otherEntityRelationshipName": "userComment",
+      "relationshipName": "tradeJournalPost",
+      "otherEntityField": "postTitle"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "dailyAnalysisPost",
+      "otherEntityRelationshipName": "userComment",
+      "relationshipName": "dailyAnalysisPost",
+      "otherEntityField": "postTitle"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "userComment",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    }
+  ],
+  "javadoc": "not an ignored comment",
+  "entityTableName": "user_comment",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001038"
+}

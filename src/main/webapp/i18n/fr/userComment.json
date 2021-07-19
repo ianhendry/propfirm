@@ -1,0 +1,31 @@
+{
+  "propfirmApp": {
+    "userComment": {
+      "home": {
+        "title": "UserComments",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau User Comment",
+        "createOrEditLabel": "Créer ou éditer un User Comment",
+        "notFound": "Aucun User Comment trouvé"
+      },
+      "created": "Un nouveau User Comment a été créé avec l'identifiant {{ param }}",
+      "updated": "Le User Comment avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le User Comment avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le User Comment {{ id }} ?"
+      },
+      "detail": {
+        "title": "User Comment"
+      },
+      "id": "ID",
+      "commentTitle": "Comment Title",
+      "commentBody": "Comment Body",
+      "commentMedia": "Comment Media",
+      "dateAdded": "Date Added",
+      "makePublicVisibleOnSite": "Make Public Visible On Site",
+      "tradeJournalPost": "Trade Journal Post",
+      "dailyAnalysisPost": "Daily Analysis Post",
+      "user": "User"
+    }
+  }
+}

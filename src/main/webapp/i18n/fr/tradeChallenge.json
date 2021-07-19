@@ -1,0 +1,33 @@
+{
+  "propfirmApp": {
+    "tradeChallenge": {
+      "home": {
+        "title": "TradeChallenges",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Trade Challenge",
+        "createOrEditLabel": "Créer ou éditer un Trade Challenge",
+        "notFound": "Aucun Trade Challenge trouvé"
+      },
+      "created": "Un nouveau Trade Challenge a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Trade Challenge avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Trade Challenge avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Trade Challenge {{ id }} ?"
+      },
+      "detail": {
+        "title": "Trade Challenge"
+      },
+      "id": "ID",
+      "tradeChallengeName": "Trade Challenge Name",
+      "startDate": "Start Date",
+      "runningMaxTotalDrawdown": "Running Max Total Drawdown",
+      "runningMaxDailyDrawdown": "Running Max Daily Drawdown",
+      "rulesViolated": "Rules Violated",
+      "ruleViolated": "Rule Violated",
+      "ruleViolatedDate": "Rule Violated Date",
+      "mt4Account": "Mt 4 Account",
+      "siteAccount": "Site Account",
+      "challengeType": "Challenge Type"
+    }
+  }
+}

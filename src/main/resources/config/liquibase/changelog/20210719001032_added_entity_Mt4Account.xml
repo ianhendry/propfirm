@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Mt4Account.
+    -->
+    <changeSet id="20210719001032-1" author="jhipster">
+        <createTable tableName="mt_4_account">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="account_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_broker" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_login" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_password" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_investor_login" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_investor_password" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_real" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_info_double" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_info_integer" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_info_string" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_balance" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_credit" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_company" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_currency" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_equity" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_free_margin" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_free_margin_check" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_free_margin_mode" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_leverage" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_margin" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_name" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_number" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_profit" type="double">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_server" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_stopout_level" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="account_stopout_mode" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="in_active" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="in_active_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="mt_4_account" columnName="in_active_date" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210719001032-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/mt_4_account.csv"
+                  separator=";"
+                  tableName="mt_4_account">
+            <column name="id" type="numeric"/>
+            <column name="account_type" type="string"/>
+            <column name="account_broker" type="string"/>
+            <column name="account_login" type="string"/>
+            <column name="account_password" type="string"/>
+            <column name="account_investor_login" type="string"/>
+            <column name="account_investor_password" type="string"/>
+            <column name="account_real" type="boolean"/>
+            <column name="account_info_double" type="numeric"/>
+            <column name="account_info_integer" type="numeric"/>
+            <column name="account_info_string" type="string"/>
+            <column name="account_balance" type="numeric"/>
+            <column name="account_credit" type="numeric"/>
+            <column name="account_company" type="string"/>
+            <column name="account_currency" type="string"/>
+            <column name="account_equity" type="numeric"/>
+            <column name="account_free_margin" type="numeric"/>
+            <column name="account_free_margin_check" type="numeric"/>
+            <column name="account_free_margin_mode" type="numeric"/>
+            <column name="account_leverage" type="numeric"/>
+            <column name="account_margin" type="numeric"/>
+            <column name="account_name" type="string"/>
+            <column name="account_number" type="numeric"/>
+            <column name="account_profit" type="numeric"/>
+            <column name="account_server" type="string"/>
+            <column name="account_stopout_level" type="numeric"/>
+            <column name="account_stopout_mode" type="numeric"/>
+            <column name="in_active" type="boolean"/>
+            <column name="in_active_date" type="${datetimeType}"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,103 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dailyAnalysisPost">
+      <h2 data-cy="dailyAnalysisPostDetailsHeading">
+        <span jhiTranslate="propfirmApp.dailyAnalysisPost.detail.title">Daily Analysis Post</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.postTitle">Post Title</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.postTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.dateAdded">Date Added</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.dateAdded | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.backgroundVolume">Background Volume</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.backgroundVolume }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.overallThoughts">Overall Thoughts</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.overallThoughts }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.weeklyChart">Weekly Chart</span></dt>
+        <dd>
+          <div *ngIf="dailyAnalysisPost.weeklyChart">
+            <a (click)="openFile(dailyAnalysisPost.weeklyChart, dailyAnalysisPost.weeklyChartContentType)">
+              <img
+                [src]="'data:' + dailyAnalysisPost.weeklyChartContentType + ';base64,' + dailyAnalysisPost.weeklyChart"
+                style="max-width: 100%"
+                alt="dailyAnalysisPost image"
+              />
+            </a>
+            {{ dailyAnalysisPost.weeklyChartContentType }}, {{ byteSize(dailyAnalysisPost.weeklyChart) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.dailyChart">Daily Chart</span></dt>
+        <dd>
+          <div *ngIf="dailyAnalysisPost.dailyChart">
+            <a (click)="openFile(dailyAnalysisPost.dailyChart, dailyAnalysisPost.dailyChartContentType)">
+              <img
+                [src]="'data:' + dailyAnalysisPost.dailyChartContentType + ';base64,' + dailyAnalysisPost.dailyChart"
+                style="max-width: 100%"
+                alt="dailyAnalysisPost image"
+              />
+            </a>
+            {{ dailyAnalysisPost.dailyChartContentType }}, {{ byteSize(dailyAnalysisPost.dailyChart) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.oneHrChart">One Hr Chart</span></dt>
+        <dd>
+          <div *ngIf="dailyAnalysisPost.oneHrChart">
+            <a (click)="openFile(dailyAnalysisPost.oneHrChart, dailyAnalysisPost.oneHrChartContentType)">
+              <img
+                [src]="'data:' + dailyAnalysisPost.oneHrChartContentType + ';base64,' + dailyAnalysisPost.oneHrChart"
+                style="max-width: 100%"
+                alt="dailyAnalysisPost image"
+              />
+            </a>
+            {{ dailyAnalysisPost.oneHrChartContentType }}, {{ byteSize(dailyAnalysisPost.oneHrChart) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.planForToday">Plan For Today</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.planForToday }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.makePublicVisibleOnSite">Make Public Visible On Site</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.makePublicVisibleOnSite }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.instrument">Instrument</span></dt>
+        <dd>
+          <div *ngIf="dailyAnalysisPost.instrument">
+            <a [routerLink]="['/instrument', dailyAnalysisPost.instrument?.id, 'view']">{{ dailyAnalysisPost.instrument?.ticker }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.dailyAnalysisPost.user">User</span></dt>
+        <dd>
+          <span>{{ dailyAnalysisPost.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/daily-analysis-post', dailyAnalysisPost.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

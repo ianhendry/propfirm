@@ -1,0 +1,31 @@
+{
+  "propfirmApp": {
+    "siteAccount": {
+      "home": {
+        "title": "Site Accounts",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Site Account",
+        "createOrEditLabel": "Crear o editar Site Account",
+        "notFound": "Ningún Site Accounts encontrado"
+      },
+      "created": "Un nuevo Site Account ha sido creado con el identificador {{ param }}",
+      "updated": "Un Site Account ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Site Account ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Site Account {{ id }}?"
+      },
+      "detail": {
+        "title": "Site Account"
+      },
+      "id": "ID",
+      "accountName": "Account Name",
+      "userPicture": "User Picture",
+      "userBio": "User Bio",
+      "inActive": "In Active",
+      "inActiveDate": "In Active Date",
+      "user": "User",
+      "addressDetails": "Address Details",
+      "tradeChallenge": "Trade Challenge"
+    }
+  }
+}

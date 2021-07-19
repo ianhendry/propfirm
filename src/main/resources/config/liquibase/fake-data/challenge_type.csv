@@ -1,0 +1,11 @@
+id;challenge_type_name;price;price_content_type;refund_after_complete;account_size;profit_target_phase_one;profit_target_phase_two;duration_days_phase_one;duration_days_phase_two;max_daily_drawdown;max_total_draw_down;profit_split_ratio;free_retry;user_bio;in_active;in_active_date
+1;Wooden;../fake-data/blob/hipster.png;image/png;true;32579;1117;4085;9575;20243;69928;28089;75373;false;../fake-data/blob/hipster.txt;true;2021-07-18T08:41:54
+2;Mountains;../fake-data/blob/hipster.png;image/png;true;4893;29964;42533;85224;77289;68893;6247;94469;false;../fake-data/blob/hipster.txt;false;2021-07-18T05:07:08
+3;Rustic;../fake-data/blob/hipster.png;image/png;false;53697;48273;24190;2040;55994;10513;25994;3431;false;../fake-data/blob/hipster.txt;false;2021-07-18T09:36:41
+4;functionalities Avon Village;../fake-data/blob/hipster.png;image/png;false;59494;71404;16856;43922;54334;84146;46838;20460;true;../fake-data/blob/hipster.txt;true;2021-07-18T20:23:07
+5;Computer;../fake-data/blob/hipster.png;image/png;true;44065;48591;32849;89548;21959;36517;76351;19482;true;../fake-data/blob/hipster.txt;false;2021-07-18T23:04:14
+6;systemic Berkshire;../fake-data/blob/hipster.png;image/png;true;51587;85017;25797;13376;73918;32633;94940;67449;true;../fake-data/blob/hipster.txt;true;2021-07-18T14:25:18
+7;mobile heuristic Cuba;../fake-data/blob/hipster.png;image/png;true;16187;98910;81917;6532;83674;89818;32923;30101;false;../fake-data/blob/hipster.txt;true;2021-07-18T18:05:36
+8;New Sleek;../fake-data/blob/hipster.png;image/png;true;98377;31896;29606;66777;6737;75695;83191;2457;false;../fake-data/blob/hipster.txt;false;2021-07-18T07:03:19
+9;PNG;../fake-data/blob/hipster.png;image/png;true;80854;72644;14412;22826;71596;75545;53465;96091;false;../fake-data/blob/hipster.txt;false;2021-07-18T07:39:04
+10;Ergonomic generating;../fake-data/blob/hipster.png;image/png;true;16698;97489;99068;67209;73730;74627;51290;88603;true;../fake-data/blob/hipster.txt;true;2021-07-18T16:58:58

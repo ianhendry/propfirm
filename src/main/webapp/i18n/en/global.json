@@ -7,6 +7,17 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "siteAccount": "Site Account",
+        "challengeType": "Challenge Type",
+        "mt4Account": "Mt 4 Account",
+        "addressDetails": "Address Details",
+        "tradeChallenge": "Trade Challenge",
+        "tradeJournalPost": "Trade Journal Post",
+        "instrument": "Instrument",
+        "dailyAnalysisPost": "Daily Analysis Post",
+        "userComment": "User Comment",
+        "mt4Trade": "Mt 4 Trade",
+        "accountDataTimeSeries": "Account Data Time Series",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

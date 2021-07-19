@@ -1,0 +1,25 @@
+<form *ngIf="mt4Trade" name="deleteForm" (ngSubmit)="confirmDelete(mt4Trade.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="mt4TradeDeleteDialogHeading" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+
+    <p id="jhi-delete-mt4Trade-heading" jhiTranslate="propfirmApp.mt4Trade.delete.question" [translateValues]="{ id: mt4Trade.id }">
+      Are you sure you want to delete this Mt 4 Trade?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="jhi-confirm-delete-mt4Trade" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+    </button>
+  </div>
+</form>

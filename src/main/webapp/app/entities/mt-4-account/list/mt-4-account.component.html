@@ -1,0 +1,209 @@
+<div>
+  <h2 id="page-heading" data-cy="Mt4AccountHeading">
+    <span jhiTranslate="propfirmApp.mt4Account.home.title">Mt 4 Accounts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="propfirmApp.mt4Account.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-mt-4-account"
+        [routerLink]="['/mt-4-account/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="propfirmApp.mt4Account.home.createLabel"> Create a new Mt 4 Account </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="mt4Accounts?.length === 0">
+    <span jhiTranslate="propfirmApp.mt4Account.home.notFound">No mt4Accounts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="mt4Accounts && mt4Accounts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="accountType">
+            <span jhiTranslate="propfirmApp.mt4Account.accountType">Account Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountBroker">
+            <span jhiTranslate="propfirmApp.mt4Account.accountBroker">Account Broker</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountLogin">
+            <span jhiTranslate="propfirmApp.mt4Account.accountLogin">Account Login</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountPassword">
+            <span jhiTranslate="propfirmApp.mt4Account.accountPassword">Account Password</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountInvestorLogin">
+            <span jhiTranslate="propfirmApp.mt4Account.accountInvestorLogin">Account Investor Login</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountInvestorPassword">
+            <span jhiTranslate="propfirmApp.mt4Account.accountInvestorPassword">Account Investor Password</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountReal">
+            <span jhiTranslate="propfirmApp.mt4Account.accountReal">Account Real</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountInfoDouble">
+            <span jhiTranslate="propfirmApp.mt4Account.accountInfoDouble">Account Info Double</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountInfoInteger">
+            <span jhiTranslate="propfirmApp.mt4Account.accountInfoInteger">Account Info Integer</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountInfoString">
+            <span jhiTranslate="propfirmApp.mt4Account.accountInfoString">Account Info String</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountBalance">
+            <span jhiTranslate="propfirmApp.mt4Account.accountBalance">Account Balance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountCredit">
+            <span jhiTranslate="propfirmApp.mt4Account.accountCredit">Account Credit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountCompany">
+            <span jhiTranslate="propfirmApp.mt4Account.accountCompany">Account Company</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountCurrency">
+            <span jhiTranslate="propfirmApp.mt4Account.accountCurrency">Account Currency</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountEquity">
+            <span jhiTranslate="propfirmApp.mt4Account.accountEquity">Account Equity</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountFreeMargin">
+            <span jhiTranslate="propfirmApp.mt4Account.accountFreeMargin">Account Free Margin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountFreeMarginCheck">
+            <span jhiTranslate="propfirmApp.mt4Account.accountFreeMarginCheck">Account Free Margin Check</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountFreeMarginMode">
+            <span jhiTranslate="propfirmApp.mt4Account.accountFreeMarginMode">Account Free Margin Mode</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountLeverage">
+            <span jhiTranslate="propfirmApp.mt4Account.accountLeverage">Account Leverage</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountMargin">
+            <span jhiTranslate="propfirmApp.mt4Account.accountMargin">Account Margin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountName">
+            <span jhiTranslate="propfirmApp.mt4Account.accountName">Account Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountNumber">
+            <span jhiTranslate="propfirmApp.mt4Account.accountNumber">Account Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountProfit">
+            <span jhiTranslate="propfirmApp.mt4Account.accountProfit">Account Profit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountServer">
+            <span jhiTranslate="propfirmApp.mt4Account.accountServer">Account Server</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountStopoutLevel">
+            <span jhiTranslate="propfirmApp.mt4Account.accountStopoutLevel">Account Stopout Level</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountStopoutMode">
+            <span jhiTranslate="propfirmApp.mt4Account.accountStopoutMode">Account Stopout Mode</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inActive">
+            <span jhiTranslate="propfirmApp.mt4Account.inActive">In Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inActiveDate">
+            <span jhiTranslate="propfirmApp.mt4Account.inActiveDate">In Active Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mt4Account of mt4Accounts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/mt-4-account', mt4Account.id, 'view']">{{ mt4Account.id }}</a>
+          </td>
+          <td jhiTranslate="{{ 'propfirmApp.ACCOUNTTYPE.' + mt4Account.accountType }}">{{ mt4Account.accountType }}</td>
+          <td jhiTranslate="{{ 'propfirmApp.BROKER.' + mt4Account.accountBroker }}">{{ mt4Account.accountBroker }}</td>
+          <td>{{ mt4Account.accountLogin }}</td>
+          <td>{{ mt4Account.accountPassword }}</td>
+          <td>{{ mt4Account.accountInvestorLogin }}</td>
+          <td>{{ mt4Account.accountInvestorPassword }}</td>
+          <td>{{ mt4Account.accountReal }}</td>
+          <td>{{ mt4Account.accountInfoDouble }}</td>
+          <td>{{ mt4Account.accountInfoInteger }}</td>
+          <td>{{ mt4Account.accountInfoString }}</td>
+          <td>{{ mt4Account.accountBalance }}</td>
+          <td>{{ mt4Account.accountCredit }}</td>
+          <td>{{ mt4Account.accountCompany }}</td>
+          <td>{{ mt4Account.accountCurrency }}</td>
+          <td>{{ mt4Account.accountEquity }}</td>
+          <td>{{ mt4Account.accountFreeMargin }}</td>
+          <td>{{ mt4Account.accountFreeMarginCheck }}</td>
+          <td>{{ mt4Account.accountFreeMarginMode }}</td>
+          <td>{{ mt4Account.accountLeverage }}</td>
+          <td>{{ mt4Account.accountMargin }}</td>
+          <td>{{ mt4Account.accountName }}</td>
+          <td>{{ mt4Account.accountNumber }}</td>
+          <td>{{ mt4Account.accountProfit }}</td>
+          <td>{{ mt4Account.accountServer }}</td>
+          <td>{{ mt4Account.accountStopoutLevel }}</td>
+          <td>{{ mt4Account.accountStopoutMode }}</td>
+          <td>{{ mt4Account.inActive }}</td>
+          <td>{{ mt4Account.inActiveDate | formatMediumDatetime }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/mt-4-account', mt4Account.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/mt-4-account', mt4Account.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(mt4Account)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="mt4Accounts && mt4Accounts.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

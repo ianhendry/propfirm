@@ -1,0 +1,102 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mt4Trade">
+      <h2 data-cy="mt4TradeDetailsHeading"><span jhiTranslate="propfirmApp.mt4Trade.detail.title">Mt 4 Trade</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ mt4Trade.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.ticket">Ticket</span></dt>
+        <dd>
+          <span>{{ mt4Trade.ticket }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.openTime">Open Time</span></dt>
+        <dd>
+          <span>{{ mt4Trade.openTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.directionType">Direction Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'propfirmApp.TRADEDIRECTION.' + mt4Trade.directionType }}">{{ mt4Trade.directionType }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.positionSize">Position Size</span></dt>
+        <dd>
+          <span>{{ mt4Trade.positionSize }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.symbol">Symbol</span></dt>
+        <dd>
+          <span>{{ mt4Trade.symbol }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.openPrice">Open Price</span></dt>
+        <dd>
+          <span>{{ mt4Trade.openPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.stopLossPrice">Stop Loss Price</span></dt>
+        <dd>
+          <span>{{ mt4Trade.stopLossPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.takeProfitPrice">Take Profit Price</span></dt>
+        <dd>
+          <span>{{ mt4Trade.takeProfitPrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.closeTime">Close Time</span></dt>
+        <dd>
+          <span>{{ mt4Trade.closeTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.closePrice">Close Price</span></dt>
+        <dd>
+          <span>{{ mt4Trade.closePrice }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.commission">Commission</span></dt>
+        <dd>
+          <span>{{ mt4Trade.commission }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.taxes">Taxes</span></dt>
+        <dd>
+          <span>{{ mt4Trade.taxes }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.swap">Swap</span></dt>
+        <dd>
+          <span>{{ mt4Trade.swap }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.profit">Profit</span></dt>
+        <dd>
+          <span>{{ mt4Trade.profit }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.tradeJournalPost">Trade Journal Post</span></dt>
+        <dd>
+          <div *ngIf="mt4Trade.tradeJournalPost">
+            <a [routerLink]="['/trade-journal-post', mt4Trade.tradeJournalPost?.id, 'view']">{{ mt4Trade.tradeJournalPost?.postTitle }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.mt4Account">Mt 4 Account</span></dt>
+        <dd>
+          <div *ngIf="mt4Trade.mt4Account">
+            <a [routerLink]="['/mt-4-account', mt4Trade.mt4Account?.id, 'view']">{{ mt4Trade.mt4Account?.accountLogin }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Trade.instrument">Instrument</span></dt>
+        <dd>
+          <div *ngIf="mt4Trade.instrument">
+            <a [routerLink]="['/instrument', mt4Trade.instrument?.id, 'view']">{{ mt4Trade.instrument?.ticker }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mt-4-trade', mt4Trade.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

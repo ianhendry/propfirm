@@ -1,0 +1,32 @@
+{
+  "propfirmApp": {
+    "instrument": {
+      "home": {
+        "title": "Instruments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Instrument",
+        "createOrEditLabel": "创建或编辑 Instrument",
+        "notFound": "No Instruments found"
+      },
+      "created": "Instrument {{ param }} 创建成功",
+      "updated": "Instrument {{ param }} 更新成功",
+      "deleted": "Instrument {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Instrument {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Instrument"
+      },
+      "id": "ID",
+      "ticker": "Ticker",
+      "instrumentType": "Instrument Type",
+      "exchange": "Exchange",
+      "averageSpread": "Average Spread",
+      "tradeRestrictions": "Trade Restrictions",
+      "inActive": "In Active",
+      "inActiveDate": "In Active Date",
+      "mt4Trade": "Mt 4 Trade",
+      "dailyAnalysisPost": "Daily Analysis Post"
+    }
+  }
+}

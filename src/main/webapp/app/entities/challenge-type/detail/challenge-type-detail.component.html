@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="challengeType">
+      <h2 data-cy="challengeTypeDetailsHeading"><span jhiTranslate="propfirmApp.challengeType.detail.title">Challenge Type</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ challengeType.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.challengeTypeName">Challenge Type Name</span></dt>
+        <dd>
+          <span>{{ challengeType.challengeTypeName }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.price">Price</span></dt>
+        <dd>
+          <div *ngIf="challengeType.price">
+            <a (click)="openFile(challengeType.price, challengeType.priceContentType)">
+              <img
+                [src]="'data:' + challengeType.priceContentType + ';base64,' + challengeType.price"
+                style="max-width: 100%"
+                alt="challengeType image"
+              />
+            </a>
+            {{ challengeType.priceContentType }}, {{ byteSize(challengeType.price) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.refundAfterComplete">Refund After Complete</span></dt>
+        <dd>
+          <span>{{ challengeType.refundAfterComplete }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.accountSize">Account Size</span></dt>
+        <dd>
+          <span>{{ challengeType.accountSize }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.profitTargetPhaseOne">Profit Target Phase One</span></dt>
+        <dd>
+          <span>{{ challengeType.profitTargetPhaseOne }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.profitTargetPhaseTwo">Profit Target Phase Two</span></dt>
+        <dd>
+          <span>{{ challengeType.profitTargetPhaseTwo }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.durationDaysPhaseOne">Duration Days Phase One</span></dt>
+        <dd>
+          <span>{{ challengeType.durationDaysPhaseOne }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.durationDaysPhaseTwo">Duration Days Phase Two</span></dt>
+        <dd>
+          <span>{{ challengeType.durationDaysPhaseTwo }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.maxDailyDrawdown">Max Daily Drawdown</span></dt>
+        <dd>
+          <span>{{ challengeType.maxDailyDrawdown }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.maxTotalDrawDown">Max Total Draw Down</span></dt>
+        <dd>
+          <span>{{ challengeType.maxTotalDrawDown }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.profitSplitRatio">Profit Split Ratio</span></dt>
+        <dd>
+          <span>{{ challengeType.profitSplitRatio }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.freeRetry">Free Retry</span></dt>
+        <dd>
+          <span>{{ challengeType.freeRetry }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.userBio">User Bio</span></dt>
+        <dd>
+          <span>{{ challengeType.userBio }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.inActive">In Active</span></dt>
+        <dd>
+          <span>{{ challengeType.inActive }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.challengeType.inActiveDate">In Active Date</span></dt>
+        <dd>
+          <span>{{ challengeType.inActiveDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/challenge-type', challengeType.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

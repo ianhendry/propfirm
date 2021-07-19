@@ -1,0 +1,59 @@
+{
+  "name": "Instrument",
+  "fields": [
+    {
+      "fieldName": "ticker",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "instrumentType",
+      "fieldType": "INSTRUMENTTYPE",
+      "fieldValues": "CFD,CRYPTO,FOREX,FUTURES,METALS,STOCKS"
+    },
+    {
+      "fieldName": "exchange",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "averageSpread",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "tradeRestrictions",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "inActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "inActiveDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "mt4Trade",
+      "otherEntityRelationshipName": "instrument",
+      "relationshipName": "mt4Trade"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "dailyAnalysisPost",
+      "otherEntityRelationshipName": "instrument",
+      "relationshipName": "dailyAnalysisPost"
+    }
+  ],
+  "entityTableName": "instrument",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001036"
+}
