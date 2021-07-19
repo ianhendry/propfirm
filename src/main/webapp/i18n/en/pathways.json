@@ -1,8 +1,8 @@
 {
-  "register": {
-    "title": "Registration",
+  "pathways": {
+    "title": "Pathways",
     "form": {
-      "button": "Register"
+      "button": "Sign Up"
     },
     "messages": {
       "validate": {

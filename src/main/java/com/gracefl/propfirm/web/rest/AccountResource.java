@@ -1,9 +1,18 @@
 package com.gracefl.propfirm.web.rest;
 
+import com.gracefl.propfirm.domain.ChallengeType;
+import com.gracefl.propfirm.domain.Mt4Account;
+import com.gracefl.propfirm.domain.SiteAccount;
+import com.gracefl.propfirm.domain.TradeChallenge;
 import com.gracefl.propfirm.domain.User;
+import com.gracefl.propfirm.domain.enumeration.BROKER;
 import com.gracefl.propfirm.repository.UserRepository;
 import com.gracefl.propfirm.security.SecurityUtils;
+import com.gracefl.propfirm.service.ChallengeTypeService;
 import com.gracefl.propfirm.service.MailService;
+import com.gracefl.propfirm.service.Mt4AccountService;
+import com.gracefl.propfirm.service.SiteAccountService;
+import com.gracefl.propfirm.service.TradeChallengeService;
 import com.gracefl.propfirm.service.UserService;
 import com.gracefl.propfirm.service.dto.AdminUserDTO;
 import com.gracefl.propfirm.service.dto.PasswordChangeDTO;
@@ -39,13 +48,26 @@ public class AccountResource {
     private final UserRepository userRepository;
 
     private final UserService userService;
-
+    
+    private final SiteAccountService siteAccountService;
+    
+    private final Mt4AccountService mt4AccountService;
+    
+    private final TradeChallengeService tradeChallengeService;
+    
+    private final ChallengeTypeService challengeTypeService;
+    
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, SiteAccountService siteAccountService,
+    		Mt4AccountService mt4AccountService, TradeChallengeService tradeChallengeService, ChallengeTypeService challengeTypeService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.siteAccountService = siteAccountService;
+        this.mt4AccountService = mt4AccountService;
+        this.tradeChallengeService = tradeChallengeService;
+        this.challengeTypeService = challengeTypeService;
     }
 
     /**
@@ -63,7 +85,42 @@ public class AccountResource {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        
+        Optional<ChallengeType> challengeType = challengeTypeService.findOne(1L);
+        
+        if (challengeType.isPresent()) {
+        // next create a SiteAccount entity
+        SiteAccount siteAccount = new SiteAccount();
+        siteAccount.setUser(user);
+        siteAccount.setAccountName(user.getEmail());
+        siteAccount.setInActive(false);
+        siteAccountService.save(siteAccount);
+        
+        // next create a Mt4Account entity
+        Mt4Account mt4Account = new Mt4Account();
+        mt4Account.setAccountLogin(user.getEmail() + "_1");
+        mt4Account.setInActive(false);
+        mt4Account.setAccountBroker(BROKER.FXPRO);
+        mt4Account.setAccountInfoString("NEW ACCOUNT:" + user.getEmail());
+        mt4AccountService.save(mt4Account);
+        
+        // then create a TradeChallenge entity with the right challenge type from the 
+        TradeChallenge tradeChallenge = new TradeChallenge();
+        tradeChallenge.setMt4Account(mt4Account);
+        tradeChallenge.setTradeChallengeName(user.getEmail() + "_1");
+        tradeChallenge.setRulesViolated(false);
+        tradeChallenge.setSiteAccount(siteAccount);
+        tradeChallenge.setChallengeType(challengeType.get());
+        tradeChallengeService.save(tradeChallenge);
+        
+        mt4Account.setTradeChallenge(tradeChallenge);
+        mt4AccountService.save(mt4Account);
+        
         mailService.sendActivationEmail(user);
+        } else {
+        	// send a mail to the ADMIN account because a sign up error occurred
+        }
+        
     }
 
     /**
