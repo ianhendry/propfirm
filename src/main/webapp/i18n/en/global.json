@@ -24,13 +24,14 @@
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
-        "main": "Account",
+        "main": "My Account",
         "settings": "Settings",
         "password": "Password",
         "sessions": "Sessions",
         "login": "Sign in",
         "logout": "Sign out",
-        "register": "Register"
+        "register": "Register",
+		"dashboard": "Dashboard"
       },
       "admin": {
         "main": "Administration",

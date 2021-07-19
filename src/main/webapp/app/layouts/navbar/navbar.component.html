@@ -30,7 +30,7 @@
 			</li>
 
 			<!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-			<li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
+			<li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" display="dynamic"
 				routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
 				<a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu"
 					data-cy="entity">
@@ -223,6 +223,13 @@
 							(click)="collapseNavbar()" data-cy="settings">
 							<fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
 							<span jhiTranslate="global.menu.account.settings">Settings</span>
+						</a>
+					</li>
+					<li *ngSwitchCase="true">
+						<a class="dropdown-item" routerLink="account/dashboard" routerLinkActive="active"
+							(click)="collapseNavbar()" data-cy="settings">
+							<fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
+							<span jhiTranslate="global.menu.account.dashboard">Dashboard</span>
 						</a>
 					</li>
 					<li *ngSwitchCase="true">
