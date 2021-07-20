@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from 'primeng/button'; 
+import { ChartModule } from 'primeng/chart';
+
 import { SharedModule } from 'app/shared/shared.module';
 import { PasswordStrengthBarComponent } from './password/password-strength-bar/password-strength-bar.component';
 import { RegisterComponent } from './register/register.component';
@@ -12,7 +16,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { accountState } from './account.route';
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(accountState)],
+  imports: [SharedModule, BrowserAnimationsModule, ButtonModule, ChartModule, RouterModule.forChild(accountState)],
   declarations: [
     ActivateComponent,
     RegisterComponent,
