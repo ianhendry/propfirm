@@ -10,6 +10,7 @@ import { IUser } from '../user-management.model';
 @Injectable({ providedIn: 'root' })
 export class UserManagementService {
   private resourceUrl = this.applicationConfigService.getEndpointFor('api/admin/users');
+  private findOneResourceUrl = this.applicationConfigService.getEndpointFor('api/finduser/findone');
 
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
 
@@ -19,6 +20,10 @@ export class UserManagementService {
 
   update(user: IUser): Observable<IUser> {
     return this.http.put<IUser>(this.resourceUrl, user);
+  }
+
+  findOneUser(login: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.findOneResourceUrl}/${login}`);
   }
 
   find(login: string): Observable<IUser> {

@@ -51,7 +51,7 @@ public class SiteAccount implements Serializable {
     @JsonIgnoreProperties(value = { "siteAccounts" }, allowSetters = true)
     private AddressDetails addressDetails;
 
-    @OneToMany(mappedBy = "siteAccount")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "siteAccount")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "mt4Account", "siteAccount", "challengeType" }, allowSetters = true)
     private Set<TradeChallenge> tradeChallenges = new HashSet<>();
