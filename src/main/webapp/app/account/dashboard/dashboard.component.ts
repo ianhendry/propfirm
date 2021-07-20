@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 
 import { ISiteAccount } from '../../entities/site-account/site-account.model';
 import { ITradeChallenge } from '../../entities/trade-challenge/trade-challenge.model';
@@ -8,10 +8,9 @@ import { SiteAccountService } from '../../entities/site-account/service/site-acc
 import { AccountService } from 'app/core/auth/account.service';
 import { UserManagementService } from 'app/admin/user-management/service/user-management.service';
 import { DataUtils } from 'app/core/util/data-util.service';
-import { DashboardService } from './dashboard.service';
 
 @Component({
-  selector: 'jhi-register',
+  selector: 'jhi-userdashboard',
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
@@ -19,6 +18,8 @@ export class DashboardComponent implements OnInit {
   	tradeChallenge: ITradeChallenge[] | null = null;
   	isLoading = false;
 	user: IUser | null = null;
+	
+	data: any;
 	
 	constructor(
 		protected dataUtils: DataUtils, 
@@ -38,7 +39,19 @@ export class DashboardComponent implements OnInit {
 		   }
 		}
 		);
-		;
+		this.data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [
+                {
+                    label: 'First Dataset',
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                    label: 'Second Dataset',
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                }
+            ]
+        }
   	}
 
 	loadSiteAccount(user: IUser): void {
