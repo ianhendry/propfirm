@@ -43,15 +43,15 @@ public class TradeChallenge implements Serializable {
     private Instant ruleViolatedDate;
 
     @JsonIgnoreProperties(value = { "tradeChallenge", "mt4Trades", "accountDataTimeSeries" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(unique = true)
     private Mt4Account mt4Account;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JsonIgnoreProperties(value = { "user", "addressDetails", "tradeChallenges" }, allowSetters = true)
     private SiteAccount siteAccount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JsonIgnoreProperties(value = { "tradeChallenges" }, allowSetters = true)
     private ChallengeType challengeType;
 
