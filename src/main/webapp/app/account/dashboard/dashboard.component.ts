@@ -15,7 +15,7 @@ import { DataUtils } from 'app/core/util/data-util.service';
 })
 export class DashboardComponent implements OnInit {
 	siteAccounts?: ISiteAccount[] | null = null;
-  	tradeChallenge: ITradeChallenge[] | null = null;
+  	tradeChallenges: ITradeChallenge[] | null = null;
   	isLoading = false;
 	user: IUser | null = null;
 	
@@ -39,19 +39,6 @@ export class DashboardComponent implements OnInit {
 		   }
 		}
 		);
-		this.data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [
-                {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },
-                {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
-            ]
-        }
   	}
 
 	loadSiteAccount(user: IUser): void {
@@ -69,8 +56,20 @@ export class DashboardComponent implements OnInit {
 	      })
 	      .subscribe(
 	        (res: HttpResponse<ISiteAccount[]>) => {
-	          this.isLoading = false;
-	          this.siteAccounts = res.body;
+	          	this.isLoading = false;
+				if (res.body) {
+					for (const item of res.body) {
+						
+						this.siteAccounts = res.body;
+						if (item.tradeChallenges) {
+				        	this.tradeChallenges = item.tradeChallenges
+						}
+						if (item.user) {
+							this.user = item.user
+						}
+				    }      
+				}
+					
 	        },
 	        () => {
 	          this.isLoading = false;
