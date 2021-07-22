@@ -45,24 +45,24 @@
 				</div>
 				<div *ngIf="tradeChallenge.mt4Account" class="container">
 				  	<div class="row">
-				    	<div class="col">accountBroker</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountBroker }}</div>
-					    <div class="col">accountType</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountType }}</div>
+				    	<div class="col">accountBroker</div><div class="col">{{ tradeChallenge.mt4Account.accountBroker }}</div>
+					    <div class="col">accountType</div><div class="col">{{ tradeChallenge.mt4Account.accountType }}</div>
 				  	</div>
 					<div class="row">
-					    <div class="col">accountLogin</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountLogin }}</div>
-					    <div class="col">accountPassword</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountPassword }}</div>
+					    <div class="col">accountLogin</div><div class="col">{{ tradeChallenge.mt4Account.accountLogin }}</div>
+					    <div class="col">accountPassword</div><div class="col">{{ tradeChallenge.mt4Account.accountPassword }}</div>
 					</div>
 					<div class="row">
-						<div class="col">accountReal</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountReal }}</div>
-					    <div class="col">accountName</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountName }}</div>
+						<div class="col">accountReal</div><div class="col">{{ tradeChallenge.mt4Account.accountReal }}</div>
+					    <div class="col">accountName</div><div class="col">{{ tradeChallenge.mt4Account.accountName }}</div>
 					</div>
 					<div class="row">
-					    <div class="col">accountBalance</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountBalance }}</div>
-					    <div class="col">accountProfit</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountProfit }}</div>
+					    <div class="col">accountBalance</div><div class="col">{{ tradeChallenge.mt4Account.accountBalance }}</div>
+					    <div class="col">accountProfit</div><div class="col">{{ tradeChallenge.mt4Account.accountProfit }}</div>
 					</div>
 					<div class="row">
-					    <div class="col">accountEquity</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountEquity }}</div>
-					    <div class="col">accountFreeMargin</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountFreeMargin }}</div>
+					    <div class="col">accountEquity</div><div class="col">{{ tradeChallenge.mt4Account.accountEquity }}</div>
+					    <div class="col">accountFreeMargin</div><div class="col">{{ tradeChallenge.mt4Account.accountFreeMargin }}</div>
 					</div>
 				
 					<!--
@@ -142,6 +142,7 @@
 				          <td>{{ mt4Trade.swap }}</td>
 				          <td>{{ mt4Trade.profit }}</td>
 				          <td>
+							<button pButton type="button" label="Journal" [routerLink]="['/trade-journal-post/new', mt4Trade.tradeJournalPost?.id, 'view']"></button>
 				            <div *ngIf="mt4Trade.tradeJournalPost">
 				              <a [routerLink]="['/trade-journal-post', mt4Trade.tradeJournalPost?.id, 'view']">{{
 				                mt4Trade.tradeJournalPost?.postTitle

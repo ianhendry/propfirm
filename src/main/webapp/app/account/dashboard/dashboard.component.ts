@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 
-import * as moment from 'moment';
-
-import { SelectItem } from 'primeng/api';
 import { UIChart } from 'primeng/chart';
 
 import { ISiteAccount } from '../../entities/site-account/site-account.model';
@@ -17,7 +14,6 @@ import { Mt4TradeService } from '../../entities/mt-4-trade/service/mt-4-trade.se
 import { AccountService } from 'app/core/auth/account.service';
 import { UserManagementService } from 'app/admin/user-management/service/user-management.service';
 import { DataUtils } from 'app/core/util/data-util.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'jhi-userdashboard',
@@ -27,7 +23,6 @@ export class DashboardComponent implements OnInit {
 	@ViewChild("chart") chart: UIChart | undefined;
 	tradesData: any;
 	chartMt4Trades: any;
-	
 
 	siteAccounts?: ISiteAccount[] | null = null;
   	mt4Trades?: IMt4Trade[] | null = null;
@@ -143,7 +138,6 @@ export class DashboardComponent implements OnInit {
 	}
 	
 	getMt4Trades(mt4AccountId: IMt4Account):void {
-		const datepipe: DatePipe = new DatePipe('en-US');
 		const criteria: { key: string; value: any; }[] = [];
 	  	criteria.push({key: 'mt4AccountId.equals', value: mt4AccountId.id});
 
