@@ -65,11 +65,12 @@
 					    <div class="col">accountFreeMargin</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountFreeMargin }}</div>
 					</div>
 				
-			
+					<!--
 					<button type="submit" (click)="getMt4Trades(tradeChallenge.mt4Account)" class="btn btn-primary btn-sm" data-cy="entityDeleteButton">
 		                <fa-icon icon="times"></fa-icon>
 		                <span class="d-none d-md-inline" jhiTranslate="entity.action.showtrades">Show Trades</span>
 	             	</button>
+					-->
 				</div>
 				<div *ngIf="mt4Trades">	
 				    <table class="table table-striped" aria-describedby="page-heading">
@@ -162,18 +163,19 @@
 	    	</div>
 	    </div>
 	</div>
+	<div *ngIf="tradeChallenges" class="row">
+	    <div *ngIf="tradeChallenges" class="col-4">
+	    </div>
+		<div class="col-4">
+			<p-chart #chart type="line" [data]="chartMt4Trades" height="300"></p-chart>
+		</div>
+		<div class="col-4">
+		</div>
+	</div>
 </div>
+
 <!--
-<button type="button" pButton (click)="getMt4Trades(tradeChallenge.mt4Account)"></button>
+	<p-button label="Click" ></p-button>
+	<button pButton type="button" label="Click" ></button>
 
-
-
-    <google-chart #chart  
-       [title]="title"  
-       [type]="type"  
-       [data]="data"  
-       [options]="options"  
-       [width]="width"  
-       [height]="height">  
-    </google-chart>  
 -->
