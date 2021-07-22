@@ -1,111 +1,179 @@
-<div>
-	<table>
-	 <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.tradeChallengeName">Trade Challenge Name</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.startDate">Start Date</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.runningMaxTotalDrawdown">Running Max Total Drawdown</span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.runningMaxDailyDrawdown">Running Max Daily Drawdown</span>
-            <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.rulesViolated">Rules Violated</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.ruleViolated">Rule Violated</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.ruleViolatedDate">Rule Violated Date</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.mt4Account">Mt 4 Account</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.siteAccount">Site Account</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col">
-            <span jhiTranslate="propfirmApp.tradeChallenge.challengeType">Challenge Type</span> <fa-icon icon="sort"></fa-icon>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-	<tbody>
-        <tr *ngFor="let tradeChallenge of tradeChallenges;" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/trade-challenge', tradeChallenge.id, 'view']">{{ tradeChallenge.id }}</a>
-          </td>
-          <td>{{ tradeChallenge.tradeChallengeName }}</td>
-          <td>{{ tradeChallenge.startDate | formatMediumDatetime }}</td>
-          <td>{{ tradeChallenge.runningMaxTotalDrawdown }}</td>
-          <td>{{ tradeChallenge.runningMaxDailyDrawdown }}</td>
-          <td>{{ tradeChallenge.rulesViolated }}</td>
-          <td>{{ tradeChallenge.ruleViolated }}</td>
-          <td>{{ tradeChallenge.ruleViolatedDate | formatMediumDatetime }}</td>
-          <td>
-            <div *ngIf="tradeChallenge.mt4Account">
-              <a [routerLink]="['/mt-4-account', tradeChallenge.mt4Account?.id, 'view']">{{ tradeChallenge.mt4Account?.accountLogin }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="tradeChallenge.siteAccount">
-              <a [routerLink]="['/site-account', tradeChallenge.siteAccount?.id, 'view']">{{ tradeChallenge.siteAccount?.accountName }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="tradeChallenge.challengeType">
-              <a [routerLink]="['/challenge-type', tradeChallenge.challengeType?.id, 'view']">{{
-                tradeChallenge.challengeType?.challengeTypeName
-              }}</a>
-            </div>
-          </td>
-
-        </tr>
-      </tbody>
-    </table>
-
-	<div class="row justify-content-center">
-		Loading {{ this.isLoading }} 
-		Accounts {{ this.siteAccounts }} 
-	</div>
-
-		<!-- 
-		<p-splitter [style]="{'height': '300px'}">
-    <ng-template pTemplate>
-        Panel 1
-    </ng-template>
-    <ng-template pTemplate>
-        Panel 2
-    </ng-template>
-</p-splitter>
-
-
-<div class="card">
-	<h5>Vertical</h5>
-		<p-splitter [style]="{'height': '300px'}" styleClass="p-mb-5" layout="vertical">
-			<ng-template>
-				<div class="p-col p-d-flex p-ai-center p-jc-center">
-					Panel 1
+<div class="container-fluid">
+	<div class="row">
+	    <div *ngIf="tradeChallenges" class="col-2">
+			<table class="table table-striped" aria-describedby="page-heading">
+		      <thead>
+		        <tr>
+		          <th scope="col">
+		            <span jhiTranslate="propfirmApp.tradeChallenge.tradeChallengeName">Trade Challenge Name</span>
+		          </th>
+		          <th scope="col">
+		            <span jhiTranslate="propfirmApp.tradeChallenge.startDate">Start Date</span>
+		          </th>
+		        </tr>
+		      </thead>
+			<tbody>
+		        <tr *ngFor="let tradeChallenge of tradeChallenges;" data-cy="entityTable">
+		        	<td>
+						<a role="button" (click)="showChallenge(tradeChallenge)">{{ tradeChallenge.tradeChallengeName }}</a>
+					</td>
+		          	<td>{{ tradeChallenge.startDate | formatMediumDatetime }}</td>
+		        </tr>
+		      </tbody>
+		    </table>
+	    </div>
+	    <div class="col-10">
+	    	<div class="container-fluid" border="1">
+				<div *ngIf="tradeChallenge">
+					<div class="container">
+				  	<div class="row">
+				    	<div class="col">Start Date</div><div class="col">{{ tradeChallenge.startDate }}</div>
+					    <div class="col">Name </div><div class="col">{{ tradeChallenge.tradeChallengeName }}</div>
+				  	</div>
+					<div class="row">
+					    <div class="col">runningMaxTotalDrawdown</div><div class="col">{{ tradeChallenge.runningMaxTotalDrawdown }}</div>
+					    <div class="col">runningMaxDailyDrawdown</div><div class="col">{{ tradeChallenge.runningMaxDailyDrawdown }}</div>
+					</div>
+					<div class="row">
+						<div class="col">rulesViolated</div><div class="col">{{ tradeChallenge.rulesViolated }}</div>
+					    <div class="col">ruleViolatedDate</div><div class="col">{{ tradeChallenge.ruleViolatedDate }}</div>
+					</div>
+					<div class="row">
+					    <div class="col">Challenge Type</div><div *ngIf="tradeChallenge.challengeType" class="col">{{ tradeChallenge.challengeType.challengeTypeName }}</div>
+					    <div class="col">Column</div><div class="col">{{ tradeChallenge.tradeChallengeName }}</div>
+					</div>
 				</div>
-			</ng-template>
-			<ng-template>
-				<div class="p-col p-d-flex p-ai-center p-jc-center">
-					Panel 2
+				<div *ngIf="tradeChallenge.mt4Account" class="container">
+				  	<div class="row">
+				    	<div class="col">accountBroker</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountBroker }}</div>
+					    <div class="col">accountType</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountType }}</div>
+				  	</div>
+					<div class="row">
+					    <div class="col">accountLogin</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountLogin }}</div>
+					    <div class="col">accountPassword</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountPassword }}</div>
+					</div>
+					<div class="row">
+						<div class="col">accountReal</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountReal }}</div>
+					    <div class="col">accountName</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountName }}</div>
+					</div>
+					<div class="row">
+					    <div class="col">accountBalance</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountBalance }}</div>
+					    <div class="col">accountProfit</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountProfit }}</div>
+					</div>
+					<div class="row">
+					    <div class="col">accountEquity</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountEquity }}</div>
+					    <div class="col">accountFreeMargin</div><div class="col">accountBroker {{ tradeChallenge.mt4Account.accountFreeMargin }}</div>
+					</div>
+				
+			
+					<button type="submit" (click)="getMt4Trades(tradeChallenge.mt4Account)" class="btn btn-primary btn-sm" data-cy="entityDeleteButton">
+		                <fa-icon icon="times"></fa-icon>
+		                <span class="d-none d-md-inline" jhiTranslate="entity.action.showtrades">Show Trades</span>
+	             	</button>
 				</div>
-			</ng-template>
-		</p-splitter>
+				<div *ngIf="mt4Trades">	
+				    <table class="table table-striped" aria-describedby="page-heading">
+				      <thead>
+				        <tr>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.ticket">Ticket</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.openTime">Open Time</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.directionType">Direction Type</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.positionSize">Position Size</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.symbol">Symbol</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.openPrice">Open Price</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.stopLossPrice">Stop Loss Price</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.takeProfitPrice">Take Profit Price</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.closeTime">Close Time</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.closePrice">Close Price</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.commission">Commission</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.taxes">Taxes</span>
+				          </th>
+				          <th scope="col"><span jhiTranslate="propfirmApp.mt4Trade.swap">Swap</span></th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.profit">Profit</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.tradeJournalPost">Trade Journal Post</span>
+				          </th>
+				          <th scope="col">
+				            <span jhiTranslate="propfirmApp.mt4Trade.instrument">Instrument</span>
+				          </th>
+				          <th scope="col"></th>
+				        </tr>
+				      </thead>
+				      <tbody>
+				        <tr *ngFor="let mt4Trade of mt4Trades;" data-cy="entityTable">
+				          <td>{{ mt4Trade.ticket }}</td>
+				          <td>{{ mt4Trade.openTime | formatMediumDatetime }}</td>
+				          <td jhiTranslate="{{ 'propfirmApp.TRADEDIRECTION.' + mt4Trade.directionType }}">{{ mt4Trade.directionType }}</td>
+				          <td>{{ mt4Trade.positionSize }}</td>
+				          <td>{{ mt4Trade.symbol }}</td>
+				          <td>{{ mt4Trade.openPrice }}</td>
+				          <td>{{ mt4Trade.stopLossPrice }}</td>
+				          <td>{{ mt4Trade.takeProfitPrice }}</td>
+				          <td>{{ mt4Trade.closeTime | formatMediumDatetime }}</td>
+				          <td>{{ mt4Trade.closePrice }}</td>
+				          <td>{{ mt4Trade.commission }}</td>
+				          <td>{{ mt4Trade.taxes }}</td>
+				          <td>{{ mt4Trade.swap }}</td>
+				          <td>{{ mt4Trade.profit }}</td>
+				          <td>
+				            <div *ngIf="mt4Trade.tradeJournalPost">
+				              <a [routerLink]="['/trade-journal-post', mt4Trade.tradeJournalPost?.id, 'view']">{{
+				                mt4Trade.tradeJournalPost?.postTitle
+				              }}</a>
+				            </div>
+				          </td>
+				          <td>
+				            <div *ngIf="mt4Trade.instrument">
+				              {{ mt4Trade.instrument?.ticker }}
+				            </div>
+				          </td>
+				          <td class="text-right">
+				          </td>
+				        </tr>
+				      </tbody>
+				    </table>
+				</div>
+				</div>
+	    	</div>
+	    </div>
 	</div>
-	
+</div>
+<!--
+<button type="button" pButton (click)="getMt4Trades(tradeChallenge.mt4Account)"></button>
 
-	<p-chart type="line" [data]="data"></p-chart>
+
+
+    <google-chart #chart  
+       [title]="title"  
+       [type]="type"  
+       [data]="data"  
+       [options]="options"  
+       [width]="width"  
+       [height]="height">  
+    </google-chart>  
 -->
-	
