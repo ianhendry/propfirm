@@ -47,7 +47,7 @@ public class TradeChallenge implements Serializable {
     @JoinColumn(unique = true)
     private Mt4Account mt4Account;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "user", "addressDetails", "tradeChallenges" }, allowSetters = true)
     private SiteAccount siteAccount;
 

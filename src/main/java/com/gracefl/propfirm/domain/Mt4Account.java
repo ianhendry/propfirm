@@ -112,15 +112,15 @@ public class Mt4Account implements Serializable {
     private Instant inActiveDate;
 
     @JsonIgnoreProperties(value = { "mt4Account", "siteAccount", "challengeType" }, allowSetters = true)
-    @OneToOne(mappedBy = "mt4Account")
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "mt4Account")
     private TradeChallenge tradeChallenge;
 
-    @OneToMany(mappedBy = "mt4Account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mt4Account")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "tradeJournalPost", "mt4Account", "instrument" }, allowSetters = true)
     private Set<Mt4Trade> mt4Trades = new HashSet<>();
 
-    @OneToMany(mappedBy = "mt4Account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mt4Account")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "mt4Account" }, allowSetters = true)
     private Set<AccountDataTimeSeries> accountDataTimeSeries = new HashSet<>();

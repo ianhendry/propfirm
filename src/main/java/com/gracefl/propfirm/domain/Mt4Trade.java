@@ -73,7 +73,7 @@ public class Mt4Trade implements Serializable {
     @JoinColumn(unique = true)
     private TradeJournalPost tradeJournalPost;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "tradeChallenge", "mt4Trades", "accountDataTimeSeries" }, allowSetters = true)
     private Mt4Account mt4Account;
 
