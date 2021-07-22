@@ -27,7 +27,9 @@
       "ruleViolatedDate": "Rule Violated Date",
       "mt4Account": "Mt 4 Account",
       "siteAccount": "Site Account",
-      "challengeType": "Challenge Type"
+      "challengeType": "Challenge Type",
+	  "challenges": "My Challenges",
+	  "trades": "Trades"
     }
   }
 }
