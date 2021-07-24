@@ -40,6 +40,14 @@ public interface InstrumentService {
     Optional<Instrument> findOne(Long id);
 
     /**
+     * Get the instrument by the ticker
+     *
+     * @param symbol the ticker of the entity.
+     * @return the entity.
+     */
+    List<Instrument> findAllByTicker(String ticker);
+    
+    /**
      * Delete the "id" instrument.
      *
      * @param id the id of the entity.

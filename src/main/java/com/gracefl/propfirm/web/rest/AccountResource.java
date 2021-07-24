@@ -1,5 +1,6 @@
 package com.gracefl.propfirm.web.rest;
 
+import com.gracefl.propfirm.domain.AccountDataTimeSeries;
 import com.gracefl.propfirm.domain.ChallengeType;
 import com.gracefl.propfirm.domain.Mt4Account;
 import com.gracefl.propfirm.domain.SiteAccount;
@@ -8,6 +9,7 @@ import com.gracefl.propfirm.domain.User;
 import com.gracefl.propfirm.domain.enumeration.BROKER;
 import com.gracefl.propfirm.repository.UserRepository;
 import com.gracefl.propfirm.security.SecurityUtils;
+import com.gracefl.propfirm.service.AccountDataTimeSeriesService;
 import com.gracefl.propfirm.service.ChallengeTypeService;
 import com.gracefl.propfirm.service.MailService;
 import com.gracefl.propfirm.service.Mt4AccountService;
@@ -20,6 +22,8 @@ import com.gracefl.propfirm.service.dto.UserDTO;
 import com.gracefl.propfirm.web.rest.errors.*;
 import com.gracefl.propfirm.web.rest.vm.KeyAndPasswordVM;
 import com.gracefl.propfirm.web.rest.vm.ManagedUserVM;
+
+import java.time.Instant;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -57,10 +61,13 @@ public class AccountResource {
     
     private final ChallengeTypeService challengeTypeService;
     
+    private final AccountDataTimeSeriesService accountDataTimeSeriesService;
+    
     private final MailService mailService;
 
     public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, SiteAccountService siteAccountService,
-    		Mt4AccountService mt4AccountService, TradeChallengeService tradeChallengeService, ChallengeTypeService challengeTypeService) {
+    		Mt4AccountService mt4AccountService, TradeChallengeService tradeChallengeService, ChallengeTypeService challengeTypeService,
+    		AccountDataTimeSeriesService accountDataTimeSeriesService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
@@ -68,6 +75,7 @@ public class AccountResource {
         this.mt4AccountService = mt4AccountService;
         this.tradeChallengeService = tradeChallengeService;
         this.challengeTypeService = challengeTypeService;
+        this.accountDataTimeSeriesService = accountDataTimeSeriesService;
     }
 
     /**
@@ -89,35 +97,47 @@ public class AccountResource {
         Optional<ChallengeType> challengeType = challengeTypeService.findOne(1L);
         
         if (challengeType.isPresent()) {
-        // next create a SiteAccount entity
-        SiteAccount siteAccount = new SiteAccount();
-        siteAccount.setUser(user);
-        siteAccount.setAccountName(user.getEmail());
-        siteAccount.setInActive(false);
-        siteAccountService.save(siteAccount);
-        
-        // next create a Mt4Account entity
-        Mt4Account mt4Account = new Mt4Account();
-        mt4Account.setAccountLogin(user.getEmail() + "_1");
-        mt4Account.setInActive(false);
-        mt4Account.setAccountBroker(BROKER.FXPRO);
-        mt4Account.setAccountInfoString("NEW ACCOUNT:" + user.getEmail());
-        mt4AccountService.save(mt4Account);
-        
-        // then create a TradeChallenge entity with the right challenge type from the 
-        TradeChallenge tradeChallenge = new TradeChallenge();
-        tradeChallenge.setMt4Account(mt4Account);
-        tradeChallenge.setTradeChallengeName(user.getEmail() + "_1");
-        tradeChallenge.setRulesViolated(false);
-        tradeChallenge.setSiteAccount(siteAccount);
-        tradeChallenge.setChallengeType(challengeType.get());
-        tradeChallengeService.save(tradeChallenge);
-        
-        mt4Account.setTradeChallenge(tradeChallenge);
-        mt4AccountService.save(mt4Account);
-        
-        mailService.sendActivationEmail(user);
+	        // next create a SiteAccount entity
+	        SiteAccount siteAccount = new SiteAccount();
+	        siteAccount.setUser(user);
+	        siteAccount.setAccountName(user.getEmail());
+	        siteAccount.setInActive(false);
+	        siteAccountService.save(siteAccount);
+	        
+	        // next create a Mt4Account entity
+	        Mt4Account mt4Account = new Mt4Account();
+	        mt4Account.setAccountLogin(user.getEmail() + "_1");
+	        mt4Account.setInActive(false);
+	        mt4Account.setAccountBroker(BROKER.FXPRO);
+	        mt4Account.setAccountInfoString("NEW ACCOUNT:" + user.getEmail());
+	        mt4Account.setAccountBalance(challengeType.get().getAccountSize().doubleValue());
+	        mt4Account.setAccountEquity(challengeType.get().getAccountSize().doubleValue());
+	        mt4AccountService.save(mt4Account);
+	        
+	        // then create a TradeChallenge entity with the right challenge type from the 
+	        TradeChallenge tradeChallenge = new TradeChallenge();
+	        tradeChallenge.setMt4Account(mt4Account);
+	        tradeChallenge.setTradeChallengeName(user.getEmail() + "_1");
+	        tradeChallenge.setRulesViolated(false);
+	        tradeChallenge.setSiteAccount(siteAccount);
+	        tradeChallenge.setChallengeType(challengeType.get());
+	        tradeChallengeService.save(tradeChallenge);
+	        
+	        AccountDataTimeSeries accountDataTimeSeries = new AccountDataTimeSeries();
+	        accountDataTimeSeries.setAccountBalance(tradeChallenge.getChallengeType().getAccountSize().doubleValue());
+	        accountDataTimeSeries.setAccountEquity(tradeChallenge.getChallengeType().getAccountSize().doubleValue());
+	        accountDataTimeSeries.setMt4Account(mt4Account);
+	        accountDataTimeSeries.setDateStamp(Instant.now());
+	        accountDataTimeSeriesService.save(accountDataTimeSeries);
+	        
+	        mt4Account.addAccountDataTimeSeries(accountDataTimeSeries);
+	        
+	        mt4Account.setTradeChallenge(tradeChallenge);
+	        mt4AccountService.save(mt4Account);
+	        
+	        mailService.sendActivationEmail(user);
         } else {
+        	// TODO send a mail to the ADMIN account because a sign up error occurred
         	// send a mail to the ADMIN account because a sign up error occurred
         }
         

@@ -5,6 +5,9 @@ import com.gracefl.propfirm.repository.InstrumentRepository;
 import com.gracefl.propfirm.service.InstrumentService;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -86,4 +89,15 @@ public class InstrumentServiceImpl implements InstrumentService {
         log.debug("Request to delete Instrument : {}", id);
         instrumentRepository.deleteById(id);
     }
+
+	@Override
+	public List<Instrument> findAllByTicker(String ticker) {
+		log.debug("Request to get all Instrument where ticker : {} ", ticker);
+        return StreamSupport
+            .stream(instrumentRepository.findAll().spliterator(), false)
+            .filter(mt4Account -> mt4Account.getTicker() == ticker)
+            .collect(Collectors.toList());
+	}
+    
+    
 }

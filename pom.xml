@@ -320,6 +320,11 @@
             <artifactId>spring-security-messaging</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+        <dependency>
+		    <groupId>org.springframework.integration</groupId>
+		    <artifactId>spring-integration-zeromq</artifactId>
+		    <version>5.4.1</version>
+		</dependency>
     </dependencies>
 
     <build>

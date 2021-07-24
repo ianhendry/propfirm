@@ -166,4 +166,14 @@ public class Mt4AccountServiceImpl implements Mt4AccountService {
         log.debug("Request to delete Mt4Account : {}", id);
         mt4AccountRepository.deleteById(id);
     }
+
+	@Override
+	public List<Mt4Account> findAllByAccountLogin(String accountLogin) {
+		// TODO Auto-generated method stub
+		log.debug("Request to get all mt4Accounts where AccountLogin is {}", accountLogin);
+        return StreamSupport
+            .stream(mt4AccountRepository.findAll().spliterator(), false)
+            .filter(mt4Account -> mt4Account.getAccountLogin() == accountLogin)
+            .collect(Collectors.toList());
+	}
 }

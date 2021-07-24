@@ -49,6 +49,14 @@ public interface Mt4AccountService {
     Optional<Mt4Account> findOne(Long id);
 
     /**
+     * Get the mt4Account.
+     *
+     * @param login the account login ID of the entity.
+     * @return the entity.
+     */
+    List<Mt4Account> findAllByAccountLogin(String accountLogin);
+    
+    /**
      * Delete the "id" mt4Account.
      *
      * @param id the id of the entity.
