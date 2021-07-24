@@ -15,13 +15,25 @@ public class Mt4ClientConnectionStartUpManager {
 	@Autowired
 	Mt4ClientConnectionTradeHistoryPuller mt4ClientConnectionTradeHistoryPuller;
 	
+	@Autowired
+	Mt4ClientConnectionAccountDataSubscriber mt4ClientConnectionAccountDataSubscriber;
+	
 	@PostConstruct
     public void init() throws Exception {	
 						
-		// finally open the real time data feed from MT4
-    	log.info("Call MT4 Client Application for MT4 trade history");
-        Thread pullThread = new Thread(mt4ClientConnectionTradeHistoryPuller);
-        pullThread.start();
+		Boolean pullHistory = true;
+		
+		// get the account history
+		if (pullHistory) {
+	    	log.info("Call MT4 Client Application for MT4 trade history");
+	        Thread pullThread = new Thread(mt4ClientConnectionTradeHistoryPuller);
+	        pullThread.start();
+		}
+		
+		// open the real time account data feed from MT4
+		log.info("Call MT4 Client Application for MT4 trade history");
+        Thread subscriberThread = new Thread(mt4ClientConnectionAccountDataSubscriber);
+        subscriberThread.start();
         
 	}
 }

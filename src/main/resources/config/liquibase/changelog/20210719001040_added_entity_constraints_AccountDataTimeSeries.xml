@@ -13,5 +13,6 @@
                                  constraintName="fk_account_data_time_series__mt4account_id"
                                  referencedColumnNames="id"
                                  referencedTableName="mt_4_account"/>
+        <addUniqueConstraint tableName="account_data_time_series" columnNames="date_stamp, mt4account_id"/>
     </changeSet>
 </databaseChangeLog>

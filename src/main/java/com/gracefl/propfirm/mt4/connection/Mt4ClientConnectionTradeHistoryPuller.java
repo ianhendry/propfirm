@@ -133,7 +133,7 @@ public class Mt4ClientConnectionTradeHistoryPuller implements Runnable, Closeabl
 
             	Mt4ClientTerminalTradeObject accountInformation = objectMapper.readValue(myJSONstring, Mt4ClientTerminalTradeObject.class);
             	
-            	processJSONMt4TRades(accountInformation, mt4Accounts);
+            	processJSONMt4TRades(accountInformation, mt4Accounts.get());
             	
             	System.out.println(accountInformation.toString());
             } else {
@@ -158,18 +158,17 @@ public class Mt4ClientConnectionTradeHistoryPuller implements Runnable, Closeabl
         CONTEXT.close();
     }
     
-    private void processJSONMt4TRades(Mt4ClientTerminalTradeObject processObject, Optional<Mt4Account> mt4Account) {
+    private void processJSONMt4TRades(Mt4ClientTerminalTradeObject processObject, Mt4Account mt4Account) {
 		
-    	Mt4Account singleMt4Account = mt4Account.get();
-    	Double balance = singleMt4Account.getAccountBalance();
-    	Double equity = singleMt4Account.getAccountEquity();
+    	Double balance = mt4Account.getAccountBalance();
+    	Double equity = mt4Account.getAccountEquity();
     	
     	for (Mt4TradesObject trade: processObject.getTrades()) {
     		
     		if (trade.getSymbol().length()>1) {
     			
     			//TODO check here if the trade is already stored and do not duplicate 
-    			if (!checkMt4TradeExists(singleMt4Account, trade.getTicket())) {
+    			if (!checkMt4TradeExists(trade.getSymbol(), trade.getTicket())) {
 	    			TRADEDIRECTION tradeDirection; 
 	    			if (trade.getType() == 1) {
 	    				tradeDirection = TRADEDIRECTION.SELL; 
@@ -185,7 +184,7 @@ public class Mt4ClientConnectionTradeHistoryPuller implements Runnable, Closeabl
 	    			mt4Trade.setCommission(trade.getCommission().doubleValue());
 	    			mt4Trade.setDirectionType(tradeDirection);
 	    			mt4Trade.setInstrument(instrument);
-	    			mt4Trade.setMt4Account(singleMt4Account);
+	    			mt4Trade.setMt4Account(mt4Account);
 	    			mt4Trade.setOpenPrice(trade.getOpenPrice().doubleValue());
 	    			mt4Trade.setPositionSize(trade.getLots());
 	    			mt4Trade.setStopLossPrice(trade.getStopLoss().doubleValue());
@@ -202,12 +201,12 @@ public class Mt4ClientConnectionTradeHistoryPuller implements Runnable, Closeabl
 	    			AccountDataTimeSeries accountDataTimeSeries = new AccountDataTimeSeries();
 	    	        accountDataTimeSeries.setAccountBalance(balance);
 	    	        accountDataTimeSeries.setAccountEquity(equity);
-	    	        accountDataTimeSeries.setMt4Account(singleMt4Account);
+	    	        accountDataTimeSeries.setMt4Account(mt4Account);
 	    	        accountDataTimeSeries.setDateStamp(datesHelper.convertStringToInstant(trade.getOpenTime()));
 	    	        accountDataTimeSeriesService.save(accountDataTimeSeries);
 	    	        
-	    	        singleMt4Account.addAccountDataTimeSeries(accountDataTimeSeries);
-	    	        mt4AccountRepository.save(singleMt4Account);
+	    	        mt4Account.addAccountDataTimeSeries(accountDataTimeSeries);
+	    	        mt4AccountRepository.save(mt4Account);
     			} else {
     				log.debug("Trade is already in the database. Did not update {} ", trade);
     			}
@@ -228,15 +227,15 @@ public class Mt4ClientConnectionTradeHistoryPuller implements Runnable, Closeabl
 		
     }
     
-	private Boolean checkMt4TradeExists(Mt4Account singleMt4Account, Double ticket ) {
+	private Boolean checkMt4TradeExists(String symbol, Double ticket ) {
 		
 		Mt4Trade tradeExample = new Mt4Trade();
-		tradeExample.setMt4Account(singleMt4Account);
+		tradeExample.setSymbol(symbol);
 		tradeExample.setTicket(BigDecimal.valueOf(ticket));
 	
-		Optional<Mt4Trade> mt4Accounts = mt4TradeRepository.findOne(Example.of(tradeExample));
+		Optional<Mt4Trade> mt4Trade = mt4TradeRepository.findOne(Example.of(tradeExample));
 		
-		if (mt4Accounts.isPresent()) {
+		if (mt4Trade.isPresent()) {
 			return true;
 		} else {
 			return false;

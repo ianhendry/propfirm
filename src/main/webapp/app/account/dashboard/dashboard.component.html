@@ -171,6 +171,7 @@
 	</div>
 	<div *ngIf="tradeChallenges" class="row">
 	    <div *ngIf="tradeChallenges" class="col-4">
+			<p-chart #chart type="line" [data]="timeSeriesData" height="300"></p-chart>
 	    </div>
 		<div class="col-4">
 			<p-chart #chart type="line" [data]="chartMt4Trades" height="300"></p-chart>

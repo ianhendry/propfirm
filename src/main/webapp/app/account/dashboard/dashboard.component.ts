@@ -7,10 +7,12 @@ import { ISiteAccount } from '../../entities/site-account/site-account.model';
 import { IMt4Trade } from '../../entities/mt-4-trade/mt-4-trade.model';
 import { IMt4Account } from '../../entities/mt-4-account/mt-4-account.model';
 import { ITradeChallenge } from '../../entities/trade-challenge/trade-challenge.model';
+import { IAccountDataTimeSeries } from '../../entities/account-data-time-series/account-data-time-series.model'
 import { IUser } from '../../entities/user/user.model';
 import { SiteAccountService } from '../../entities/site-account/service/site-account.service';
 import { TradeChallengeService } from '../../entities/trade-challenge/service/trade-challenge.service';
 import { Mt4TradeService } from '../../entities/mt-4-trade/service/mt-4-trade.service';
+import { AccountDataTimeSeriesService } from '../../entities/account-data-time-series/service/account-data-time-series.service'
 import { AccountService } from 'app/core/auth/account.service';
 import { UserManagementService } from 'app/admin/user-management/service/user-management.service';
 import { DataUtils } from 'app/core/util/data-util.service';
@@ -23,9 +25,11 @@ export class DashboardComponent implements OnInit {
 	@ViewChild("chart") chart: UIChart | undefined;
 	tradesData: any;
 	chartMt4Trades: any;
-
+	timeSeriesData: any;
+	
 	siteAccounts?: ISiteAccount[] | null = null;
   	mt4Trades?: IMt4Trade[] | null = null;
+	accountDataTimeSeries?: IAccountDataTimeSeries[];
 	tradeChallenges: ITradeChallenge[] = [];
 	tradeChallenge?: ITradeChallenge;
 
@@ -39,6 +43,7 @@ export class DashboardComponent implements OnInit {
 		protected siteAccountService: SiteAccountService,
 		protected tradeChallengeService: TradeChallengeService,
 		protected mt4TradeService: Mt4TradeService,
+		protected accountDataTimeSeriesService: AccountDataTimeSeriesService,
 		private accountService: AccountService,
     	private userService: UserManagementService
 	) {
@@ -60,11 +65,34 @@ export class DashboardComponent implements OnInit {
 	      datasets: [
 	          {
 	              label: 'Balance',
-	              data: []
+	              data: [],
+				  fill: false,
+                  borderColor: '#42A5F5'
+
 	          },
 			  {
 	              label: 'Equity',
-	              data: []
+	              data: [],
+				  fill: false,	
+                  borderColor: '#FFA726'
+	          }
+	      ]
+	    };
+		this.timeSeriesData = {
+	      labels: [],
+	      datasets: [
+	          {
+	              label: 'Balance',
+	              data: [],
+				  fill: false,
+                  borderColor: '#42A5F5'
+
+	          },
+			  {
+	              label: 'Equity',
+	              data: [],
+				  fill: false,	
+                  borderColor: '#FFA726'
 	          }
 	      ]
 	    };
@@ -126,6 +154,7 @@ export class DashboardComponent implements OnInit {
 									this.showChallenge(this.tradeChallenges[0]);
 									if (this.tradeChallenges[0].mt4Account) {
 										this.getMt4Trades(this.tradeChallenges[0].mt4Account);
+										this.getMt4AccountDataTimeSeries(this.tradeChallenges[0].mt4Account);
 									}
 								}
 		                    } 
@@ -155,6 +184,32 @@ export class DashboardComponent implements OnInit {
 							this.chartMt4Trades.datasets[0].data = this.mt4Trades.map(a =>  a.closePrice);
 							this.chartMt4Trades.datasets[1].data = this.mt4Trades.map(a =>  a.openPrice);
 							this.chartMt4Trades.labels = this.mt4Trades.map(a => a.closeTime!.format('DD/MM/YYYY HH:mm:ss'));
+	        				this.chart!.refresh();
+						}
+					}
+	            } 
+	    	);
+		}
+	}
+	
+	getMt4AccountDataTimeSeries(mt4AccountId: IMt4Account):void {
+		const criteria: { key: string; value: any; }[] = [];
+	  	criteria.push({key: 'mt4AccountId.equals', value: mt4AccountId.id});
+
+		if (mt4AccountId.id) {
+			this.accountDataTimeSeriesService.query({
+		        page: 0,
+		        size: 200,
+		        sort: [],
+	        	criteria
+		      }).subscribe(
+				(res: HttpResponse<IAccountDataTimeSeries[]>) => {
+					if (res.body) {
+						this.accountDataTimeSeries = res.body;
+						for (const accountTimeSeries of this.accountDataTimeSeries.reverse()) {
+							this.timeSeriesData.datasets[0].data = this.accountDataTimeSeries.map(a =>  a.accountBalance);
+							this.timeSeriesData.datasets[1].data = this.accountDataTimeSeries.map(a =>  a.accountEquity);
+							this.timeSeriesData.labels = this.accountDataTimeSeries.map(a => a.dateStamp!.format('DD/MM/YYYY HH:mm:ss'));
 	        				this.chart!.refresh();
 						}
 					}
