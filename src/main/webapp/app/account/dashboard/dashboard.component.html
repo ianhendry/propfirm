@@ -1,3 +1,15 @@
+<div *ngIf="this.isLoading" class="container-fluid">
+	<div class="row">
+		<div class="col-5">
+		</div>
+		<div class="col-2">
+			<i class="pi pi-spin pi-spinner" style="font-size: 10rem; text-align: center"></i>
+		</div>
+		<div class="col-5">
+		</div>
+	</div>
+</div>
+	
 <div class="container-fluid">
 	<div class="row">
 	    <div *ngIf="tradeChallenges" class="col-2">
@@ -170,13 +182,14 @@
 	    </div>
 	</div>
 	<div *ngIf="tradeChallenges" class="row">
-	    <div *ngIf="tradeChallenges" class="col-4">
-			<p-chart #chart type="line" [data]="timeSeriesData" height="300"></p-chart>
+	    <div class="col-2">
+			
 	    </div>
-		<div class="col-4">
+		<div class="col-5">
 			<p-chart #chart type="line" [data]="chartMt4Trades" height="300"></p-chart>
 		</div>
-		<div class="col-4">
+		<div class="col-5">
+			<p-chart #chart type="line" [data]="timeSeriesData" height="300"></p-chart>
 		</div>
 	</div>
 </div>
