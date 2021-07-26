@@ -12,7 +12,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Table(name = "account_data_time_series", uniqueConstraints = {@UniqueConstraint(columnNames = {"date_stamp", "mt4account_id"})})
-//"Table(name = "account_data_time_series")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class AccountDataTimeSeries implements Serializable {
 

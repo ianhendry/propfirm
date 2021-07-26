@@ -1,8 +1,9 @@
 package com.gracefl.propfirm.service;
 
 import com.gracefl.propfirm.domain.AccountDataTimeSeries;
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link AccountDataTimeSeries}.
@@ -27,9 +28,10 @@ public interface AccountDataTimeSeriesService {
     /**
      * Get all the accountDataTimeSeries.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<AccountDataTimeSeries> findAll();
+    Page<AccountDataTimeSeries> findAll(Pageable pageable);
 
     /**
      * Get the "id" accountDataTimeSeries.

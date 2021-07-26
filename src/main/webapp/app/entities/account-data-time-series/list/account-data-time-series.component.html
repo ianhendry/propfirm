@@ -3,7 +3,7 @@
     <span jhiTranslate="propfirmApp.accountDataTimeSeries.home.title">Account Data Time Series</span>
 
     <div class="d-flex justify-content-end">
-      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span jhiTranslate="propfirmApp.accountDataTimeSeries.home.refreshListLabel">Refresh List</span>
       </button>
@@ -31,17 +31,38 @@
   <div class="table-responsive" id="entities" *ngIf="accountDataTimeSeries && accountDataTimeSeries.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
-        <tr>
-          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.dateStamp">Date Stamp</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountBalance">Account Balance</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountEquity">Account Equity</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountCredit">Account Credit</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountFreeMargin">Account Free Margin</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.accountStopoutLevel">Account Stopout Level</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.openLots">Open Lots</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.openNumberOfTrades">Open Number Of Trades</span></th>
-          <th scope="col"><span jhiTranslate="propfirmApp.accountDataTimeSeries.mt4Account">Mt 4 Account</span></th>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateStamp">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.dateStamp">Date Stamp</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountBalance">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountBalance">Account Balance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountEquity">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountEquity">Account Equity</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountCredit">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountCredit">Account Credit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountFreeMargin">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountFreeMargin">Account Free Margin</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountStopoutLevel">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountStopoutLevel">Account Stopout Level</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="openLots">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.openLots">Open Lots</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="openNumberOfTrades">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.openNumberOfTrades">Open Number Of Trades</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mt4Account.accountLogin">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.mt4Account">Mt 4 Account</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -96,5 +117,23 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div *ngIf="accountDataTimeSeries && accountDataTimeSeries.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
   </div>
 </div>

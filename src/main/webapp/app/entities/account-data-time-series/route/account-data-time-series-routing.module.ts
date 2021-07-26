@@ -11,6 +11,9 @@ const accountDataTimeSeriesRoute: Routes = [
   {
     path: '',
     component: AccountDataTimeSeriesComponent,
+    data: {
+      defaultSort: 'id,asc',
+    },
     canActivate: [UserRouteAccessService],
   },
   {

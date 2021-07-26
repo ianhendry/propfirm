@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface AccountDataTimeSeriesRepository extends JpaRepository<AccountDataTimeSeries, Long> {}
+public interface AccountDataTimeSeriesRepository
+    extends JpaRepository<AccountDataTimeSeries, Long>, JpaSpecificationExecutor<AccountDataTimeSeries> {}

@@ -169,11 +169,10 @@ public class Mt4ClientConnectionAccountDataSubscriber implements Runnable, Close
 	        accountDataTimeSeries.setMt4Account(mt4Account);
 	        accountDataTimeSeries.setDateStamp(timeStamp);
 	        
-	        mt4Account.addAccountDataTimeSeries(accountDataTimeSeries);
-	        mt4AccountRepository.save(mt4Account);
-	        
 	        accountDataTimeSeriesService.save(accountDataTimeSeries);
 	        
+	        //mt4Account.addAccountDataTimeSeries(accountDataTimeSeries);
+	        //mt4AccountRepository.save(mt4Account);
     	}
 	}
     
