@@ -21,7 +21,7 @@ public class Mt4ClientConnectionStartUpManager {
 	@PostConstruct
     public void init() throws Exception {	
 						
-		Boolean pullHistory = true;
+		Boolean pullHistory = false;
 		
 		// get the account history
 		if (pullHistory) {

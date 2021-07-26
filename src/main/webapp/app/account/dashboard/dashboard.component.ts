@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
 		protected mt4TradeService: Mt4TradeService,
 		protected accountDataTimeSeriesService: AccountDataTimeSeriesService,
 		private accountService: AccountService,
-    	private userService: UserManagementService
+    	private userService: UserManagementService,
 	) {
 		this.tradesData = {
 	      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -97,6 +97,7 @@ export class DashboardComponent implements OnInit {
 	      ]
 	    };
 	}
+
 
 	ngOnInit(): void {
 		this.accountService.getAuthenticationState().subscribe(
@@ -163,7 +164,6 @@ export class DashboardComponent implements OnInit {
 				}
 			}
 		}
-		this.isLoading = false;
 	}
 	
 	getMt4Trades(mt4AccountId: IMt4Account):void {
@@ -216,6 +216,7 @@ export class DashboardComponent implements OnInit {
 	            } 
 	    	);
 		}
+		this.isLoading = false;
 	}
 	
 	showChallenge(challengeId: ITradeChallenge):void {

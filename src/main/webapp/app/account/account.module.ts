@@ -4,10 +4,9 @@ import { RouterModule } from '@angular/router';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button'; 
 import { ChartModule } from 'primeng/chart';
-import { ListboxModule } from 'primeng/listbox'
-import { SplitterModule } from 'primeng/splitter';
 import { AccordionModule } from 'primeng/accordion';
-import {FieldsetModule} from 'primeng/fieldset';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TabViewModule } from 'primeng/tabview';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { PasswordStrengthBarComponent } from './password/password-strength-bar/password-strength-bar.component';
@@ -21,7 +20,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { accountState } from './account.route';
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(accountState), ButtonModule, ChartModule, ListboxModule, SplitterModule, AccordionModule, FieldsetModule],
+  imports: [SharedModule, RouterModule.forChild(accountState), ButtonModule, ChartModule, AccordionModule, ProgressSpinnerModule, TabViewModule],
   declarations: [
     ActivateComponent,
     RegisterComponent,

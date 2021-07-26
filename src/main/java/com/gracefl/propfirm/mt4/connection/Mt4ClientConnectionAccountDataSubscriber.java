@@ -127,6 +127,8 @@ public class Mt4ClientConnectionAccountDataSubscriber implements Runnable, Close
 	                msg = new String(subscriber.recv(0));
 	                String myJSONstring = msg.replace('\'','"');
 	                
+	                log.debug("account info recievd {}", myJSONstring);
+	                
 	                ObjectMapper objectMapper = new ObjectMapper();
 
 	                Mt4LiveAccountJSON accountInformation = objectMapper.readValue(myJSONstring, Mt4LiveAccountJSON.class);
@@ -181,7 +183,7 @@ public class Mt4ClientConnectionAccountDataSubscriber implements Runnable, Close
     	accountDataTimeSeries.setDateStamp(timeStamp);
     	accountDataTimeSeries.setMt4Account(mt4Account);
 
-    	return true;
+    	return false;
     	/*
 		Optional<AccountDataTimeSeries> recordOptional = accountDataTimeSeriesService.findOne(Example.of(accountDataTimeSeries));
 		

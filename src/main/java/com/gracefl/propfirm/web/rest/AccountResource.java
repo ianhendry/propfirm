@@ -23,6 +23,7 @@ import com.gracefl.propfirm.web.rest.errors.*;
 import com.gracefl.propfirm.web.rest.vm.KeyAndPasswordVM;
 import com.gracefl.propfirm.web.rest.vm.ManagedUserVM;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
@@ -115,9 +116,16 @@ public class AccountResource {
 	        mt4AccountService.save(mt4Account);
 	        
 	        // then create a TradeChallenge entity with the right challenge type from the 
+	        Calendar cal = Calendar.getInstance();
+	        String month = new SimpleDateFormat("MMM").format(cal.getTime());
+	        String year = new SimpleDateFormat("YYYY").format(cal.getTime());
+	        
 	        TradeChallenge tradeChallenge = new TradeChallenge();
 	        tradeChallenge.setMt4Account(mt4Account);
-	        tradeChallenge.setTradeChallengeName(user.getEmail() + "_1");
+	        tradeChallenge.setRunningMaxDailyDrawdown(0D);
+	        tradeChallenge.setRunningMaxTotalDrawdown(0D);
+	        tradeChallenge.setStartDate(Instant.now());
+	        tradeChallenge.setTradeChallengeName(challengeType.get() + " " + month + " " + year);
 	        tradeChallenge.setRulesViolated(false);
 	        tradeChallenge.setSiteAccount(siteAccount);
 	        tradeChallenge.setChallengeType(challengeType.get());
