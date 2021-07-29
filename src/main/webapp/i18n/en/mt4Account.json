@@ -25,7 +25,7 @@
       "accountInvestorLogin": "Account Investor Login",
       "accountInvestorPassword": "Account Investor Password",
       "accountReal": "Account Real",
-      "accountInfoDouble": "Account Info Double",
+      "accountInfoDouble": "Account Info Double (used for daily drawdown start price)",
       "accountInfoInteger": "Account Info Integer",
       "accountInfoString": "Account Info String",
       "accountBalance": "Account Balance",

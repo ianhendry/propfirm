@@ -11,12 +11,14 @@ import com.gracefl.propfirm.domain.AccountDataTimeSeries;
 import com.gracefl.propfirm.domain.Instrument;
 import com.gracefl.propfirm.domain.Mt4Account;
 import com.gracefl.propfirm.domain.Mt4Trade;
+import com.gracefl.propfirm.domain.TradeChallenge;
 import com.gracefl.propfirm.domain.enumeration.BROKER;
 import com.gracefl.propfirm.domain.enumeration.TRADEDIRECTION;
 import com.gracefl.propfirm.helpers.DatesHelper;
 import com.gracefl.propfirm.repository.InstrumentRepository;
 import com.gracefl.propfirm.repository.Mt4AccountRepository;
 import com.gracefl.propfirm.repository.Mt4TradeRepository;
+import com.gracefl.propfirm.repository.TradeChallengeRepository;
 import com.gracefl.propfirm.service.AccountDataTimeSeriesService;
 import com.gracefl.propfirm.service.Mt4AccountService;
 
@@ -48,6 +50,9 @@ public class Mt4ClientConnectionAccountDataSubscriber implements Runnable, Close
 	
 	@Autowired
 	private Mt4AccountRepository mt4AccountRepository;
+	
+	@Autowired
+	private  TradeChallengeRepository tradeChallengeRepository;
 	
 	@Autowired
 	Mt4TradeRepository mt4TradeRepository;
@@ -155,12 +160,19 @@ public class Mt4ClientConnectionAccountDataSubscriber implements Runnable, Close
     private void processAccountDataTimeSeries(Mt4LiveAccountJSON processObject, Mt4Account mt4Account) {
 		
     	Instant timeStamp = datesHelper.convertStringToInstant(processObject.getAccountInformation().getTimeStamp());
+    	Boolean rulesBroken = false;
     	
     	if (!accountDataTimeSeriesRrecordExists(mt4Account, timeStamp)) {
     		
+    		// get MT4 values
+    		Double equity = processObject.getAccountInformation().getAccountEquity();
+    		Double balance = processObject.getAccountInformation().getAccountBalance();
+    		Double openProfit = processObject.getAccountInformation().getAccountProfit();
+    		Double currentDrawdown = openProfit;
+    		
 			AccountDataTimeSeries accountDataTimeSeries = new AccountDataTimeSeries();
-	        accountDataTimeSeries.setAccountBalance(processObject.getAccountInformation().getAccountBalance());
-	        accountDataTimeSeries.setAccountEquity(processObject.getAccountInformation().getAccountEquity());
+	        accountDataTimeSeries.setAccountBalance(balance);
+	        accountDataTimeSeries.setAccountEquity(equity);
 	        accountDataTimeSeries.setAccountCredit(processObject.getAccountInformation().getAccountCredit());
 	        accountDataTimeSeries.setAccountFreeMargin(processObject.getAccountInformation().getAccountFreeMargin());
 	        accountDataTimeSeries.setAccountStopoutLevel(processObject.getAccountInformation().getAccountStopoutLevel().intValue());
@@ -169,10 +181,49 @@ public class Mt4ClientConnectionAccountDataSubscriber implements Runnable, Close
 	        accountDataTimeSeries.setMt4Account(mt4Account);
 	        accountDataTimeSeries.setDateStamp(timeStamp);
 	        
-	        accountDataTimeSeriesService.save(accountDataTimeSeries);
+	        TradeChallenge challenge = mt4Account.getTradeChallenge();	        
+	        Double lastDrawdown = challenge.getRunningMaxTotalDrawdown();
 	        
-	        //mt4Account.addAccountDataTimeSeries(accountDataTimeSeries);
-	        //mt4AccountRepository.save(mt4Account);
+	        Double percentChange = currentDrawdown * 100 / openProfit;
+	        
+	        // need to think about how to calculate this daily drawdown 
+	        Double dailyDrawdown = mt4Account.getAccountInfoDouble() - currentDrawdown;
+	        
+	        if (currentDrawdown < challenge.getRunningMaxTotalDrawdown()) {
+	        	challenge.setRunningMaxTotalDrawdown(currentDrawdown);
+	        }
+	        if (currentDrawdown < challenge.getRunningMaxDailyDrawdown()) {
+	        	challenge.setRunningMaxDailyDrawdown(balance);
+	        }
+	        
+	        // total drawdown check
+	        if (currentDrawdown > challenge.getChallengeType().getMaxTotalDrawDown()) {
+	        	challenge.setRunningMaxTotalDrawdown(currentDrawdown);
+	        	challenge.setRulesViolated(true);
+	        	challenge.setRuleViolatedDate(Instant.now());
+	        	challenge.setRuleViolated("Max total drawdown exceeded");
+	        	rulesBroken = true;
+	        }
+	        // daily draw down check
+	        if (dailyDrawdown > challenge.getChallengeType().getMaxDailyDrawdown()) {
+	        	challenge.setRunningMaxDailyDrawdown(dailyDrawdown);
+	        	challenge.setRulesViolated(true);
+	        	challenge.setRuleViolatedDate(Instant.now());
+	        	challenge.setRuleViolated("Max daily drawdown exceeded");
+	        	rulesBroken = true;
+	        }
+	        
+	        // only save if a) rules broken or b) equity has changed by more than 0.01% from last time to limit number records needly saved
+	        if (percentChange > 0.01 || rulesBroken) {
+		        accountDataTimeSeriesService.save(accountDataTimeSeries);
+		        
+		        mt4Account.setAccountEquity(equity);
+		        mt4Account.setAccountBalance(balance);
+		        mt4AccountRepository.save(mt4Account);
+    		}
+    	
+	        tradeChallengeRepository.save(challenge);
+	        
     	}
 	}
     

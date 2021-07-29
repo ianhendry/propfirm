@@ -64,16 +64,16 @@ export class DashboardComponent implements OnInit {
 	      labels: [],
 	      datasets: [
 	          {
-	              label: 'Balance',
+	              label: 'Profit',
 	              data: [],
-				  fill: false,
+				  fill: true,
                   borderColor: '#42A5F5'
 
 	          },
 			  {
-	              label: 'Equity',
+	              label: 'Size',
 	              data: [],
-				  fill: false,	
+				  fill: true,	
                   borderColor: '#FFA726'
 	          }
 	      ]
@@ -173,16 +173,16 @@ export class DashboardComponent implements OnInit {
 		if (mt4AccountId.id) {
 			this.mt4TradeService.query({
 		        page: 0,
-		        size: 20,
-		        sort: [],
+		        size: 200,
+		        sort: ['closeTime' + ',' + 'desc'],
 	        	criteria
 		      }).subscribe(
 				(res: HttpResponse<IMt4Trade[]>) => {
 					if (res.body) {
 						this.mt4Trades = res.body;
 						for (const mt4Trade of this.mt4Trades.reverse()) {
-							this.chartMt4Trades.datasets[0].data = this.mt4Trades.map(a =>  a.closePrice);
-							this.chartMt4Trades.datasets[1].data = this.mt4Trades.map(a =>  a.openPrice);
+							this.chartMt4Trades.datasets[0].data = this.mt4Trades.map(a =>  a.profit);
+							this.chartMt4Trades.datasets[1].data = this.mt4Trades.map(a =>  a.positionSize);
 							this.chartMt4Trades.labels = this.mt4Trades.map(a => a.closeTime!.format('DD/MM/YYYY HH:mm:ss'));
 	        				this.chart!.refresh();
 						}
@@ -200,7 +200,7 @@ export class DashboardComponent implements OnInit {
 			this.accountDataTimeSeriesService.query({
 		        page: 0,
 		        size: 200,
-		        sort: [],
+		        sort: ['dateStamp' + ',' + 'desc'],
 	        	criteria
 		      }).subscribe(
 				(res: HttpResponse<IAccountDataTimeSeries[]>) => {

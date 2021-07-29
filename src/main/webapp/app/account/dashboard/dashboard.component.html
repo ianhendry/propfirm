@@ -101,7 +101,13 @@
 							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Free Margin</div><div class="col">{{ tradeChallenge.mt4Account.accountFreeMargin }}</div>
 							</div>
 						</div>
-			       </div>
+			       	</div>
+					<div class="container">
+						<div class="row">
+							<!-- spacer row for layout -->
+							&nbsp;
+						</div>
+					</div>		
 			    </p-tabPanel>
 			    <p-tabPanel header="Trades">
 					<div *ngIf="mt4Trades">	
@@ -196,26 +202,38 @@
 							<div class="row">
 								<div class="col-6">
 									<div *ngIf="this.chartMt4Trades">
-										<H4>Equity and Balance</H4>
-										<p-chart #chart1 type="line" [data]="chartMt4Trades" height="300"></p-chart>
+										<H4 style="text-align: center;">Equity and Balance</H4>
+										<p-chart #chart1 type="line" [data]="timeSeriesData" height="300"></p-chart>
 									</div>
 								</div>
 								<div class="col-6">
 									<div *ngIf="this.timeSeriesData">
-										<p-chart #chart2 type="line" [data]="timeSeriesData" height="300"></p-chart>
+										<H4 style="text-align: center;">Profit per trade</H4>
+										<p-chart #chart2 type="bar" [data]="chartMt4Trades" height="300"></p-chart>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-6">
 									<div *ngIf="this.chartMt4Trades">
-										<p-chart #chart1 type="line" [data]="chartMt4Trades" height="300"></p-chart>
+										<p-chart #chart3 type="line" [data]="tradesData" height="300"></p-chart>
 									</div>
 								</div>
 								<div class="col-6">
 									<div *ngIf="this.chartMt4Trades">
-										<p-chart #chart1 type="line" [data]="chartMt4Trades" height="300"></p-chart>
+										<p-chart #chart4 type="line" [data]="chartMt4Trades" height="300"></p-chart>
 									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									% win rate<br>
+									run of losses<br>
+									run of wins<br>
+									
+								</div>
+								<div class="col-6">
+									
 								</div>
 							</div>
 						</div>

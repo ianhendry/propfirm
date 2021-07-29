@@ -27,7 +27,9 @@ public class Mt4LiveAccountDetailJSON {
 	private Double openLots;
 	@JsonProperty("_orders_total")
 	private Double ordersTotal;
-
+	@JsonProperty("_account_profit")
+	private Double accountProfit;
+	
 	@JsonProperty("_time_stamp")
 	public String getTimeStamp() {
 		return timeStamp;
@@ -108,4 +110,15 @@ public class Mt4LiveAccountDetailJSON {
 		this.ordersTotal = ordersTotal;
 	}
 
+	@JsonProperty("_account_profit")
+	public Double getAccountProfit() {
+		return accountProfit;
+	}
+
+	@JsonProperty("_account_profit")
+	public void setAccountProfit(Double accountProfit) {
+		this.accountProfit = accountProfit;
+	}
+	
+	
 }
