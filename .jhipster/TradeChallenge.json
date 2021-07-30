@@ -28,6 +28,22 @@
     {
       "fieldName": "ruleViolatedDate",
       "fieldType": "Instant"
+    },
+    {
+      "fieldName": "maxTotalDrawdown",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "maxDailyDrawdown",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "lastDailyResetDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
     }
   ],
   "relationships": [

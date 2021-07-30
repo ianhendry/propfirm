@@ -37,6 +37,10 @@ export class TradeChallengeUpdateComponent implements OnInit {
     rulesViolated: [],
     ruleViolated: [],
     ruleViolatedDate: [],
+    maxTotalDrawdown: [],
+    maxDailyDrawdown: [],
+    lastDailyResetDate: [],
+    endDate: [],
     mt4Account: [],
     siteAccount: [],
     challengeType: [],
@@ -57,6 +61,8 @@ export class TradeChallengeUpdateComponent implements OnInit {
         const today = dayjs().startOf('day');
         tradeChallenge.startDate = today;
         tradeChallenge.ruleViolatedDate = today;
+        tradeChallenge.lastDailyResetDate = today;
+        tradeChallenge.endDate = today;
       }
 
       this.updateForm(tradeChallenge);
@@ -120,6 +126,10 @@ export class TradeChallengeUpdateComponent implements OnInit {
       rulesViolated: tradeChallenge.rulesViolated,
       ruleViolated: tradeChallenge.ruleViolated,
       ruleViolatedDate: tradeChallenge.ruleViolatedDate ? tradeChallenge.ruleViolatedDate.format(DATE_TIME_FORMAT) : null,
+      maxTotalDrawdown: tradeChallenge.maxTotalDrawdown,
+      maxDailyDrawdown: tradeChallenge.maxDailyDrawdown,
+      lastDailyResetDate: tradeChallenge.lastDailyResetDate ? tradeChallenge.lastDailyResetDate.format(DATE_TIME_FORMAT) : null,
+      endDate: tradeChallenge.endDate ? tradeChallenge.endDate.format(DATE_TIME_FORMAT) : null,
       mt4Account: tradeChallenge.mt4Account,
       siteAccount: tradeChallenge.siteAccount,
       challengeType: tradeChallenge.challengeType,
@@ -184,6 +194,12 @@ export class TradeChallengeUpdateComponent implements OnInit {
       ruleViolatedDate: this.editForm.get(['ruleViolatedDate'])!.value
         ? dayjs(this.editForm.get(['ruleViolatedDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
+      maxTotalDrawdown: this.editForm.get(['maxTotalDrawdown'])!.value,
+      maxDailyDrawdown: this.editForm.get(['maxDailyDrawdown'])!.value,
+      lastDailyResetDate: this.editForm.get(['lastDailyResetDate'])!.value
+        ? dayjs(this.editForm.get(['lastDailyResetDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      endDate: this.editForm.get(['endDate'])!.value ? dayjs(this.editForm.get(['endDate'])!.value, DATE_TIME_FORMAT) : undefined,
       mt4Account: this.editForm.get(['mt4Account'])!.value,
       siteAccount: this.editForm.get(['siteAccount'])!.value,
       challengeType: this.editForm.get(['challengeType'])!.value,

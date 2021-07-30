@@ -56,6 +56,18 @@
           <th scope="col" jhiSortBy="ruleViolatedDate">
             <span jhiTranslate="propfirmApp.tradeChallenge.ruleViolatedDate">Rule Violated Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="maxTotalDrawdown">
+            <span jhiTranslate="propfirmApp.tradeChallenge.maxTotalDrawdown">Max Total Drawdown</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="maxDailyDrawdown">
+            <span jhiTranslate="propfirmApp.tradeChallenge.maxDailyDrawdown">Max Daily Drawdown</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastDailyResetDate">
+            <span jhiTranslate="propfirmApp.tradeChallenge.lastDailyResetDate">Last Daily Reset Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="endDate">
+            <span jhiTranslate="propfirmApp.tradeChallenge.endDate">End Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="mt4Account.accountLogin">
             <span jhiTranslate="propfirmApp.tradeChallenge.mt4Account">Mt 4 Account</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -80,6 +92,10 @@
           <td>{{ tradeChallenge.rulesViolated }}</td>
           <td>{{ tradeChallenge.ruleViolated }}</td>
           <td>{{ tradeChallenge.ruleViolatedDate | formatMediumDatetime }}</td>
+          <td>{{ tradeChallenge.maxTotalDrawdown }}</td>
+          <td>{{ tradeChallenge.maxDailyDrawdown }}</td>
+          <td>{{ tradeChallenge.lastDailyResetDate | formatMediumDatetime }}</td>
+          <td>{{ tradeChallenge.endDate | formatMediumDatetime }}</td>
           <td>
             <div *ngIf="tradeChallenge.mt4Account">
               <a [routerLink]="['/mt-4-account', tradeChallenge.mt4Account?.id, 'view']">{{ tradeChallenge.mt4Account?.accountLogin }}</a>

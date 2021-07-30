@@ -42,6 +42,18 @@ public class TradeChallenge implements Serializable {
     @Column(name = "rule_violated_date")
     private Instant ruleViolatedDate;
 
+    @Column(name = "max_total_drawdown")
+    private Double maxTotalDrawdown;
+
+    @Column(name = "max_daily_drawdown")
+    private Double maxDailyDrawdown;
+
+    @Column(name = "last_daily_reset_date")
+    private Instant lastDailyResetDate;
+
+    @Column(name = "end_date")
+    private Instant endDate;
+
     @JsonIgnoreProperties(value = { "tradeChallenge", "mt4Trades", "accountDataTimeSeries" }, allowSetters = true)
     @OneToOne
     @JoinColumn(unique = true)
@@ -160,6 +172,58 @@ public class TradeChallenge implements Serializable {
         this.ruleViolatedDate = ruleViolatedDate;
     }
 
+    public Double getMaxTotalDrawdown() {
+        return this.maxTotalDrawdown;
+    }
+
+    public TradeChallenge maxTotalDrawdown(Double maxTotalDrawdown) {
+        this.maxTotalDrawdown = maxTotalDrawdown;
+        return this;
+    }
+
+    public void setMaxTotalDrawdown(Double maxTotalDrawdown) {
+        this.maxTotalDrawdown = maxTotalDrawdown;
+    }
+
+    public Double getMaxDailyDrawdown() {
+        return this.maxDailyDrawdown;
+    }
+
+    public TradeChallenge maxDailyDrawdown(Double maxDailyDrawdown) {
+        this.maxDailyDrawdown = maxDailyDrawdown;
+        return this;
+    }
+
+    public void setMaxDailyDrawdown(Double maxDailyDrawdown) {
+        this.maxDailyDrawdown = maxDailyDrawdown;
+    }
+
+    public Instant getLastDailyResetDate() {
+        return this.lastDailyResetDate;
+    }
+
+    public TradeChallenge lastDailyResetDate(Instant lastDailyResetDate) {
+        this.lastDailyResetDate = lastDailyResetDate;
+        return this;
+    }
+
+    public void setLastDailyResetDate(Instant lastDailyResetDate) {
+        this.lastDailyResetDate = lastDailyResetDate;
+    }
+
+    public Instant getEndDate() {
+        return this.endDate;
+    }
+
+    public TradeChallenge endDate(Instant endDate) {
+        this.endDate = endDate;
+        return this;
+    }
+
+    public void setEndDate(Instant endDate) {
+        this.endDate = endDate;
+    }
+
     public Mt4Account getMt4Account() {
         return this.mt4Account;
     }
@@ -230,6 +294,10 @@ public class TradeChallenge implements Serializable {
             ", rulesViolated='" + getRulesViolated() + "'" +
             ", ruleViolated='" + getRuleViolated() + "'" +
             ", ruleViolatedDate='" + getRuleViolatedDate() + "'" +
+            ", maxTotalDrawdown=" + getMaxTotalDrawdown() +
+            ", maxDailyDrawdown=" + getMaxDailyDrawdown() +
+            ", lastDailyResetDate='" + getLastDailyResetDate() + "'" +
+            ", endDate='" + getEndDate() + "'" +
             "}";
     }
 }

@@ -42,6 +42,22 @@
         <dd>
           <span>{{ tradeChallenge.ruleViolatedDate | formatMediumDatetime }}</span>
         </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.maxTotalDrawdown">Max Total Drawdown</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.maxTotalDrawdown }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.maxDailyDrawdown">Max Daily Drawdown</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.maxDailyDrawdown }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.lastDailyResetDate">Last Daily Reset Date</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.lastDailyResetDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeChallenge.endDate">End Date</span></dt>
+        <dd>
+          <span>{{ tradeChallenge.endDate | formatMediumDatetime }}</span>
+        </dd>
         <dt><span jhiTranslate="propfirmApp.tradeChallenge.mt4Account">Mt 4 Account</span></dt>
         <dd>
           <div *ngIf="tradeChallenge.mt4Account">

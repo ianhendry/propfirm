@@ -126,6 +126,66 @@
         </div>
 
         <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.maxTotalDrawdown" for="field_maxTotalDrawdown"
+            >Max Total Drawdown</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="maxTotalDrawdown"
+            id="field_maxTotalDrawdown"
+            data-cy="maxTotalDrawdown"
+            formControlName="maxTotalDrawdown"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.maxDailyDrawdown" for="field_maxDailyDrawdown"
+            >Max Daily Drawdown</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="maxDailyDrawdown"
+            id="field_maxDailyDrawdown"
+            data-cy="maxDailyDrawdown"
+            formControlName="maxDailyDrawdown"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.lastDailyResetDate" for="field_lastDailyResetDate"
+            >Last Daily Reset Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastDailyResetDate"
+              data-cy="lastDailyResetDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastDailyResetDate"
+              formControlName="lastDailyResetDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.endDate" for="field_endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.mt4Account" for="field_mt4Account">Mt 4 Account</label>
           <select class="form-control" id="field_mt4Account" data-cy="mt4Account" name="mt4Account" formControlName="mt4Account">
             <option [ngValue]="null"></option>

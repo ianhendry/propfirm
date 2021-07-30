@@ -33,6 +33,10 @@ describe('Service Tests', () => {
         rulesViolated: false,
         ruleViolated: 'AAAAAAA',
         ruleViolatedDate: currentDate,
+        maxTotalDrawdown: 0,
+        maxDailyDrawdown: 0,
+        lastDailyResetDate: currentDate,
+        endDate: currentDate,
       };
     });
 
@@ -42,6 +46,8 @@ describe('Service Tests', () => {
           {
             startDate: currentDate.format(DATE_TIME_FORMAT),
             ruleViolatedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastDailyResetDate: currentDate.format(DATE_TIME_FORMAT),
+            endDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -59,6 +65,8 @@ describe('Service Tests', () => {
             id: 0,
             startDate: currentDate.format(DATE_TIME_FORMAT),
             ruleViolatedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastDailyResetDate: currentDate.format(DATE_TIME_FORMAT),
+            endDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -67,6 +75,8 @@ describe('Service Tests', () => {
           {
             startDate: currentDate,
             ruleViolatedDate: currentDate,
+            lastDailyResetDate: currentDate,
+            endDate: currentDate,
           },
           returnedFromService
         );
@@ -89,6 +99,10 @@ describe('Service Tests', () => {
             rulesViolated: true,
             ruleViolated: 'BBBBBB',
             ruleViolatedDate: currentDate.format(DATE_TIME_FORMAT),
+            maxTotalDrawdown: 1,
+            maxDailyDrawdown: 1,
+            lastDailyResetDate: currentDate.format(DATE_TIME_FORMAT),
+            endDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -97,6 +111,8 @@ describe('Service Tests', () => {
           {
             startDate: currentDate,
             ruleViolatedDate: currentDate,
+            lastDailyResetDate: currentDate,
+            endDate: currentDate,
           },
           returnedFromService
         );
@@ -115,6 +131,8 @@ describe('Service Tests', () => {
             runningMaxTotalDrawdown: 1,
             rulesViolated: true,
             ruleViolatedDate: currentDate.format(DATE_TIME_FORMAT),
+            maxTotalDrawdown: 1,
+            maxDailyDrawdown: 1,
           },
           new TradeChallenge()
         );
@@ -125,6 +143,8 @@ describe('Service Tests', () => {
           {
             startDate: currentDate,
             ruleViolatedDate: currentDate,
+            lastDailyResetDate: currentDate,
+            endDate: currentDate,
           },
           returnedFromService
         );
@@ -147,6 +167,10 @@ describe('Service Tests', () => {
             rulesViolated: true,
             ruleViolated: 'BBBBBB',
             ruleViolatedDate: currentDate.format(DATE_TIME_FORMAT),
+            maxTotalDrawdown: 1,
+            maxDailyDrawdown: 1,
+            lastDailyResetDate: currentDate.format(DATE_TIME_FORMAT),
+            endDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -155,6 +179,8 @@ describe('Service Tests', () => {
           {
             startDate: currentDate,
             ruleViolatedDate: currentDate,
+            lastDailyResetDate: currentDate,
+            endDate: currentDate,
           },
           returnedFromService
         );
@@ -204,7 +230,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique TradeChallenge to an array', () => {
-          const tradeChallengeArray: ITradeChallenge[] = [{ id: 123 }, { id: 456 }, { id: 52081 }];
+          const tradeChallengeArray: ITradeChallenge[] = [{ id: 123 }, { id: 456 }, { id: 13000 }];
           const tradeChallengeCollection: ITradeChallenge[] = [{ id: 123 }];
           expectedResult = service.addTradeChallengeToCollectionIfMissing(tradeChallengeCollection, ...tradeChallengeArray);
           expect(expectedResult).toHaveLength(3);

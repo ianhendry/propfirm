@@ -52,6 +52,18 @@ class TradeChallengeResourceIT {
     private static final Instant DEFAULT_RULE_VIOLATED_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_RULE_VIOLATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Double DEFAULT_MAX_TOTAL_DRAWDOWN = 1D;
+    private static final Double UPDATED_MAX_TOTAL_DRAWDOWN = 2D;
+
+    private static final Double DEFAULT_MAX_DAILY_DRAWDOWN = 1D;
+    private static final Double UPDATED_MAX_DAILY_DRAWDOWN = 2D;
+
+    private static final Instant DEFAULT_LAST_DAILY_RESET_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_DAILY_RESET_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_END_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
     private static final String ENTITY_API_URL = "/api/trade-challenges";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -83,7 +95,11 @@ class TradeChallengeResourceIT {
             .runningMaxDailyDrawdown(DEFAULT_RUNNING_MAX_DAILY_DRAWDOWN)
             .rulesViolated(DEFAULT_RULES_VIOLATED)
             .ruleViolated(DEFAULT_RULE_VIOLATED)
-            .ruleViolatedDate(DEFAULT_RULE_VIOLATED_DATE);
+            .ruleViolatedDate(DEFAULT_RULE_VIOLATED_DATE)
+            .maxTotalDrawdown(DEFAULT_MAX_TOTAL_DRAWDOWN)
+            .maxDailyDrawdown(DEFAULT_MAX_DAILY_DRAWDOWN)
+            .lastDailyResetDate(DEFAULT_LAST_DAILY_RESET_DATE)
+            .endDate(DEFAULT_END_DATE);
         return tradeChallenge;
     }
 
@@ -101,7 +117,11 @@ class TradeChallengeResourceIT {
             .runningMaxDailyDrawdown(UPDATED_RUNNING_MAX_DAILY_DRAWDOWN)
             .rulesViolated(UPDATED_RULES_VIOLATED)
             .ruleViolated(UPDATED_RULE_VIOLATED)
-            .ruleViolatedDate(UPDATED_RULE_VIOLATED_DATE);
+            .ruleViolatedDate(UPDATED_RULE_VIOLATED_DATE)
+            .maxTotalDrawdown(UPDATED_MAX_TOTAL_DRAWDOWN)
+            .maxDailyDrawdown(UPDATED_MAX_DAILY_DRAWDOWN)
+            .lastDailyResetDate(UPDATED_LAST_DAILY_RESET_DATE)
+            .endDate(UPDATED_END_DATE);
         return tradeChallenge;
     }
 
@@ -132,6 +152,10 @@ class TradeChallengeResourceIT {
         assertThat(testTradeChallenge.getRulesViolated()).isEqualTo(DEFAULT_RULES_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolated()).isEqualTo(DEFAULT_RULE_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolatedDate()).isEqualTo(DEFAULT_RULE_VIOLATED_DATE);
+        assertThat(testTradeChallenge.getMaxTotalDrawdown()).isEqualTo(DEFAULT_MAX_TOTAL_DRAWDOWN);
+        assertThat(testTradeChallenge.getMaxDailyDrawdown()).isEqualTo(DEFAULT_MAX_DAILY_DRAWDOWN);
+        assertThat(testTradeChallenge.getLastDailyResetDate()).isEqualTo(DEFAULT_LAST_DAILY_RESET_DATE);
+        assertThat(testTradeChallenge.getEndDate()).isEqualTo(DEFAULT_END_DATE);
     }
 
     @Test
@@ -172,7 +196,11 @@ class TradeChallengeResourceIT {
             .andExpect(jsonPath("$.[*].runningMaxDailyDrawdown").value(hasItem(DEFAULT_RUNNING_MAX_DAILY_DRAWDOWN.doubleValue())))
             .andExpect(jsonPath("$.[*].rulesViolated").value(hasItem(DEFAULT_RULES_VIOLATED.booleanValue())))
             .andExpect(jsonPath("$.[*].ruleViolated").value(hasItem(DEFAULT_RULE_VIOLATED)))
-            .andExpect(jsonPath("$.[*].ruleViolatedDate").value(hasItem(DEFAULT_RULE_VIOLATED_DATE.toString())));
+            .andExpect(jsonPath("$.[*].ruleViolatedDate").value(hasItem(DEFAULT_RULE_VIOLATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].maxTotalDrawdown").value(hasItem(DEFAULT_MAX_TOTAL_DRAWDOWN.doubleValue())))
+            .andExpect(jsonPath("$.[*].maxDailyDrawdown").value(hasItem(DEFAULT_MAX_DAILY_DRAWDOWN.doubleValue())))
+            .andExpect(jsonPath("$.[*].lastDailyResetDate").value(hasItem(DEFAULT_LAST_DAILY_RESET_DATE.toString())))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())));
     }
 
     @Test
@@ -193,7 +221,11 @@ class TradeChallengeResourceIT {
             .andExpect(jsonPath("$.runningMaxDailyDrawdown").value(DEFAULT_RUNNING_MAX_DAILY_DRAWDOWN.doubleValue()))
             .andExpect(jsonPath("$.rulesViolated").value(DEFAULT_RULES_VIOLATED.booleanValue()))
             .andExpect(jsonPath("$.ruleViolated").value(DEFAULT_RULE_VIOLATED))
-            .andExpect(jsonPath("$.ruleViolatedDate").value(DEFAULT_RULE_VIOLATED_DATE.toString()));
+            .andExpect(jsonPath("$.ruleViolatedDate").value(DEFAULT_RULE_VIOLATED_DATE.toString()))
+            .andExpect(jsonPath("$.maxTotalDrawdown").value(DEFAULT_MAX_TOTAL_DRAWDOWN.doubleValue()))
+            .andExpect(jsonPath("$.maxDailyDrawdown").value(DEFAULT_MAX_DAILY_DRAWDOWN.doubleValue()))
+            .andExpect(jsonPath("$.lastDailyResetDate").value(DEFAULT_LAST_DAILY_RESET_DATE.toString()))
+            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()));
     }
 
     @Test
@@ -222,7 +254,11 @@ class TradeChallengeResourceIT {
             .runningMaxDailyDrawdown(UPDATED_RUNNING_MAX_DAILY_DRAWDOWN)
             .rulesViolated(UPDATED_RULES_VIOLATED)
             .ruleViolated(UPDATED_RULE_VIOLATED)
-            .ruleViolatedDate(UPDATED_RULE_VIOLATED_DATE);
+            .ruleViolatedDate(UPDATED_RULE_VIOLATED_DATE)
+            .maxTotalDrawdown(UPDATED_MAX_TOTAL_DRAWDOWN)
+            .maxDailyDrawdown(UPDATED_MAX_DAILY_DRAWDOWN)
+            .lastDailyResetDate(UPDATED_LAST_DAILY_RESET_DATE)
+            .endDate(UPDATED_END_DATE);
 
         restTradeChallengeMockMvc
             .perform(
@@ -243,6 +279,10 @@ class TradeChallengeResourceIT {
         assertThat(testTradeChallenge.getRulesViolated()).isEqualTo(UPDATED_RULES_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolated()).isEqualTo(UPDATED_RULE_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolatedDate()).isEqualTo(UPDATED_RULE_VIOLATED_DATE);
+        assertThat(testTradeChallenge.getMaxTotalDrawdown()).isEqualTo(UPDATED_MAX_TOTAL_DRAWDOWN);
+        assertThat(testTradeChallenge.getMaxDailyDrawdown()).isEqualTo(UPDATED_MAX_DAILY_DRAWDOWN);
+        assertThat(testTradeChallenge.getLastDailyResetDate()).isEqualTo(UPDATED_LAST_DAILY_RESET_DATE);
+        assertThat(testTradeChallenge.getEndDate()).isEqualTo(UPDATED_END_DATE);
     }
 
     @Test
@@ -317,7 +357,8 @@ class TradeChallengeResourceIT {
             .tradeChallengeName(UPDATED_TRADE_CHALLENGE_NAME)
             .runningMaxDailyDrawdown(UPDATED_RUNNING_MAX_DAILY_DRAWDOWN)
             .rulesViolated(UPDATED_RULES_VIOLATED)
-            .ruleViolated(UPDATED_RULE_VIOLATED);
+            .ruleViolated(UPDATED_RULE_VIOLATED)
+            .lastDailyResetDate(UPDATED_LAST_DAILY_RESET_DATE);
 
         restTradeChallengeMockMvc
             .perform(
@@ -338,6 +379,10 @@ class TradeChallengeResourceIT {
         assertThat(testTradeChallenge.getRulesViolated()).isEqualTo(UPDATED_RULES_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolated()).isEqualTo(UPDATED_RULE_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolatedDate()).isEqualTo(DEFAULT_RULE_VIOLATED_DATE);
+        assertThat(testTradeChallenge.getMaxTotalDrawdown()).isEqualTo(DEFAULT_MAX_TOTAL_DRAWDOWN);
+        assertThat(testTradeChallenge.getMaxDailyDrawdown()).isEqualTo(DEFAULT_MAX_DAILY_DRAWDOWN);
+        assertThat(testTradeChallenge.getLastDailyResetDate()).isEqualTo(UPDATED_LAST_DAILY_RESET_DATE);
+        assertThat(testTradeChallenge.getEndDate()).isEqualTo(DEFAULT_END_DATE);
     }
 
     @Test
@@ -359,7 +404,11 @@ class TradeChallengeResourceIT {
             .runningMaxDailyDrawdown(UPDATED_RUNNING_MAX_DAILY_DRAWDOWN)
             .rulesViolated(UPDATED_RULES_VIOLATED)
             .ruleViolated(UPDATED_RULE_VIOLATED)
-            .ruleViolatedDate(UPDATED_RULE_VIOLATED_DATE);
+            .ruleViolatedDate(UPDATED_RULE_VIOLATED_DATE)
+            .maxTotalDrawdown(UPDATED_MAX_TOTAL_DRAWDOWN)
+            .maxDailyDrawdown(UPDATED_MAX_DAILY_DRAWDOWN)
+            .lastDailyResetDate(UPDATED_LAST_DAILY_RESET_DATE)
+            .endDate(UPDATED_END_DATE);
 
         restTradeChallengeMockMvc
             .perform(
@@ -380,6 +429,10 @@ class TradeChallengeResourceIT {
         assertThat(testTradeChallenge.getRulesViolated()).isEqualTo(UPDATED_RULES_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolated()).isEqualTo(UPDATED_RULE_VIOLATED);
         assertThat(testTradeChallenge.getRuleViolatedDate()).isEqualTo(UPDATED_RULE_VIOLATED_DATE);
+        assertThat(testTradeChallenge.getMaxTotalDrawdown()).isEqualTo(UPDATED_MAX_TOTAL_DRAWDOWN);
+        assertThat(testTradeChallenge.getMaxDailyDrawdown()).isEqualTo(UPDATED_MAX_DAILY_DRAWDOWN);
+        assertThat(testTradeChallenge.getLastDailyResetDate()).isEqualTo(UPDATED_LAST_DAILY_RESET_DATE);
+        assertThat(testTradeChallenge.getEndDate()).isEqualTo(UPDATED_END_DATE);
     }
 
     @Test

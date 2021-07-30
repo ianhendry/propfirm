@@ -61,6 +61,18 @@ public class TradeChallengeServiceImpl implements TradeChallengeService {
                     if (tradeChallenge.getRuleViolatedDate() != null) {
                         existingTradeChallenge.setRuleViolatedDate(tradeChallenge.getRuleViolatedDate());
                     }
+                    if (tradeChallenge.getMaxTotalDrawdown() != null) {
+                        existingTradeChallenge.setMaxTotalDrawdown(tradeChallenge.getMaxTotalDrawdown());
+                    }
+                    if (tradeChallenge.getMaxDailyDrawdown() != null) {
+                        existingTradeChallenge.setMaxDailyDrawdown(tradeChallenge.getMaxDailyDrawdown());
+                    }
+                    if (tradeChallenge.getLastDailyResetDate() != null) {
+                        existingTradeChallenge.setLastDailyResetDate(tradeChallenge.getLastDailyResetDate());
+                    }
+                    if (tradeChallenge.getEndDate() != null) {
+                        existingTradeChallenge.setEndDate(tradeChallenge.getEndDate());
+                    }
 
                     return existingTradeChallenge;
                 }

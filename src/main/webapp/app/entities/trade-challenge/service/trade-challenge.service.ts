@@ -82,6 +82,8 @@ export class TradeChallengeService {
     return Object.assign({}, tradeChallenge, {
       startDate: tradeChallenge.startDate?.isValid() ? tradeChallenge.startDate.toJSON() : undefined,
       ruleViolatedDate: tradeChallenge.ruleViolatedDate?.isValid() ? tradeChallenge.ruleViolatedDate.toJSON() : undefined,
+      lastDailyResetDate: tradeChallenge.lastDailyResetDate?.isValid() ? tradeChallenge.lastDailyResetDate.toJSON() : undefined,
+      endDate: tradeChallenge.endDate?.isValid() ? tradeChallenge.endDate.toJSON() : undefined,
     });
   }
 
@@ -89,6 +91,8 @@ export class TradeChallengeService {
     if (res.body) {
       res.body.startDate = res.body.startDate ? dayjs(res.body.startDate) : undefined;
       res.body.ruleViolatedDate = res.body.ruleViolatedDate ? dayjs(res.body.ruleViolatedDate) : undefined;
+      res.body.lastDailyResetDate = res.body.lastDailyResetDate ? dayjs(res.body.lastDailyResetDate) : undefined;
+      res.body.endDate = res.body.endDate ? dayjs(res.body.endDate) : undefined;
     }
     return res;
   }
@@ -98,6 +102,8 @@ export class TradeChallengeService {
       res.body.forEach((tradeChallenge: ITradeChallenge) => {
         tradeChallenge.startDate = tradeChallenge.startDate ? dayjs(tradeChallenge.startDate) : undefined;
         tradeChallenge.ruleViolatedDate = tradeChallenge.ruleViolatedDate ? dayjs(tradeChallenge.ruleViolatedDate) : undefined;
+        tradeChallenge.lastDailyResetDate = tradeChallenge.lastDailyResetDate ? dayjs(tradeChallenge.lastDailyResetDate) : undefined;
+        tradeChallenge.endDate = tradeChallenge.endDate ? dayjs(tradeChallenge.endDate) : undefined;
       });
     }
     return res;
