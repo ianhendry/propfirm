@@ -111,6 +111,7 @@ public class AccountResource {
 	        mt4Account.setInActive(false);
 	        mt4Account.setAccountBroker(BROKER.FXPRO);
 	        mt4Account.setAccountInfoString("NEW ACCOUNT:" + user.getEmail());
+	        mt4Account.setAccountInfoDouble(0D);
 	        mt4Account.setAccountBalance(challengeType.get().getAccountSize().doubleValue());
 	        mt4Account.setAccountEquity(challengeType.get().getAccountSize().doubleValue());
 	        mt4AccountService.save(mt4Account);
@@ -125,7 +126,7 @@ public class AccountResource {
 	        tradeChallenge.setRunningMaxDailyDrawdown(0D);
 	        tradeChallenge.setRunningMaxTotalDrawdown(0D);
 	        tradeChallenge.setStartDate(Instant.now());
-	        tradeChallenge.setTradeChallengeName(challengeType.get() + " " + month + " " + year);
+	        tradeChallenge.setTradeChallengeName(challengeType.get().getChallengeTypeName() + " " + month + " " + year);
 	        tradeChallenge.setRulesViolated(false);
 	        tradeChallenge.setSiteAccount(siteAccount);
 	        tradeChallenge.setChallengeType(challengeType.get());
