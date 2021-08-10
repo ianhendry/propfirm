@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="userComment">
+      <h2 data-cy="userCommentDetailsHeading"><span jhiTranslate="propfirmApp.userComment.detail.title">User Comment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ userComment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.commentTitle">Comment Title</span></dt>
+        <dd>
+          <span>{{ userComment.commentTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.commentBody">Comment Body</span></dt>
+        <dd>
+          <span>{{ userComment.commentBody }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.commentMedia">Comment Media</span></dt>
+        <dd>
+          <div *ngIf="userComment.commentMedia">
+            <a (click)="openFile(userComment.commentMedia, userComment.commentMediaContentType)" jhiTranslate="entity.action.open">open</a>
+            {{ userComment.commentMediaContentType }}, {{ byteSize(userComment.commentMedia) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.dateAdded">Date Added</span></dt>
+        <dd>
+          <span>{{ userComment.dateAdded | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.makePublicVisibleOnSite">Make Public Visible On Site</span></dt>
+        <dd>
+          <span>{{ userComment.makePublicVisibleOnSite }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.tradeJournalPost">Trade Journal Post</span></dt>
+        <dd>
+          <div *ngIf="userComment.tradeJournalPost">
+            <a [routerLink]="['/trade-journal-post', userComment.tradeJournalPost?.id, 'view']">{{
+              userComment.tradeJournalPost?.postTitle
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.dailyAnalysisPost">Daily Analysis Post</span></dt>
+        <dd>
+          <div *ngIf="userComment.dailyAnalysisPost">
+            <a [routerLink]="['/daily-analysis-post', userComment.dailyAnalysisPost?.id, 'view']">{{
+              userComment.dailyAnalysisPost?.postTitle
+            }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.userComment.user">User</span></dt>
+        <dd>
+          <span>{{ userComment.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/user-comment', userComment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

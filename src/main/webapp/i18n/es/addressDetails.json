@@ -1,0 +1,37 @@
+{
+  "propfirmApp": {
+    "addressDetails": {
+      "home": {
+        "title": "Address Details",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Address Details",
+        "createOrEditLabel": "Crear o editar Address Details",
+        "notFound": "Ningún Address Details encontrado"
+      },
+      "created": "Un nuevo Address Details ha sido creado con el identificador {{ param }}",
+      "updated": "Un Address Details ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Address Details ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Address Details {{ id }}?"
+      },
+      "detail": {
+        "title": "Address Details"
+      },
+      "id": "ID",
+      "contactName": "Contact Name",
+      "address1": "Address 1",
+      "address2": "Address 2",
+      "address3": "Address 3",
+      "address4": "Address 4",
+      "address5": "Address 5",
+      "address6": "Address 6",
+      "dialCode": "Dial Code",
+      "phoneNumber": "Phone Number",
+      "messengerId": "Messenger Id",
+      "dateAdded": "Date Added",
+      "inActive": "In Active",
+      "inActiveDate": "In Active Date",
+      "siteAccount": "Site Account"
+    }
+  }
+}

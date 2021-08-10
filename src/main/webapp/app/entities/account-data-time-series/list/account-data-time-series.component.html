@@ -1,0 +1,139 @@
+<div>
+  <h2 id="page-heading" data-cy="AccountDataTimeSeriesHeading">
+    <span jhiTranslate="propfirmApp.accountDataTimeSeries.home.title">Account Data Time Series</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="propfirmApp.accountDataTimeSeries.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-account-data-time-series"
+        [routerLink]="['/account-data-time-series/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="propfirmApp.accountDataTimeSeries.home.createLabel"> Create a new Account Data Time Series </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="accountDataTimeSeries?.length === 0">
+    <span jhiTranslate="propfirmApp.accountDataTimeSeries.home.notFound">No accountDataTimeSeries found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="accountDataTimeSeries && accountDataTimeSeries.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateStamp">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.dateStamp">Date Stamp</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountBalance">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountBalance">Account Balance</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountEquity">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountEquity">Account Equity</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountCredit">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountCredit">Account Credit</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountFreeMargin">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountFreeMargin">Account Free Margin</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountStopoutLevel">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.accountStopoutLevel">Account Stopout Level</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="openLots">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.openLots">Open Lots</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="openNumberOfTrades">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.openNumberOfTrades">Open Number Of Trades</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mt4Account.accountLogin">
+            <span jhiTranslate="propfirmApp.accountDataTimeSeries.mt4Account">Mt 4 Account</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let accountDataTimeSeries of accountDataTimeSeries; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/account-data-time-series', accountDataTimeSeries.id, 'view']">{{ accountDataTimeSeries.id }}</a>
+          </td>
+          <td>{{ accountDataTimeSeries.dateStamp | formatMediumDatetime }}</td>
+          <td>{{ accountDataTimeSeries.accountBalance }}</td>
+          <td>{{ accountDataTimeSeries.accountEquity }}</td>
+          <td>{{ accountDataTimeSeries.accountCredit }}</td>
+          <td>{{ accountDataTimeSeries.accountFreeMargin }}</td>
+          <td>{{ accountDataTimeSeries.accountStopoutLevel }}</td>
+          <td>{{ accountDataTimeSeries.openLots }}</td>
+          <td>{{ accountDataTimeSeries.openNumberOfTrades }}</td>
+          <td>
+            <div *ngIf="accountDataTimeSeries.mt4Account">
+              <a [routerLink]="['/mt-4-account', accountDataTimeSeries.mt4Account?.id, 'view']">{{
+                accountDataTimeSeries.mt4Account?.accountLogin
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/account-data-time-series', accountDataTimeSeries.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/account-data-time-series', accountDataTimeSeries.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(accountDataTimeSeries)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="accountDataTimeSeries && accountDataTimeSeries.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+<div>
+  <h2 id="page-heading" data-cy="DailyAnalysisPostHeading">
+    <span jhiTranslate="propfirmApp.dailyAnalysisPost.home.title">Daily Analysis Posts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="propfirmApp.dailyAnalysisPost.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-daily-analysis-post"
+        [routerLink]="['/daily-analysis-post/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="propfirmApp.dailyAnalysisPost.home.createLabel"> Create a new Daily Analysis Post </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="dailyAnalysisPosts?.length === 0">
+    <span jhiTranslate="propfirmApp.dailyAnalysisPost.home.notFound">No dailyAnalysisPosts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="dailyAnalysisPosts && dailyAnalysisPosts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="postTitle">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.postTitle">Post Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateAdded">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.dateAdded">Date Added</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="backgroundVolume">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.backgroundVolume">Background Volume</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="overallThoughts">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.overallThoughts">Overall Thoughts</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="weeklyChart">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.weeklyChart">Weekly Chart</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dailyChart">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.dailyChart">Daily Chart</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="oneHrChart">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.oneHrChart">One Hr Chart</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="planForToday">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.planForToday">Plan For Today</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="makePublicVisibleOnSite">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.makePublicVisibleOnSite">Make Public Visible On Site</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="instrument.ticker">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.instrument">Instrument</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <span jhiTranslate="propfirmApp.dailyAnalysisPost.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dailyAnalysisPost of dailyAnalysisPosts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/daily-analysis-post', dailyAnalysisPost.id, 'view']">{{ dailyAnalysisPost.id }}</a>
+          </td>
+          <td>{{ dailyAnalysisPost.postTitle }}</td>
+          <td>{{ dailyAnalysisPost.dateAdded | formatMediumDatetime }}</td>
+          <td>{{ dailyAnalysisPost.backgroundVolume }}</td>
+          <td>{{ dailyAnalysisPost.overallThoughts }}</td>
+          <td>
+            <a
+              *ngIf="dailyAnalysisPost.weeklyChart"
+              (click)="openFile(dailyAnalysisPost.weeklyChart, dailyAnalysisPost.weeklyChartContentType)"
+            >
+              <img
+                [src]="'data:' + dailyAnalysisPost.weeklyChartContentType + ';base64,' + dailyAnalysisPost.weeklyChart"
+                style="max-height: 30px"
+                alt="dailyAnalysisPost image"
+              />
+            </a>
+            <span *ngIf="dailyAnalysisPost.weeklyChart"
+              >{{ dailyAnalysisPost.weeklyChartContentType }}, {{ byteSize(dailyAnalysisPost.weeklyChart) }}</span
+            >
+          </td>
+          <td>
+            <a
+              *ngIf="dailyAnalysisPost.dailyChart"
+              (click)="openFile(dailyAnalysisPost.dailyChart, dailyAnalysisPost.dailyChartContentType)"
+            >
+              <img
+                [src]="'data:' + dailyAnalysisPost.dailyChartContentType + ';base64,' + dailyAnalysisPost.dailyChart"
+                style="max-height: 30px"
+                alt="dailyAnalysisPost image"
+              />
+            </a>
+            <span *ngIf="dailyAnalysisPost.dailyChart"
+              >{{ dailyAnalysisPost.dailyChartContentType }}, {{ byteSize(dailyAnalysisPost.dailyChart) }}</span
+            >
+          </td>
+          <td>
+            <a
+              *ngIf="dailyAnalysisPost.oneHrChart"
+              (click)="openFile(dailyAnalysisPost.oneHrChart, dailyAnalysisPost.oneHrChartContentType)"
+            >
+              <img
+                [src]="'data:' + dailyAnalysisPost.oneHrChartContentType + ';base64,' + dailyAnalysisPost.oneHrChart"
+                style="max-height: 30px"
+                alt="dailyAnalysisPost image"
+              />
+            </a>
+            <span *ngIf="dailyAnalysisPost.oneHrChart"
+              >{{ dailyAnalysisPost.oneHrChartContentType }}, {{ byteSize(dailyAnalysisPost.oneHrChart) }}</span
+            >
+          </td>
+          <td>{{ dailyAnalysisPost.planForToday }}</td>
+          <td>{{ dailyAnalysisPost.makePublicVisibleOnSite }}</td>
+          <td>
+            <div *ngIf="dailyAnalysisPost.instrument">
+              <a [routerLink]="['/instrument', dailyAnalysisPost.instrument?.id, 'view']">{{ dailyAnalysisPost.instrument?.ticker }}</a>
+            </div>
+          </td>
+          <td>
+            {{ dailyAnalysisPost.user?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/daily-analysis-post', dailyAnalysisPost.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/daily-analysis-post', dailyAnalysisPost.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(dailyAnalysisPost)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="dailyAnalysisPosts && dailyAnalysisPosts.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

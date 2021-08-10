@@ -1,0 +1,151 @@
+{
+  "name": "Mt4Account",
+  "fields": [
+    {
+      "fieldName": "accountType",
+      "fieldType": "ACCOUNTTYPE",
+      "fieldValues": "REAL,DEMO"
+    },
+    {
+      "fieldName": "accountBroker",
+      "fieldType": "BROKER",
+      "fieldValues": "FXPRO,ALPARI,THINKMARKETS,PEPPERSTONE"
+    },
+    {
+      "fieldName": "accountLogin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountPassword",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountInvestorLogin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountInvestorPassword",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountReal",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "accountInfoDouble",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountInfoInteger",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "accountInfoString",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountBalance",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountCredit",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountCompany",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountCurrency",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountEquity",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountFreeMargin",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountFreeMarginCheck",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountFreeMarginMode",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountLeverage",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "accountMargin",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "accountProfit",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountServer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "accountStopoutLevel",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "accountStopoutMode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "inActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "inActiveDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "tradeChallenge",
+      "otherEntityRelationshipName": "mt4Account",
+      "relationshipName": "tradeChallenge",
+      "otherEntityField": "tradeChallengeName",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "mt4Trade",
+      "otherEntityRelationshipName": "mt4Account",
+      "relationshipName": "mt4Trade"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "accountDataTimeSeries",
+      "otherEntityRelationshipName": "mt4Account",
+      "relationshipName": "accountDataTimeSeries"
+    }
+  ],
+  "entityTableName": "mt_4_account",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001032"
+}

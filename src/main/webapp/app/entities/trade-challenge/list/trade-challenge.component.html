@@ -1,0 +1,166 @@
+<div>
+  <h2 id="page-heading" data-cy="TradeChallengeHeading">
+    <span jhiTranslate="propfirmApp.tradeChallenge.home.title">Trade Challenges</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="propfirmApp.tradeChallenge.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-trade-challenge"
+        [routerLink]="['/trade-challenge/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="propfirmApp.tradeChallenge.home.createLabel"> Create a new Trade Challenge </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tradeChallenges?.length === 0">
+    <span jhiTranslate="propfirmApp.tradeChallenge.home.notFound">No tradeChallenges found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="tradeChallenges && tradeChallenges.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tradeChallengeName">
+            <span jhiTranslate="propfirmApp.tradeChallenge.tradeChallengeName">Trade Challenge Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="startDate">
+            <span jhiTranslate="propfirmApp.tradeChallenge.startDate">Start Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="runningMaxTotalDrawdown">
+            <span jhiTranslate="propfirmApp.tradeChallenge.runningMaxTotalDrawdown">Running Max Total Drawdown</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="runningMaxDailyDrawdown">
+            <span jhiTranslate="propfirmApp.tradeChallenge.runningMaxDailyDrawdown">Running Max Daily Drawdown</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="rulesViolated">
+            <span jhiTranslate="propfirmApp.tradeChallenge.rulesViolated">Rules Violated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ruleViolated">
+            <span jhiTranslate="propfirmApp.tradeChallenge.ruleViolated">Rule Violated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="ruleViolatedDate">
+            <span jhiTranslate="propfirmApp.tradeChallenge.ruleViolatedDate">Rule Violated Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="maxTotalDrawdown">
+            <span jhiTranslate="propfirmApp.tradeChallenge.maxTotalDrawdown">Max Total Drawdown</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="maxDailyDrawdown">
+            <span jhiTranslate="propfirmApp.tradeChallenge.maxDailyDrawdown">Max Daily Drawdown</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastDailyResetDate">
+            <span jhiTranslate="propfirmApp.tradeChallenge.lastDailyResetDate">Last Daily Reset Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="endDate">
+            <span jhiTranslate="propfirmApp.tradeChallenge.endDate">End Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="mt4Account.accountLogin">
+            <span jhiTranslate="propfirmApp.tradeChallenge.mt4Account">Mt 4 Account</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="siteAccount.accountName">
+            <span jhiTranslate="propfirmApp.tradeChallenge.siteAccount">Site Account</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="challengeType.challengeTypeName">
+            <span jhiTranslate="propfirmApp.tradeChallenge.challengeType">Challenge Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tradeChallenge of tradeChallenges; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/trade-challenge', tradeChallenge.id, 'view']">{{ tradeChallenge.id }}</a>
+          </td>
+          <td>{{ tradeChallenge.tradeChallengeName }}</td>
+          <td>{{ tradeChallenge.startDate | formatMediumDatetime }}</td>
+          <td>{{ tradeChallenge.runningMaxTotalDrawdown }}</td>
+          <td>{{ tradeChallenge.runningMaxDailyDrawdown }}</td>
+          <td>{{ tradeChallenge.rulesViolated }}</td>
+          <td>{{ tradeChallenge.ruleViolated }}</td>
+          <td>{{ tradeChallenge.ruleViolatedDate | formatMediumDatetime }}</td>
+          <td>{{ tradeChallenge.maxTotalDrawdown }}</td>
+          <td>{{ tradeChallenge.maxDailyDrawdown }}</td>
+          <td>{{ tradeChallenge.lastDailyResetDate | formatMediumDatetime }}</td>
+          <td>{{ tradeChallenge.endDate | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="tradeChallenge.mt4Account">
+              <a [routerLink]="['/mt-4-account', tradeChallenge.mt4Account?.id, 'view']">{{ tradeChallenge.mt4Account?.accountLogin }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="tradeChallenge.siteAccount">
+              <a [routerLink]="['/site-account', tradeChallenge.siteAccount?.id, 'view']">{{ tradeChallenge.siteAccount?.accountName }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="tradeChallenge.challengeType">
+              <a [routerLink]="['/challenge-type', tradeChallenge.challengeType?.id, 'view']">{{
+                tradeChallenge.challengeType?.challengeTypeName
+              }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/trade-challenge', tradeChallenge.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/trade-challenge', tradeChallenge.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(tradeChallenge)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="tradeChallenges && tradeChallenges.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

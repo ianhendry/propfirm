@@ -1,0 +1,39 @@
+{
+  "propfirmApp": {
+    "challengeType": {
+      "home": {
+        "title": "Challenge Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Challenge Type",
+        "createOrEditLabel": "Create or edit a Challenge Type",
+        "notFound": "No Challenge Types found"
+      },
+      "created": "A new Challenge Type is created with identifier {{ param }}",
+      "updated": "A Challenge Type is updated with identifier {{ param }}",
+      "deleted": "A Challenge Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Challenge Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Challenge Type"
+      },
+      "id": "ID",
+      "challengeTypeName": "Challenge Type Name",
+      "price": "Price",
+      "refundAfterComplete": "Refund After Complete",
+      "accountSize": "Account Size",
+      "profitTargetPhaseOne": "Profit Target Phase One",
+      "profitTargetPhaseTwo": "Profit Target Phase Two",
+      "durationDaysPhaseOne": "Duration Days Phase One",
+      "durationDaysPhaseTwo": "Duration Days Phase Two",
+      "maxDailyDrawdown": "Max Daily Drawdown",
+      "maxTotalDrawDown": "Max Total Draw Down",
+      "profitSplitRatio": "Profit Split Ratio",
+      "freeRetry": "Free Retry",
+      "userBio": "User Bio",
+      "inActive": "In Active",
+      "inActiveDate": "In Active Date",
+      "tradeChallenge": "Trade Challenge"
+    }
+  }
+}

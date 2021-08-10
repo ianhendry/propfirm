@@ -1,0 +1,40 @@
+{
+  "propfirmApp": {
+    "mt4Trade": {
+      "home": {
+        "title": "Mt 4 Trades",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Mt 4 Trade",
+        "createOrEditLabel": "Create or edit a Mt 4 Trade",
+        "notFound": "No Mt 4 Trades found"
+      },
+      "created": "A new Mt 4 Trade is created with identifier {{ param }}",
+      "updated": "A Mt 4 Trade is updated with identifier {{ param }}",
+      "deleted": "A Mt 4 Trade is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mt 4 Trade {{ id }}?"
+      },
+      "detail": {
+        "title": "Mt 4 Trade"
+      },
+      "id": "ID",
+      "ticket": "Ticket",
+      "openTime": "Open Time",
+      "directionType": "Direction Type",
+      "positionSize": "Position Size",
+      "symbol": "Symbol",
+      "openPrice": "Open Price",
+      "stopLossPrice": "Stop Loss Price",
+      "takeProfitPrice": "Take Profit Price",
+      "closeTime": "Close Time",
+      "closePrice": "Close Price",
+      "commission": "Commission",
+      "taxes": "Taxes",
+      "swap": "Swap",
+      "profit": "Profit",
+      "tradeJournalPost": "Trade Journal Post",
+      "mt4Account": "Mt 4 Account",
+      "instrument": "Instrument"
+    }
+  }
+}

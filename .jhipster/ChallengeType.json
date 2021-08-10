@@ -1,0 +1,85 @@
+{
+  "name": "ChallengeType",
+  "fields": [
+    {
+      "fieldName": "challengeTypeName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "refundAfterComplete",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "accountSize",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "profitTargetPhaseOne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "profitTargetPhaseTwo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "durationDaysPhaseOne",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "durationDaysPhaseTwo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxDailyDrawdown",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "maxTotalDrawDown",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "profitSplitRatio",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "freeRetry",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "userBio",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "inActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "inActiveDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "tradeChallenge",
+      "otherEntityRelationshipName": "challengeType",
+      "relationshipName": "tradeChallenge"
+    }
+  ],
+  "entityTableName": "challenge_type",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001031"
+}

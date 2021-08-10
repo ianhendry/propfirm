@@ -1,0 +1,56 @@
+{
+  "name": "AccountDataTimeSeries",
+  "fields": [
+    {
+      "fieldName": "dateStamp",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "accountBalance",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountEquity",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountCredit",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountFreeMargin",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "accountStopoutLevel",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "openLots",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "openNumberOfTrades",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "mt4Account",
+      "otherEntityRelationshipName": "accountDataTimeSeries",
+      "relationshipName": "mt4Account",
+      "otherEntityField": "accountLogin"
+    }
+  ],
+  "entityTableName": "account_data_time_series",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001040"
+}

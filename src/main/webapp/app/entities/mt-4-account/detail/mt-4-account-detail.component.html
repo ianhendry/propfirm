@@ -1,0 +1,140 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="mt4Account">
+      <h2 data-cy="mt4AccountDetailsHeading"><span jhiTranslate="propfirmApp.mt4Account.detail.title">Mt 4 Account</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ mt4Account.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountType">Account Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'propfirmApp.ACCOUNTTYPE.' + mt4Account.accountType }}">{{ mt4Account.accountType }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountBroker">Account Broker</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'propfirmApp.BROKER.' + mt4Account.accountBroker }}">{{ mt4Account.accountBroker }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountLogin">Account Login</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountLogin }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountPassword">Account Password</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountPassword }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountInvestorLogin">Account Investor Login</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountInvestorLogin }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountInvestorPassword">Account Investor Password</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountInvestorPassword }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountReal">Account Real</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountReal }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountInfoDouble">Account Info Double</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountInfoDouble }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountInfoInteger">Account Info Integer</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountInfoInteger }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountInfoString">Account Info String</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountInfoString }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountBalance">Account Balance</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountBalance }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountCredit">Account Credit</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountCredit }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountCompany">Account Company</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountCompany }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountCurrency">Account Currency</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountCurrency }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountEquity">Account Equity</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountEquity }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountFreeMargin">Account Free Margin</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountFreeMargin }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountFreeMarginCheck">Account Free Margin Check</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountFreeMarginCheck }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountFreeMarginMode">Account Free Margin Mode</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountFreeMarginMode }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountLeverage">Account Leverage</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountLeverage }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountMargin">Account Margin</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountMargin }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountName">Account Name</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountName }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountNumber">Account Number</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountProfit">Account Profit</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountProfit }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountServer">Account Server</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountServer }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountStopoutLevel">Account Stopout Level</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountStopoutLevel }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.accountStopoutMode">Account Stopout Mode</span></dt>
+        <dd>
+          <span>{{ mt4Account.accountStopoutMode }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.inActive">In Active</span></dt>
+        <dd>
+          <span>{{ mt4Account.inActive }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.mt4Account.inActiveDate">In Active Date</span></dt>
+        <dd>
+          <span>{{ mt4Account.inActiveDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/mt-4-account', mt4Account.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

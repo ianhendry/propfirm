@@ -1,0 +1,13 @@
+export enum INSTRUMENTTYPE {
+  CFD = 'CFD',
+
+  CRYPTO = 'CRYPTO',
+
+  FOREX = 'FOREX',
+
+  FUTURES = 'FUTURES',
+
+  METALS = 'METALS',
+
+  STOCKS = 'STOCKS',
+}

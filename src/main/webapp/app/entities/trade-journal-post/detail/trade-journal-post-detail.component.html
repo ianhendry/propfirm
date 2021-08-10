@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="tradeJournalPost">
+      <h2 data-cy="tradeJournalPostDetailsHeading">
+        <span jhiTranslate="propfirmApp.tradeJournalPost.detail.title">Trade Journal Post</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.postTitle">Post Title</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.postTitle }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.dateAdded">Date Added</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.dateAdded | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnPsychology">Thoughts On Psychology</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.thoughtsOnPsychology }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnTradeProcessAccuracy">Thoughts On Trade Process Accuracy</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.thoughtsOnTradeProcessAccuracy }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnAreasOfStrength">Thoughts On Areas Of Strength</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.thoughtsOnAreasOfStrength }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnAreasForImprovement">Thoughts On Areas For Improvement</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.thoughtsOnAreasForImprovement }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.areaOfFocusForTomorrow">Area Of Focus For Tomorrow</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.areaOfFocusForTomorrow }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.makePublicVisibleOnSite">Make Public Visible On Site</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.makePublicVisibleOnSite }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.anyMedia">Any Media</span></dt>
+        <dd>
+          <div *ngIf="tradeJournalPost.anyMedia">
+            <a (click)="openFile(tradeJournalPost.anyMedia, tradeJournalPost.anyMediaContentType)" jhiTranslate="entity.action.open"
+              >open</a
+            >
+            {{ tradeJournalPost.anyMediaContentType }}, {{ byteSize(tradeJournalPost.anyMedia) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.anyImage">Any Image</span></dt>
+        <dd>
+          <div *ngIf="tradeJournalPost.anyImage">
+            <a (click)="openFile(tradeJournalPost.anyImage, tradeJournalPost.anyImageContentType)">
+              <img
+                [src]="'data:' + tradeJournalPost.anyImageContentType + ';base64,' + tradeJournalPost.anyImage"
+                style="max-width: 100%"
+                alt="tradeJournalPost image"
+              />
+            </a>
+            {{ tradeJournalPost.anyImageContentType }}, {{ byteSize(tradeJournalPost.anyImage) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.tradeJournalPost.user">User</span></dt>
+        <dd>
+          <span>{{ tradeJournalPost.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/trade-journal-post', tradeJournalPost.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

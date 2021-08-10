@@ -1,0 +1,11 @@
+id;ticker;instrument_type;exchange;average_spread;trade_restrictions;in_active;in_active_date
+1;Dynamic;FOREX;Saint cyan hour;95553;../fake-data/blob/hipster.txt;true;2021-07-18T16:39:10
+2;Team-oriented;FUTURES;Up-sized;2304;../fake-data/blob/hipster.txt;true;2021-07-18T17:28:26
+3;Refined;CRYPTO;Frozen Quality-focused Oklahoma;55412;../fake-data/blob/hipster.txt;false;2021-07-18T12:37:44
+4;District neural;FUTURES;Home Knoll Home;32093;../fake-data/blob/hipster.txt;false;2021-07-18T05:12:08
+5;back Avon;METALS;task-force;22051;../fake-data/blob/hipster.txt;false;2021-07-18T04:01:54
+6;Salvador ability Versatile;CRYPTO;Chilean;45096;../fake-data/blob/hipster.txt;true;2021-07-18T02:45:22
+7;Salad hierarchy;STOCKS;programming Borders orange;79574;../fake-data/blob/hipster.txt;true;2021-07-18T11:15:46
+8;Berkshire;STOCKS;Small modular;42680;../fake-data/blob/hipster.txt;false;2021-07-18T01:14:48
+9;Borders Togo;CRYPTO;Beauty olive applications;34792;../fake-data/blob/hipster.txt;true;2021-07-18T04:32:43
+10;Beauty;FOREX;Account Tennessee;76892;../fake-data/blob/hipster.txt;false;2021-07-18T18:39:13

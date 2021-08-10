@@ -1,0 +1,263 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-trade-challenge-heading"
+        data-cy="TradeChallengeCreateUpdateHeading"
+        jhiTranslate="propfirmApp.tradeChallenge.home.createOrEditLabel"
+      >
+        Create or edit a Trade Challenge
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.tradeChallengeName" for="field_tradeChallengeName"
+            >Trade Challenge Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="tradeChallengeName"
+            id="field_tradeChallengeName"
+            data-cy="tradeChallengeName"
+            formControlName="tradeChallengeName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.startDate" for="field_startDate">Start Date</label>
+          <div class="d-flex">
+            <input
+              id="field_startDate"
+              data-cy="startDate"
+              type="datetime-local"
+              class="form-control"
+              name="startDate"
+              formControlName="startDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeChallenge.runningMaxTotalDrawdown"
+            for="field_runningMaxTotalDrawdown"
+            >Running Max Total Drawdown</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="runningMaxTotalDrawdown"
+            id="field_runningMaxTotalDrawdown"
+            data-cy="runningMaxTotalDrawdown"
+            formControlName="runningMaxTotalDrawdown"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeChallenge.runningMaxDailyDrawdown"
+            for="field_runningMaxDailyDrawdown"
+            >Running Max Daily Drawdown</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="runningMaxDailyDrawdown"
+            id="field_runningMaxDailyDrawdown"
+            data-cy="runningMaxDailyDrawdown"
+            formControlName="runningMaxDailyDrawdown"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.rulesViolated" for="field_rulesViolated"
+            >Rules Violated</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="rulesViolated"
+            id="field_rulesViolated"
+            data-cy="rulesViolated"
+            formControlName="rulesViolated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.ruleViolated" for="field_ruleViolated"
+            >Rule Violated</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="ruleViolated"
+            id="field_ruleViolated"
+            data-cy="ruleViolated"
+            formControlName="ruleViolated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.ruleViolatedDate" for="field_ruleViolatedDate"
+            >Rule Violated Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_ruleViolatedDate"
+              data-cy="ruleViolatedDate"
+              type="datetime-local"
+              class="form-control"
+              name="ruleViolatedDate"
+              formControlName="ruleViolatedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.maxTotalDrawdown" for="field_maxTotalDrawdown"
+            >Max Total Drawdown</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="maxTotalDrawdown"
+            id="field_maxTotalDrawdown"
+            data-cy="maxTotalDrawdown"
+            formControlName="maxTotalDrawdown"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.maxDailyDrawdown" for="field_maxDailyDrawdown"
+            >Max Daily Drawdown</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="maxDailyDrawdown"
+            id="field_maxDailyDrawdown"
+            data-cy="maxDailyDrawdown"
+            formControlName="maxDailyDrawdown"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.lastDailyResetDate" for="field_lastDailyResetDate"
+            >Last Daily Reset Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastDailyResetDate"
+              data-cy="lastDailyResetDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastDailyResetDate"
+              formControlName="lastDailyResetDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.endDate" for="field_endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.mt4Account" for="field_mt4Account">Mt 4 Account</label>
+          <select class="form-control" id="field_mt4Account" data-cy="mt4Account" name="mt4Account" formControlName="mt4Account">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                mt4AccountOption.id === editForm.get('mt4Account')!.value?.id ? editForm.get('mt4Account')!.value : mt4AccountOption
+              "
+              *ngFor="let mt4AccountOption of mt4AccountsCollection; trackBy: trackMt4AccountById"
+            >
+              {{ mt4AccountOption.accountLogin }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.siteAccount" for="field_siteAccount"
+            >Site Account</label
+          >
+          <select class="form-control" id="field_siteAccount" data-cy="siteAccount" name="siteAccount" formControlName="siteAccount">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                siteAccountOption.id === editForm.get('siteAccount')!.value?.id ? editForm.get('siteAccount')!.value : siteAccountOption
+              "
+              *ngFor="let siteAccountOption of siteAccountsSharedCollection; trackBy: trackSiteAccountById"
+            >
+              {{ siteAccountOption.accountName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeChallenge.challengeType" for="field_challengeType"
+            >Challenge Type</label
+          >
+          <select
+            class="form-control"
+            id="field_challengeType"
+            data-cy="challengeType"
+            name="challengeType"
+            formControlName="challengeType"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                challengeTypeOption.id === editForm.get('challengeType')!.value?.id
+                  ? editForm.get('challengeType')!.value
+                  : challengeTypeOption
+              "
+              *ngFor="let challengeTypeOption of challengeTypesSharedCollection; trackBy: trackChallengeTypeById"
+            >
+              {{ challengeTypeOption.challengeTypeName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

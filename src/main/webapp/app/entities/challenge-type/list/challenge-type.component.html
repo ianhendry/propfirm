@@ -1,0 +1,167 @@
+<div>
+  <h2 id="page-heading" data-cy="ChallengeTypeHeading">
+    <span jhiTranslate="propfirmApp.challengeType.home.title">Challenge Types</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="propfirmApp.challengeType.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-challenge-type"
+        [routerLink]="['/challenge-type/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="propfirmApp.challengeType.home.createLabel"> Create a new Challenge Type </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="challengeTypes?.length === 0">
+    <span jhiTranslate="propfirmApp.challengeType.home.notFound">No challengeTypes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="challengeTypes && challengeTypes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="challengeTypeName">
+            <span jhiTranslate="propfirmApp.challengeType.challengeTypeName">Challenge Type Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="price">
+            <span jhiTranslate="propfirmApp.challengeType.price">Price</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="refundAfterComplete">
+            <span jhiTranslate="propfirmApp.challengeType.refundAfterComplete">Refund After Complete</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accountSize">
+            <span jhiTranslate="propfirmApp.challengeType.accountSize">Account Size</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="profitTargetPhaseOne">
+            <span jhiTranslate="propfirmApp.challengeType.profitTargetPhaseOne">Profit Target Phase One</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="profitTargetPhaseTwo">
+            <span jhiTranslate="propfirmApp.challengeType.profitTargetPhaseTwo">Profit Target Phase Two</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="durationDaysPhaseOne">
+            <span jhiTranslate="propfirmApp.challengeType.durationDaysPhaseOne">Duration Days Phase One</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="durationDaysPhaseTwo">
+            <span jhiTranslate="propfirmApp.challengeType.durationDaysPhaseTwo">Duration Days Phase Two</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="maxDailyDrawdown">
+            <span jhiTranslate="propfirmApp.challengeType.maxDailyDrawdown">Max Daily Drawdown</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="maxTotalDrawDown">
+            <span jhiTranslate="propfirmApp.challengeType.maxTotalDrawDown">Max Total Draw Down</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="profitSplitRatio">
+            <span jhiTranslate="propfirmApp.challengeType.profitSplitRatio">Profit Split Ratio</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freeRetry">
+            <span jhiTranslate="propfirmApp.challengeType.freeRetry">Free Retry</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="userBio">
+            <span jhiTranslate="propfirmApp.challengeType.userBio">User Bio</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inActive">
+            <span jhiTranslate="propfirmApp.challengeType.inActive">In Active</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="inActiveDate">
+            <span jhiTranslate="propfirmApp.challengeType.inActiveDate">In Active Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let challengeType of challengeTypes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/challenge-type', challengeType.id, 'view']">{{ challengeType.id }}</a>
+          </td>
+          <td>{{ challengeType.challengeTypeName }}</td>
+          <td>
+            <a *ngIf="challengeType.price" (click)="openFile(challengeType.price, challengeType.priceContentType)">
+              <img
+                [src]="'data:' + challengeType.priceContentType + ';base64,' + challengeType.price"
+                style="max-height: 30px"
+                alt="challengeType image"
+              />
+            </a>
+            <span *ngIf="challengeType.price">{{ challengeType.priceContentType }}, {{ byteSize(challengeType.price) }}</span>
+          </td>
+          <td>{{ challengeType.refundAfterComplete }}</td>
+          <td>{{ challengeType.accountSize }}</td>
+          <td>{{ challengeType.profitTargetPhaseOne }}</td>
+          <td>{{ challengeType.profitTargetPhaseTwo }}</td>
+          <td>{{ challengeType.durationDaysPhaseOne }}</td>
+          <td>{{ challengeType.durationDaysPhaseTwo }}</td>
+          <td>{{ challengeType.maxDailyDrawdown }}</td>
+          <td>{{ challengeType.maxTotalDrawDown }}</td>
+          <td>{{ challengeType.profitSplitRatio }}</td>
+          <td>{{ challengeType.freeRetry }}</td>
+          <td>{{ challengeType.userBio }}</td>
+          <td>{{ challengeType.inActive }}</td>
+          <td>{{ challengeType.inActiveDate | formatMediumDatetime }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/challenge-type', challengeType.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/challenge-type', challengeType.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(challengeType)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="challengeTypes && challengeTypes.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

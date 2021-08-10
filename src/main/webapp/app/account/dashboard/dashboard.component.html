@@ -1,0 +1,246 @@
+<div *ngIf="this.isLoading" class="container-fluid">
+	<div class="row">
+		<div class="col-5">
+		</div>
+		<div class="col-2">
+			<p-progressSpinner></p-progressSpinner>
+		</div>
+		<div class="col-5">
+		</div>
+	</div>
+</div>
+	
+<div class="container-fluid">
+	<div class="row">
+	    <div *ngIf="tradeChallenges" class="col-2">
+			
+			<h2><span jhiTranslate="propfirmApp.tradeChallenge.challenges">Challenges</span></h2>	
+
+			<table class="table table-striped" aria-describedby="page-heading">
+			<!--
+		      <thead>
+		        <tr>
+		          <th scope="col">
+		            <span jhiTranslate="propfirmApp.tradeChallenge.tradeChallengeName">Trade Challenge Name</span>
+		          </th>
+		          <th scope="col">
+		            <span jhiTranslate="propfirmApp.tradeChallenge.startDate">Start Date</span>
+		          </th>
+		        </tr>
+		      </thead>
+			-->
+			<tbody>
+		        <tr *ngFor="let tradeChallenge of tradeChallenges;" data-cy="entityTable">
+		        	<td>
+						<a role="button" (click)="showChallenge(tradeChallenge)">{{ tradeChallenge.tradeChallengeName }}</a>
+					</td>
+					<!-- 
+		          	<td>{{ tradeChallenge.startDate | formatMediumDatetime }}</td>
+					-->
+		        </tr>
+		      </tbody>
+		    </table>
+			<button pButton type="button" label="Start a new challenge"></button>
+	    </div>
+	    <div class="col-10">
+
+			<p-tabView>
+			    <p-tabPanel header="Overview">
+			       <div *ngIf="tradeChallenge">
+						<H4><b>{{ tradeChallenge.tradeChallengeName }}</b></H4>
+						<div *ngIf="tradeChallenge.rulesViolated" >
+							<div class="container">
+						  		<div class="row">
+						    		<div class="col" style="background-color:rgb(255, 128, 64); color: white; font-weight: bold; text-align: center;">Trading has been suspended for this account. {{ tradeChallenge.ruleViolated }} on {{ tradeChallenge.ruleViolatedDate }}.</div>
+								</div>
+							</div>		
+						</div>
+						<div class="container">
+					  		<div class="row">
+								<!-- spacer row for layout -->
+								&nbsp;
+							</div>
+						</div>		
+						<div class="container">
+						  	<div class="row">
+						    	<div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Start Date</div><div class="col">{{ tradeChallenge.startDate }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Challenge Type</div><div *ngIf="tradeChallenge.challengeType" class="col">{{ tradeChallenge.challengeType.challengeTypeName }}</div>
+						  	</div>
+							<div class="row">
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Max Total Drawdown</div><div class="col">{{ tradeChallenge.runningMaxTotalDrawdown }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Max Daily Drawdown</div><div class="col">{{ tradeChallenge.runningMaxDailyDrawdown }}</div>
+							</div>
+							<div class="row">
+								<div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Rule Violated</div><div class="col">{{ tradeChallenge.rulesViolated }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Rule Violated Date</div><div class="col">{{ tradeChallenge.ruleViolatedDate }}</div>
+							</div>
+							<div class="row">
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Challenge Type</div><div *ngIf="tradeChallenge.challengeType" class="col">{{ tradeChallenge.challengeType.challengeTypeName }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Column</div><div class="col">{{ tradeChallenge.tradeChallengeName }}</div>
+							</div>
+						</div>
+						<div *ngIf="tradeChallenge.mt4Account" class="container">
+						  	<div class="row">
+						    	<div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Broker</div><div class="col">{{ tradeChallenge.mt4Account.accountBroker }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Account Type</div><div class="col">{{ tradeChallenge.mt4Account.accountType }}</div>
+						  	</div>
+							<div class="row">
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Login</div><div class="col">{{ tradeChallenge.mt4Account.accountLogin }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Password</div><div class="col">{{ tradeChallenge.mt4Account.accountPassword }}</div>
+							</div>
+							<div class="row">
+								<div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Real</div><div class="col">{{ tradeChallenge.mt4Account.accountReal }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Account Name</div><div class="col">{{ tradeChallenge.mt4Account.accountName }}</div>
+							</div>
+							<div class="row">
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Balance</div><div class="col">{{ tradeChallenge.mt4Account.accountBalance }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Profit</div><div class="col">{{ tradeChallenge.mt4Account.accountProfit }}</div>
+							</div>
+							<div class="row">
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Equity</div><div class="col">{{ tradeChallenge.mt4Account.accountEquity }}</div>
+							    <div class="col" style="background-color:dodgerblue; color: white; font-weight: bold;">Free Margin</div><div class="col">{{ tradeChallenge.mt4Account.accountFreeMargin }}</div>
+							</div>
+						</div>
+			       	</div>
+					<div class="container">
+						<div class="row">
+							<!-- spacer row for layout -->
+							&nbsp;
+						</div>
+					</div>		
+			    </p-tabPanel>
+			    <p-tabPanel header="Trades">
+					<div *ngIf="mt4Trades">	
+					    <table class="table table-striped" aria-describedby="page-heading">
+					      <thead>
+					        <tr>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.ticket">Ticket</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.openTime">Open Time</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.directionType">Direction Type</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.positionSize">Position Size</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.symbol">Symbol</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.openPrice">Open Price</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.stopLossPrice">Stop Loss Price</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.takeProfitPrice">Take Profit Price</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.closeTime">Close Time</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.closePrice">Close Price</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.commission">Commission</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.taxes">Taxes</span>
+					          </th>
+					          <th scope="col"><span jhiTranslate="propfirmApp.mt4Trade.swap">Swap</span></th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.profit">Profit</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.tradeJournalPost">Trade Journal Post</span>
+					          </th>
+					          <th scope="col">
+					            <span jhiTranslate="propfirmApp.mt4Trade.instrument">Instrument</span>
+					          </th>
+					        </tr>
+					      </thead>
+					      <tbody>
+					        <tr *ngFor="let mt4Trade of mt4Trades;" data-cy="entityTable">
+					          <td>{{ mt4Trade.ticket }}</td>
+					          <td>{{ mt4Trade.openTime | formatMediumDatetime }}</td>
+					          <td jhiTranslate="{{ 'propfirmApp.TRADEDIRECTION.' + mt4Trade.directionType }}">{{ mt4Trade.directionType }}</td>
+					          <td>{{ mt4Trade.positionSize }}</td>
+					          <td>{{ mt4Trade.symbol }}</td>
+					          <td>{{ mt4Trade.openPrice }}</td>
+					          <td>{{ mt4Trade.stopLossPrice }}</td>
+					          <td>{{ mt4Trade.takeProfitPrice }}</td>
+					          <td>{{ mt4Trade.closeTime | formatMediumDatetime }}</td>
+					          <td>{{ mt4Trade.closePrice }}</td>
+					          <td>{{ mt4Trade.commission }}</td>
+					          <td>{{ mt4Trade.taxes }}</td>
+					          <td>{{ mt4Trade.swap }}</td>
+					          <td>{{ mt4Trade.profit }}</td>
+					          <td>
+								<button pButton type="button" label="Journal" [routerLink]="['/trade-journal-post/new', mt4Trade.tradeJournalPost?.id, 'view']"></button>
+					            <div *ngIf="mt4Trade.tradeJournalPost">
+					              <a [routerLink]="['/trade-journal-post', mt4Trade.tradeJournalPost?.id, 'view']">{{
+					                mt4Trade.tradeJournalPost?.postTitle
+					              }}</a>
+					            </div>
+					          </td>
+					          <td>
+					            <div *ngIf="mt4Trade.instrument">
+					              {{ mt4Trade.instrument?.ticker }}
+					            </div>
+					          </td>
+					        </tr>
+					      </tbody>
+					    </table>
+					</div>
+			    </p-tabPanel>
+			    <p-tabPanel header="Metrics">
+					<ng-template pTemplate="content">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="col-6">
+									<div *ngIf="this.chartMt4Trades">
+										<H4 style="text-align: center;">Equity and Balance</H4>
+										<p-chart #chart1 type="line" [data]="timeSeriesData" height="300"></p-chart>
+									</div>
+								</div>
+								<div class="col-6">
+									<div *ngIf="this.timeSeriesData">
+										<H4 style="text-align: center;">Profit per trade</H4>
+										<p-chart #chart2 type="bar" [data]="chartMt4Trades" height="300"></p-chart>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									<div *ngIf="this.chartMt4Trades">
+										<p-chart #chart3 type="line" [data]="tradesData" height="300"></p-chart>
+									</div>
+								</div>
+								<div class="col-6">
+									<div *ngIf="this.chartMt4Trades">
+										<p-chart #chart4 type="line" [data]="chartMt4Trades" height="300"></p-chart>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-6">
+									% win rate<br>
+									run of losses<br>
+									run of wins<br>
+									
+								</div>
+								<div class="col-6">
+									
+								</div>
+							</div>
+						</div>
+			        </ng-template>
+			    </p-tabPanel>
+			</p-tabView>
+	    </div>
+	</div>
+	
+</div>

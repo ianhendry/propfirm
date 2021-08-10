@@ -1,0 +1,32 @@
+{
+  "propfirmApp": {
+    "accountDataTimeSeries": {
+      "home": {
+        "title": "Account Data Time Series",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Account Data Time Series",
+        "createOrEditLabel": "创建或编辑 Account Data Time Series",
+        "notFound": "No Account Data Time Series found"
+      },
+      "created": "Account Data Time Series {{ param }} 创建成功",
+      "updated": "Account Data Time Series {{ param }} 更新成功",
+      "deleted": "Account Data Time Series {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Account Data Time Series {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Account Data Time Series"
+      },
+      "id": "ID",
+      "dateStamp": "Date Stamp",
+      "accountBalance": "Account Balance",
+      "accountEquity": "Account Equity",
+      "accountCredit": "Account Credit",
+      "accountFreeMargin": "Account Free Margin",
+      "accountStopoutLevel": "Account Stopout Level",
+      "openLots": "Open Lots",
+      "openNumberOfTrades": "Open Number Of Trades",
+      "mt4Account": "Mt 4 Account"
+    }
+  }
+}

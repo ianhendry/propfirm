@@ -12,7 +12,13 @@ import { IUser, getUserIdentifier } from './user.model';
 export class UserService {
   private resourceUrl = this.applicationConfigService.getEndpointFor('api/users');
 
+// /users/findone/
+
   constructor(private http: HttpClient, private applicationConfigService: ApplicationConfigService) {}
+
+  findOne(login: string): Observable<IUser> {
+    return this.http.get<IUser>(`${this.resourceUrl}/findone/${login}`);
+  }
 
   query(req?: Pagination): Observable<HttpResponse<IUser[]>> {
     const options = createRequestOption(req);

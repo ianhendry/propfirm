@@ -1,0 +1,75 @@
+{
+  "name": "AddressDetails",
+  "fields": [
+    {
+      "fieldName": "contactName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address5",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address6",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dialCode",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "messengerId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateAdded",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "inActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "inActiveDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "siteAccount",
+      "otherEntityRelationshipName": "addressDetails",
+      "relationshipName": "siteAccount"
+    }
+  ],
+  "entityTableName": "address_details",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210719001033"
+}

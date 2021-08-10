@@ -1,0 +1,233 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-user-comment-heading"
+        data-cy="UserCommentCreateUpdateHeading"
+        jhiTranslate="propfirmApp.userComment.home.createOrEditLabel"
+      >
+        Create or edit a User Comment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.userComment.commentTitle" for="field_commentTitle"
+            >Comment Title</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="commentTitle"
+            id="field_commentTitle"
+            data-cy="commentTitle"
+            formControlName="commentTitle"
+          />
+          <div
+            *ngIf="editForm.get('commentTitle')!.invalid && (editForm.get('commentTitle')!.dirty || editForm.get('commentTitle')!.touched)"
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('commentTitle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.userComment.commentBody" for="field_commentBody">Comment Body</label>
+          <textarea
+            class="form-control"
+            name="commentBody"
+            id="field_commentBody"
+            data-cy="commentBody"
+            formControlName="commentBody"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.userComment.commentMedia" for="field_commentMedia"
+            >Comment Media</label
+          >
+          <div>
+            <div *ngIf="editForm.get('commentMedia')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('commentMedia')!.value, editForm.get('commentMediaContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('commentMediaContentType')!.value }}, {{ byteSize(editForm.get('commentMedia')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ commentMedia: null }); editForm.patchValue({ commentMediaContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_commentMedia"
+              data-cy="commentMedia"
+              (change)="setFileData($event, 'commentMedia', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="commentMedia"
+            id="field_commentMedia"
+            data-cy="commentMedia"
+            formControlName="commentMedia"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="commentMediaContentType"
+            id="field_commentMediaContentType"
+            formControlName="commentMediaContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.userComment.dateAdded" for="field_dateAdded">Date Added</label>
+          <div class="d-flex">
+            <input
+              id="field_dateAdded"
+              data-cy="dateAdded"
+              type="datetime-local"
+              class="form-control"
+              name="dateAdded"
+              formControlName="dateAdded"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dateAdded')!.invalid && (editForm.get('dateAdded')!.dirty || editForm.get('dateAdded')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateAdded')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateAdded')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.userComment.makePublicVisibleOnSite"
+            for="field_makePublicVisibleOnSite"
+            >Make Public Visible On Site</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="makePublicVisibleOnSite"
+            id="field_makePublicVisibleOnSite"
+            data-cy="makePublicVisibleOnSite"
+            formControlName="makePublicVisibleOnSite"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.userComment.tradeJournalPost" for="field_tradeJournalPost"
+            >Trade Journal Post</label
+          >
+          <select
+            class="form-control"
+            id="field_tradeJournalPost"
+            data-cy="tradeJournalPost"
+            name="tradeJournalPost"
+            formControlName="tradeJournalPost"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                tradeJournalPostOption.id === editForm.get('tradeJournalPost')!.value?.id
+                  ? editForm.get('tradeJournalPost')!.value
+                  : tradeJournalPostOption
+              "
+              *ngFor="let tradeJournalPostOption of tradeJournalPostsSharedCollection; trackBy: trackTradeJournalPostById"
+            >
+              {{ tradeJournalPostOption.postTitle }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.userComment.dailyAnalysisPost" for="field_dailyAnalysisPost"
+            >Daily Analysis Post</label
+          >
+          <select
+            class="form-control"
+            id="field_dailyAnalysisPost"
+            data-cy="dailyAnalysisPost"
+            name="dailyAnalysisPost"
+            formControlName="dailyAnalysisPost"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                dailyAnalysisPostOption.id === editForm.get('dailyAnalysisPost')!.value?.id
+                  ? editForm.get('dailyAnalysisPost')!.value
+                  : dailyAnalysisPostOption
+              "
+              *ngFor="let dailyAnalysisPostOption of dailyAnalysisPostsSharedCollection; trackBy: trackDailyAnalysisPostById"
+            >
+              {{ dailyAnalysisPostOption.postTitle }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.userComment.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

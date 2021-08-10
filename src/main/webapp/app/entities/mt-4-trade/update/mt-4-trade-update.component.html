@@ -1,0 +1,238 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-mt-4-trade-heading" data-cy="Mt4TradeCreateUpdateHeading" jhiTranslate="propfirmApp.mt4Trade.home.createOrEditLabel">
+        Create or edit a Mt 4 Trade
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.ticket" for="field_ticket">Ticket</label>
+          <input type="number" class="form-control" name="ticket" id="field_ticket" data-cy="ticket" formControlName="ticket" />
+          <div *ngIf="editForm.get('ticket')!.invalid && (editForm.get('ticket')!.dirty || editForm.get('ticket')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('ticket')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('ticket')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.openTime" for="field_openTime">Open Time</label>
+          <div class="d-flex">
+            <input
+              id="field_openTime"
+              data-cy="openTime"
+              type="datetime-local"
+              class="form-control"
+              name="openTime"
+              formControlName="openTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.directionType" for="field_directionType"
+            >Direction Type</label
+          >
+          <select
+            class="form-control"
+            name="directionType"
+            formControlName="directionType"
+            id="field_directionType"
+            data-cy="directionType"
+          >
+            <option [ngValue]="null">{{ 'propfirmApp.TRADEDIRECTION.null' | translate }}</option>
+            <option value="BUY">{{ 'propfirmApp.TRADEDIRECTION.BUY' | translate }}</option>
+            <option value="SELL">{{ 'propfirmApp.TRADEDIRECTION.SELL' | translate }}</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.positionSize" for="field_positionSize">Position Size</label>
+          <input
+            type="number"
+            class="form-control"
+            name="positionSize"
+            id="field_positionSize"
+            data-cy="positionSize"
+            formControlName="positionSize"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.symbol" for="field_symbol">Symbol</label>
+          <input type="text" class="form-control" name="symbol" id="field_symbol" data-cy="symbol" formControlName="symbol" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.openPrice" for="field_openPrice">Open Price</label>
+          <input type="number" class="form-control" name="openPrice" id="field_openPrice" data-cy="openPrice" formControlName="openPrice" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.stopLossPrice" for="field_stopLossPrice"
+            >Stop Loss Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="stopLossPrice"
+            id="field_stopLossPrice"
+            data-cy="stopLossPrice"
+            formControlName="stopLossPrice"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.takeProfitPrice" for="field_takeProfitPrice"
+            >Take Profit Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="takeProfitPrice"
+            id="field_takeProfitPrice"
+            data-cy="takeProfitPrice"
+            formControlName="takeProfitPrice"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.closeTime" for="field_closeTime">Close Time</label>
+          <div class="d-flex">
+            <input
+              id="field_closeTime"
+              data-cy="closeTime"
+              type="datetime-local"
+              class="form-control"
+              name="closeTime"
+              formControlName="closeTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.closePrice" for="field_closePrice">Close Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="closePrice"
+            id="field_closePrice"
+            data-cy="closePrice"
+            formControlName="closePrice"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.commission" for="field_commission">Commission</label>
+          <input
+            type="number"
+            class="form-control"
+            name="commission"
+            id="field_commission"
+            data-cy="commission"
+            formControlName="commission"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.taxes" for="field_taxes">Taxes</label>
+          <input type="number" class="form-control" name="taxes" id="field_taxes" data-cy="taxes" formControlName="taxes" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.swap" for="field_swap">Swap</label>
+          <input type="number" class="form-control" name="swap" id="field_swap" data-cy="swap" formControlName="swap" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.profit" for="field_profit">Profit</label>
+          <input type="number" class="form-control" name="profit" id="field_profit" data-cy="profit" formControlName="profit" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.tradeJournalPost" for="field_tradeJournalPost"
+            >Trade Journal Post</label
+          >
+          <select
+            class="form-control"
+            id="field_tradeJournalPost"
+            data-cy="tradeJournalPost"
+            name="tradeJournalPost"
+            formControlName="tradeJournalPost"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                tradeJournalPostOption.id === editForm.get('tradeJournalPost')!.value?.id
+                  ? editForm.get('tradeJournalPost')!.value
+                  : tradeJournalPostOption
+              "
+              *ngFor="let tradeJournalPostOption of tradeJournalPostsCollection; trackBy: trackTradeJournalPostById"
+            >
+              {{ tradeJournalPostOption.postTitle }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.mt4Account" for="field_mt4Account">Mt 4 Account</label>
+          <select class="form-control" id="field_mt4Account" data-cy="mt4Account" name="mt4Account" formControlName="mt4Account">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                mt4AccountOption.id === editForm.get('mt4Account')!.value?.id ? editForm.get('mt4Account')!.value : mt4AccountOption
+              "
+              *ngFor="let mt4AccountOption of mt4AccountsSharedCollection; trackBy: trackMt4AccountById"
+            >
+              {{ mt4AccountOption.accountLogin }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.mt4Trade.instrument" for="field_instrument">Instrument</label>
+          <select class="form-control" id="field_instrument" data-cy="instrument" name="instrument" formControlName="instrument">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                instrumentOption.id === editForm.get('instrument')!.value?.id ? editForm.get('instrument')!.value : instrumentOption
+              "
+              *ngFor="let instrumentOption of instrumentsSharedCollection; trackBy: trackInstrumentById"
+            >
+              {{ instrumentOption.ticker }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

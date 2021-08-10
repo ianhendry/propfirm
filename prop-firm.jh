@@ -1,0 +1,225 @@
+enum ACCOUNTTYPE {
+	REAL, DEMO
+}
+
+enum BROKER {
+	FXPRO, ALPARI, THINKMARKETS, PEPPERSTONE
+}
+
+enum INSTRUMENTTYPE {
+	CFD, CRYPTO, FOREX, FUTURES, METALS, STOCKS
+}
+
+enum TRADEDIRECTION {
+	BUY, SELL
+}
+entity SiteAccount {
+    accountName String,
+    userPicture ImageBlob,
+    userBio TextBlob,
+    inActive Boolean,
+    inActiveDate Instant
+}
+
+entity ChallengeType {
+    challengeTypeName String,
+    price ImageBlob,
+    refundAfterComplete Boolean,
+    accountSize Integer,
+    profitTargetPhaseOne Integer,
+    profitTargetPhaseTwo Integer,
+    durationDaysPhaseOne Integer,
+    durationDaysPhaseTwo Integer,
+    maxDailyDrawdown Integer,
+    maxTotalDrawDown Integer,
+    profitSplitRatio Integer,
+    freeRetry Boolean,
+    userBio TextBlob,
+    inActive Boolean,
+    inActiveDate Instant
+}
+
+/*
+AccountInfoDouble Returns a value of double type of the corresponding account property
+AccountInfoInteger Returns a value of integer type (bool, int or long) of the corresponding account property
+AccountInfoString Returns a value string type corresponding account property
+AccountBalance Returns balance value of the current account
+AccountCredit Returns credit value of the current account
+AccountCompany Returns the brokerage company name where the current account was registered
+AccountCurrency Returns currency name of the current account
+AccountEquity Returns equity value of the current account
+AccountFreeMargin Returns free margin value of the current account
+AccountFreeMarginCheck Returns free margin that remains after the specified position has been opened at the current price on the current account
+AccountFreeMarginMode Calculation mode of free margin allowed to open orders on the current account
+AccountLeverage Returns leverage of the current account
+AccountMargin Returns margin value of the current account
+AccountName Returns the current account name
+AccountNumber Returns the current account number
+AccountProfit Returns profit value of the current account
+AccountServer Returns the connected server name
+AccountStopoutLevel Returns the value of the Stop Out level
+AccountStopoutMode Returns the calculation mode for the Stop Out level
+*/
+entity Mt4Account {
+	accountType ACCOUNTTYPE,
+    accountBroker BROKER,
+    accountLogin String,
+    accountPassword String,
+    accountInvestorLogin String,
+    accountInvestorPassword String,
+    accountReal Boolean,
+    accountInfoDouble Double,
+	accountInfoInteger Integer,
+	accountInfoString String,
+	accountBalance Double, 
+	accountCredit Double, 
+	accountCompany String,
+	accountCurrency String,
+	accountEquity Double,
+	accountFreeMargin Double, 
+	accountFreeMarginCheck Double, 
+	accountFreeMarginMode Double, 
+	accountLeverage Integer,
+	accountMargin Double,
+	accountName String,
+	accountNumber Integer,
+	accountProfit Double,
+	accountServer String,
+	accountStopoutLevel Integer,
+	accountStopoutMode Integer,
+    inActive Boolean,
+    inActiveDate Instant
+}
+
+entity AddressDetails {
+  	contactName String,
+  	address1 String,
+  	address2 String,
+  	address3 String,
+  	address4 String,
+  	address5 String,
+    address6 String,
+    dialCode String,
+    phoneNumber String,
+    messengerId String,
+  	dateAdded Instant,
+  	inActive Boolean,
+    inActiveDate Instant
+}
+
+entity TradeChallenge {
+	tradeChallengeName String,
+	startDate Instant,
+    runningMaxTotalDrawdown Double,
+    runningMaxDailyDrawdown Double,
+    rulesViolated Boolean,
+    ruleViolated String,
+    ruleViolatedDate Instant
+}
+
+entity TradeJournalPost {
+	postTitle String required,
+    dateAdded Instant required,
+    thoughtsOnPsychology TextBlob,
+    thoughtsOnTradeProcessAccuracy TextBlob,
+    thoughtsOnAreasOfStrength TextBlob,
+    thoughtsOnAreasForImprovement TextBlob,
+    areaOfFocusForTomorrow TextBlob,
+    makePublicVisibleOnSite Boolean,
+    anyMedia AnyBlob,
+    anyImage ImageBlob
+}
+
+entity Instrument {
+	ticker String,
+    instrumentType INSTRUMENTTYPE,
+    exchange String,
+    averageSpread Double,
+    tradeRestrictions TextBlob,
+    inActive Boolean,
+    inActiveDate Instant
+}
+
+entity DailyAnalysisPost {
+	postTitle String required,
+    dateAdded Instant required,
+    backgroundVolume TextBlob,
+    overallThoughts TextBlob,
+    weeklyChart ImageBlob,
+    dailyChart ImageBlob,
+    oneHrChart ImageBlob,
+    planForToday TextBlob,
+    makePublicVisibleOnSite Boolean
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity UserComment {
+	commentTitle String required,
+  	commentBody TextBlob,
+  	commentMedia AnyBlob,
+  	dateAdded Instant required,
+	makePublicVisibleOnSite Boolean
+}
+
+entity Mt4Trade {
+	ticket BigDecimal required,
+    openTime Instant,
+    directionType TRADEDIRECTION,
+    positionSize Double,
+    symbol String,
+    openPrice Double,
+    stopLossPrice Double,
+    takeProfitPrice Double,
+    closeTime Instant,
+    closePrice Double,
+    commission Double, 
+    taxes Double,
+    swap Double,
+    profit Double
+}
+
+entity AccountDataTimeSeries {
+	dateStamp Instant,
+    accountBalance Double, 
+    accountEquity Double,
+    accountCredit Double, 
+	accountFreeMargin Double, 
+	accountStopoutLevel Integer,
+    openLots Double,
+    openNumberOfTrades Integer,    
+}
+
+relationship ManyToOne {
+	SiteAccount{addressDetails(contactName)} to AddressDetails{siteAccount}
+    TradeChallenge{siteAccount(accountName)} to SiteAccount{tradeChallenge}
+    TradeChallenge{challengeType(challengeTypeName)} to ChallengeType{tradeChallenge}
+	Mt4Trade{mt4Account(accountLogin)} to Mt4Account{mt4Trade}
+    Mt4Trade{instrument(ticker)} to Instrument{mt4Trade}
+    UserComment{tradeJournalPost(postTitle)} to TradeJournalPost{userComment}
+    UserComment{dailyAnalysisPost(postTitle)} to DailyAnalysisPost{userComment}
+    AccountDataTimeSeries{mt4Account(accountLogin)} to Mt4Account{accountDataTimeSeries}
+    DailyAnalysisPost{instrument(ticker)} to Instrument{dailyAnalysisPost}
+    UserComment{user(login)} to User
+    DailyAnalysisPost{user(login)} to User
+    TradeJournalPost{user(login)} to User
+}
+
+relationship OneToOne {
+	SiteAccount{user(login)} to User
+    TradeChallenge{mt4Account(accountLogin)} to Mt4Account{tradeChallenge(tradeChallengeName)}
+	Mt4Trade{tradeJournalPost(postTitle)} to TradeJournalPost{mt4Trade(ticket)}
+}
+
+// Set pagination options
+paginate UserComment with infinite-scroll
+paginate Mt4Account, Mt4Trade, DailyAnalysisPost, TradeJournalPost, SiteAccount, ChallengeType, TradeChallenge with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+filter Mt4Account, Mt4Trade, DailyAnalysisPost, TradeJournalPost, SiteAccount
+// Set an angular suffix
+// angularSuffix * with mySuffix

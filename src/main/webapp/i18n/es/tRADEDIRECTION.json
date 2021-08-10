@@ -1,0 +1,9 @@
+{
+  "propfirmApp": {
+    "TRADEDIRECTION": {
+      "null": "",
+      "BUY": "BUY",
+      "SELL": "SELL"
+    }
+  }
+}

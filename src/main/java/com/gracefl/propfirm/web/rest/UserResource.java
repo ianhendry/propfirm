@@ -191,6 +191,12 @@ public class UserResource {
         return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
     }
 
+    @GetMapping("/users/findone/{login}")
+    public ResponseEntity<AdminUserDTO> getOneUser(@PathVariable String login) {
+        log.debug("REST request to get User : {}", login);
+        return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
+    }
+    
     /**
      * {@code DELETE /admin/users/:login} : delete the "login" User.
      *

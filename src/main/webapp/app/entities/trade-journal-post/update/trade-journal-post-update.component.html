@@ -1,0 +1,272 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-trade-journal-post-heading"
+        data-cy="TradeJournalPostCreateUpdateHeading"
+        jhiTranslate="propfirmApp.tradeJournalPost.home.createOrEditLabel"
+      >
+        Create or edit a Trade Journal Post
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeJournalPost.postTitle" for="field_postTitle">Post Title</label>
+          <input type="text" class="form-control" name="postTitle" id="field_postTitle" data-cy="postTitle" formControlName="postTitle" />
+          <div *ngIf="editForm.get('postTitle')!.invalid && (editForm.get('postTitle')!.dirty || editForm.get('postTitle')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('postTitle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeJournalPost.dateAdded" for="field_dateAdded">Date Added</label>
+          <div class="d-flex">
+            <input
+              id="field_dateAdded"
+              data-cy="dateAdded"
+              type="datetime-local"
+              class="form-control"
+              name="dateAdded"
+              formControlName="dateAdded"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dateAdded')!.invalid && (editForm.get('dateAdded')!.dirty || editForm.get('dateAdded')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateAdded')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateAdded')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnPsychology"
+            for="field_thoughtsOnPsychology"
+            >Thoughts On Psychology</label
+          >
+          <textarea
+            class="form-control"
+            name="thoughtsOnPsychology"
+            id="field_thoughtsOnPsychology"
+            data-cy="thoughtsOnPsychology"
+            formControlName="thoughtsOnPsychology"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnTradeProcessAccuracy"
+            for="field_thoughtsOnTradeProcessAccuracy"
+            >Thoughts On Trade Process Accuracy</label
+          >
+          <textarea
+            class="form-control"
+            name="thoughtsOnTradeProcessAccuracy"
+            id="field_thoughtsOnTradeProcessAccuracy"
+            data-cy="thoughtsOnTradeProcessAccuracy"
+            formControlName="thoughtsOnTradeProcessAccuracy"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnAreasOfStrength"
+            for="field_thoughtsOnAreasOfStrength"
+            >Thoughts On Areas Of Strength</label
+          >
+          <textarea
+            class="form-control"
+            name="thoughtsOnAreasOfStrength"
+            id="field_thoughtsOnAreasOfStrength"
+            data-cy="thoughtsOnAreasOfStrength"
+            formControlName="thoughtsOnAreasOfStrength"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnAreasForImprovement"
+            for="field_thoughtsOnAreasForImprovement"
+            >Thoughts On Areas For Improvement</label
+          >
+          <textarea
+            class="form-control"
+            name="thoughtsOnAreasForImprovement"
+            id="field_thoughtsOnAreasForImprovement"
+            data-cy="thoughtsOnAreasForImprovement"
+            formControlName="thoughtsOnAreasForImprovement"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeJournalPost.areaOfFocusForTomorrow"
+            for="field_areaOfFocusForTomorrow"
+            >Area Of Focus For Tomorrow</label
+          >
+          <textarea
+            class="form-control"
+            name="areaOfFocusForTomorrow"
+            id="field_areaOfFocusForTomorrow"
+            data-cy="areaOfFocusForTomorrow"
+            formControlName="areaOfFocusForTomorrow"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.tradeJournalPost.makePublicVisibleOnSite"
+            for="field_makePublicVisibleOnSite"
+            >Make Public Visible On Site</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="makePublicVisibleOnSite"
+            id="field_makePublicVisibleOnSite"
+            data-cy="makePublicVisibleOnSite"
+            formControlName="makePublicVisibleOnSite"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeJournalPost.anyMedia" for="field_anyMedia">Any Media</label>
+          <div>
+            <div *ngIf="editForm.get('anyMedia')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-left"
+                (click)="openFile(editForm.get('anyMedia')!.value, editForm.get('anyMediaContentType')!.value)"
+                jhiTranslate="entity.action.open"
+                >open</a
+              ><br />
+              <span class="pull-left"
+                >{{ editForm.get('anyMediaContentType')!.value }}, {{ byteSize(editForm.get('anyMedia')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="editForm.patchValue({ anyMedia: null }); editForm.patchValue({ anyMediaContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_anyMedia"
+              data-cy="anyMedia"
+              (change)="setFileData($event, 'anyMedia', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="anyMedia" id="field_anyMedia" data-cy="anyMedia" formControlName="anyMedia" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="anyMediaContentType"
+            id="field_anyMediaContentType"
+            formControlName="anyMediaContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeJournalPost.anyImage" for="field_anyImage">Any Image</label>
+          <div>
+            <img
+              [src]="'data:' + editForm.get('anyImageContentType')!.value + ';base64,' + editForm.get('anyImage')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('anyImage')!.value"
+              alt="tradeJournalPost image"
+            />
+            <div *ngIf="editForm.get('anyImage')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left"
+                >{{ editForm.get('anyImageContentType')!.value }}, {{ byteSize(editForm.get('anyImage')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('anyImage', 'anyImageContentType', 'file_anyImage')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_anyImage"
+              data-cy="anyImage"
+              (change)="setFileData($event, 'anyImage', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="anyImage" id="field_anyImage" data-cy="anyImage" formControlName="anyImage" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="anyImageContentType"
+            id="field_anyImageContentType"
+            formControlName="anyImageContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.tradeJournalPost.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

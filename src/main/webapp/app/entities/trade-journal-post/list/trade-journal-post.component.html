@@ -1,0 +1,167 @@
+<div>
+  <h2 id="page-heading" data-cy="TradeJournalPostHeading">
+    <span jhiTranslate="propfirmApp.tradeJournalPost.home.title">Trade Journal Posts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="propfirmApp.tradeJournalPost.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-trade-journal-post"
+        [routerLink]="['/trade-journal-post/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="propfirmApp.tradeJournalPost.home.createLabel"> Create a new Trade Journal Post </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tradeJournalPosts?.length === 0">
+    <span jhiTranslate="propfirmApp.tradeJournalPost.home.notFound">No tradeJournalPosts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="tradeJournalPosts && tradeJournalPosts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="postTitle">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.postTitle">Post Title</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateAdded">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.dateAdded">Date Added</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="thoughtsOnPsychology">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnPsychology">Thoughts On Psychology</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="thoughtsOnTradeProcessAccuracy">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnTradeProcessAccuracy">Thoughts On Trade Process Accuracy</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="thoughtsOnAreasOfStrength">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnAreasOfStrength">Thoughts On Areas Of Strength</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="thoughtsOnAreasForImprovement">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.thoughtsOnAreasForImprovement">Thoughts On Areas For Improvement</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="areaOfFocusForTomorrow">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.areaOfFocusForTomorrow">Area Of Focus For Tomorrow</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="makePublicVisibleOnSite">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.makePublicVisibleOnSite">Make Public Visible On Site</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="anyMedia">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.anyMedia">Any Media</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="anyImage">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.anyImage">Any Image</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="user.login">
+            <span jhiTranslate="propfirmApp.tradeJournalPost.user">User</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tradeJournalPost of tradeJournalPosts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/trade-journal-post', tradeJournalPost.id, 'view']">{{ tradeJournalPost.id }}</a>
+          </td>
+          <td>{{ tradeJournalPost.postTitle }}</td>
+          <td>{{ tradeJournalPost.dateAdded | formatMediumDatetime }}</td>
+          <td>{{ tradeJournalPost.thoughtsOnPsychology }}</td>
+          <td>{{ tradeJournalPost.thoughtsOnTradeProcessAccuracy }}</td>
+          <td>{{ tradeJournalPost.thoughtsOnAreasOfStrength }}</td>
+          <td>{{ tradeJournalPost.thoughtsOnAreasForImprovement }}</td>
+          <td>{{ tradeJournalPost.areaOfFocusForTomorrow }}</td>
+          <td>{{ tradeJournalPost.makePublicVisibleOnSite }}</td>
+          <td>
+            <a
+              *ngIf="tradeJournalPost.anyMedia"
+              (click)="openFile(tradeJournalPost.anyMedia, tradeJournalPost.anyMediaContentType)"
+              jhiTranslate="entity.action.open"
+              >open</a
+            >
+            <span *ngIf="tradeJournalPost.anyMedia"
+              >{{ tradeJournalPost.anyMediaContentType }}, {{ byteSize(tradeJournalPost.anyMedia) }}</span
+            >
+          </td>
+          <td>
+            <a *ngIf="tradeJournalPost.anyImage" (click)="openFile(tradeJournalPost.anyImage, tradeJournalPost.anyImageContentType)">
+              <img
+                [src]="'data:' + tradeJournalPost.anyImageContentType + ';base64,' + tradeJournalPost.anyImage"
+                style="max-height: 30px"
+                alt="tradeJournalPost image"
+              />
+            </a>
+            <span *ngIf="tradeJournalPost.anyImage"
+              >{{ tradeJournalPost.anyImageContentType }}, {{ byteSize(tradeJournalPost.anyImage) }}</span
+            >
+          </td>
+          <td>
+            {{ tradeJournalPost.user?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/trade-journal-post', tradeJournalPost.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/trade-journal-post', tradeJournalPost.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(tradeJournalPost)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="tradeJournalPosts && tradeJournalPosts.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

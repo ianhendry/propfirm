@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="siteAccount">
+      <h2 data-cy="siteAccountDetailsHeading"><span jhiTranslate="propfirmApp.siteAccount.detail.title">Site Account</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ siteAccount.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.siteAccount.accountName">Account Name</span></dt>
+        <dd>
+          <span>{{ siteAccount.accountName }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.siteAccount.userPicture">User Picture</span></dt>
+        <dd>
+          <div *ngIf="siteAccount.userPicture">
+            <a (click)="openFile(siteAccount.userPicture, siteAccount.userPictureContentType)">
+              <img
+                [src]="'data:' + siteAccount.userPictureContentType + ';base64,' + siteAccount.userPicture"
+                style="max-width: 100%"
+                alt="siteAccount image"
+              />
+            </a>
+            {{ siteAccount.userPictureContentType }}, {{ byteSize(siteAccount.userPicture) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.siteAccount.userBio">User Bio</span></dt>
+        <dd>
+          <span>{{ siteAccount.userBio }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.siteAccount.inActive">In Active</span></dt>
+        <dd>
+          <span>{{ siteAccount.inActive }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.siteAccount.inActiveDate">In Active Date</span></dt>
+        <dd>
+          <span>{{ siteAccount.inActiveDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.siteAccount.user">User</span></dt>
+        <dd>
+          <span>{{ siteAccount.user?.login }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.siteAccount.addressDetails">Address Details</span></dt>
+        <dd>
+          <div *ngIf="siteAccount.addressDetails">
+            <a [routerLink]="['/address-details', siteAccount.addressDetails?.id, 'view']">{{ siteAccount.addressDetails?.contactName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/site-account', siteAccount.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

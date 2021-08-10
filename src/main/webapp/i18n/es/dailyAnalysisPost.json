@@ -1,0 +1,35 @@
+{
+  "propfirmApp": {
+    "dailyAnalysisPost": {
+      "home": {
+        "title": "Daily Analysis Posts",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Daily Analysis Post",
+        "createOrEditLabel": "Crear o editar Daily Analysis Post",
+        "notFound": "Ningún Daily Analysis Posts encontrado"
+      },
+      "created": "Un nuevo Daily Analysis Post ha sido creado con el identificador {{ param }}",
+      "updated": "Un Daily Analysis Post ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Daily Analysis Post ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Daily Analysis Post {{ id }}?"
+      },
+      "detail": {
+        "title": "Daily Analysis Post"
+      },
+      "id": "ID",
+      "postTitle": "Post Title",
+      "dateAdded": "Date Added",
+      "backgroundVolume": "Background Volume",
+      "overallThoughts": "Overall Thoughts",
+      "weeklyChart": "Weekly Chart",
+      "dailyChart": "Daily Chart",
+      "oneHrChart": "One Hr Chart",
+      "planForToday": "Plan For Today",
+      "makePublicVisibleOnSite": "Make Public Visible On Site",
+      "instrument": "Instrument",
+      "user": "User",
+      "userComment": "User Comment"
+    }
+  }
+}

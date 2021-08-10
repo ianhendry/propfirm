@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="instrument">
+      <h2 data-cy="instrumentDetailsHeading"><span jhiTranslate="propfirmApp.instrument.detail.title">Instrument</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ instrument.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.instrument.ticker">Ticker</span></dt>
+        <dd>
+          <span>{{ instrument.ticker }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.instrument.instrumentType">Instrument Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'propfirmApp.INSTRUMENTTYPE.' + instrument.instrumentType }}">{{ instrument.instrumentType }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.instrument.exchange">Exchange</span></dt>
+        <dd>
+          <span>{{ instrument.exchange }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.instrument.averageSpread">Average Spread</span></dt>
+        <dd>
+          <span>{{ instrument.averageSpread }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.instrument.tradeRestrictions">Trade Restrictions</span></dt>
+        <dd>
+          <span>{{ instrument.tradeRestrictions }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.instrument.inActive">In Active</span></dt>
+        <dd>
+          <span>{{ instrument.inActive }}</span>
+        </dd>
+        <dt><span jhiTranslate="propfirmApp.instrument.inActiveDate">In Active Date</span></dt>
+        <dd>
+          <span>{{ instrument.inActiveDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/instrument', instrument.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

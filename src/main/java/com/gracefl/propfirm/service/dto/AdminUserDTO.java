@@ -47,6 +47,8 @@ public class AdminUserDTO {
     private Instant lastModifiedDate;
 
     private Set<String> authorities;
+    
+    private String accountType;
 
     public AdminUserDTO() {
         // Empty constructor needed for Jackson.
@@ -172,7 +174,16 @@ public class AdminUserDTO {
         this.authorities = authorities;
     }
 
-    // prettier-ignore
+    
+    public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	// prettier-ignore
     @Override
     public String toString() {
         return "AdminUserDTO{" +
@@ -188,6 +199,7 @@ public class AdminUserDTO {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", accountType=" + accountType +
             "}";
     }
 }

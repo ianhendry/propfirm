@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity AccountDataTimeSeries.
+    -->
+    <changeSet id="20210719001040-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="mt4account_id"
+                                 baseTableName="account_data_time_series"
+                                 constraintName="fk_account_data_time_series__mt4account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="mt_4_account"/>
+        <addUniqueConstraint tableName="account_data_time_series" columnNames="date_stamp, mt4account_id"/>
+    </changeSet>
+</databaseChangeLog>

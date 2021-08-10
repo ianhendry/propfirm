@@ -1,0 +1,316 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-daily-analysis-post-heading"
+        data-cy="DailyAnalysisPostCreateUpdateHeading"
+        jhiTranslate="propfirmApp.dailyAnalysisPost.home.createOrEditLabel"
+      >
+        Create or edit a Daily Analysis Post
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.postTitle" for="field_postTitle">Post Title</label>
+          <input type="text" class="form-control" name="postTitle" id="field_postTitle" data-cy="postTitle" formControlName="postTitle" />
+          <div *ngIf="editForm.get('postTitle')!.invalid && (editForm.get('postTitle')!.dirty || editForm.get('postTitle')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('postTitle')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.dateAdded" for="field_dateAdded">Date Added</label>
+          <div class="d-flex">
+            <input
+              id="field_dateAdded"
+              data-cy="dateAdded"
+              type="datetime-local"
+              class="form-control"
+              name="dateAdded"
+              formControlName="dateAdded"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('dateAdded')!.invalid && (editForm.get('dateAdded')!.dirty || editForm.get('dateAdded')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateAdded')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('dateAdded')?.errors?.ZonedDateTimelocal"
+              jhiTranslate="entity.validation.ZonedDateTimelocal"
+            >
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.backgroundVolume" for="field_backgroundVolume"
+            >Background Volume</label
+          >
+          <textarea
+            class="form-control"
+            name="backgroundVolume"
+            id="field_backgroundVolume"
+            data-cy="backgroundVolume"
+            formControlName="backgroundVolume"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.overallThoughts" for="field_overallThoughts"
+            >Overall Thoughts</label
+          >
+          <textarea
+            class="form-control"
+            name="overallThoughts"
+            id="field_overallThoughts"
+            data-cy="overallThoughts"
+            formControlName="overallThoughts"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.weeklyChart" for="field_weeklyChart"
+            >Weekly Chart</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('weeklyChartContentType')!.value + ';base64,' + editForm.get('weeklyChart')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('weeklyChart')!.value"
+              alt="dailyAnalysisPost image"
+            />
+            <div *ngIf="editForm.get('weeklyChart')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left"
+                >{{ editForm.get('weeklyChartContentType')!.value }}, {{ byteSize(editForm.get('weeklyChart')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('weeklyChart', 'weeklyChartContentType', 'file_weeklyChart')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_weeklyChart"
+              data-cy="weeklyChart"
+              (change)="setFileData($event, 'weeklyChart', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="weeklyChart"
+            id="field_weeklyChart"
+            data-cy="weeklyChart"
+            formControlName="weeklyChart"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="weeklyChartContentType"
+            id="field_weeklyChartContentType"
+            formControlName="weeklyChartContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.dailyChart" for="field_dailyChart"
+            >Daily Chart</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('dailyChartContentType')!.value + ';base64,' + editForm.get('dailyChart')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('dailyChart')!.value"
+              alt="dailyAnalysisPost image"
+            />
+            <div *ngIf="editForm.get('dailyChart')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left"
+                >{{ editForm.get('dailyChartContentType')!.value }}, {{ byteSize(editForm.get('dailyChart')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('dailyChart', 'dailyChartContentType', 'file_dailyChart')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_dailyChart"
+              data-cy="dailyChart"
+              (change)="setFileData($event, 'dailyChart', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="dailyChart"
+            id="field_dailyChart"
+            data-cy="dailyChart"
+            formControlName="dailyChart"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="dailyChartContentType"
+            id="field_dailyChartContentType"
+            formControlName="dailyChartContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.oneHrChart" for="field_oneHrChart"
+            >One Hr Chart</label
+          >
+          <div>
+            <img
+              [src]="'data:' + editForm.get('oneHrChartContentType')!.value + ';base64,' + editForm.get('oneHrChart')!.value"
+              style="max-height: 100px"
+              *ngIf="editForm.get('oneHrChart')!.value"
+              alt="dailyAnalysisPost image"
+            />
+            <div *ngIf="editForm.get('oneHrChart')!.value" class="form-text text-danger clearfix">
+              <span class="pull-left"
+                >{{ editForm.get('oneHrChartContentType')!.value }}, {{ byteSize(editForm.get('oneHrChart')!.value) }}</span
+              >
+              <button
+                type="button"
+                (click)="clearInputImage('oneHrChart', 'oneHrChartContentType', 'file_oneHrChart')"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_oneHrChart"
+              data-cy="oneHrChart"
+              (change)="setFileData($event, 'oneHrChart', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <input
+            type="hidden"
+            class="form-control"
+            name="oneHrChart"
+            id="field_oneHrChart"
+            data-cy="oneHrChart"
+            formControlName="oneHrChart"
+          />
+          <input
+            type="hidden"
+            class="form-control"
+            name="oneHrChartContentType"
+            id="field_oneHrChartContentType"
+            formControlName="oneHrChartContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.planForToday" for="field_planForToday"
+            >Plan For Today</label
+          >
+          <textarea
+            class="form-control"
+            name="planForToday"
+            id="field_planForToday"
+            data-cy="planForToday"
+            formControlName="planForToday"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="propfirmApp.dailyAnalysisPost.makePublicVisibleOnSite"
+            for="field_makePublicVisibleOnSite"
+            >Make Public Visible On Site</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="makePublicVisibleOnSite"
+            id="field_makePublicVisibleOnSite"
+            data-cy="makePublicVisibleOnSite"
+            formControlName="makePublicVisibleOnSite"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.instrument" for="field_instrument"
+            >Instrument</label
+          >
+          <select class="form-control" id="field_instrument" data-cy="instrument" name="instrument" formControlName="instrument">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                instrumentOption.id === editForm.get('instrument')!.value?.id ? editForm.get('instrument')!.value : instrumentOption
+              "
+              *ngFor="let instrumentOption of instrumentsSharedCollection; trackBy: trackInstrumentById"
+            >
+              {{ instrumentOption.ticker }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="propfirmApp.dailyAnalysisPost.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

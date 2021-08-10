@@ -1,0 +1,32 @@
+{
+  "propfirmApp": {
+    "accountDataTimeSeries": {
+      "home": {
+        "title": "AccountDataTimeSeries",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Account Data Time Series",
+        "createOrEditLabel": "Créer ou éditer un Account Data Time Series",
+        "notFound": "Aucun Account Data Time Series trouvé"
+      },
+      "created": "Un nouveau Account Data Time Series a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Account Data Time Series avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Account Data Time Series avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Account Data Time Series {{ id }} ?"
+      },
+      "detail": {
+        "title": "Account Data Time Series"
+      },
+      "id": "ID",
+      "dateStamp": "Date Stamp",
+      "accountBalance": "Account Balance",
+      "accountEquity": "Account Equity",
+      "accountCredit": "Account Credit",
+      "accountFreeMargin": "Account Free Margin",
+      "accountStopoutLevel": "Account Stopout Level",
+      "openLots": "Open Lots",
+      "openNumberOfTrades": "Open Number Of Trades",
+      "mt4Account": "Mt 4 Account"
+    }
+  }
+}

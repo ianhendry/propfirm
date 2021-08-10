@@ -1,0 +1,9 @@
+{
+  "propfirmApp": {
+    "ACCOUNTTYPE": {
+      "null": "",
+      "REAL": "REAL",
+      "DEMO": "DEMO"
+    }
+  }
+}

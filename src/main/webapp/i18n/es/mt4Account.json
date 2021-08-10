@@ -1,0 +1,54 @@
+{
+  "propfirmApp": {
+    "mt4Account": {
+      "home": {
+        "title": "Mt 4 Accounts",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Mt 4 Account",
+        "createOrEditLabel": "Crear o editar Mt 4 Account",
+        "notFound": "Ningún Mt 4 Accounts encontrado"
+      },
+      "created": "Un nuevo Mt 4 Account ha sido creado con el identificador {{ param }}",
+      "updated": "Un Mt 4 Account ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Mt 4 Account ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Mt 4 Account {{ id }}?"
+      },
+      "detail": {
+        "title": "Mt 4 Account"
+      },
+      "id": "ID",
+      "accountType": "Account Type",
+      "accountBroker": "Account Broker",
+      "accountLogin": "Account Login",
+      "accountPassword": "Account Password",
+      "accountInvestorLogin": "Account Investor Login",
+      "accountInvestorPassword": "Account Investor Password",
+      "accountReal": "Account Real",
+      "accountInfoDouble": "Account Info Double",
+      "accountInfoInteger": "Account Info Integer",
+      "accountInfoString": "Account Info String",
+      "accountBalance": "Account Balance",
+      "accountCredit": "Account Credit",
+      "accountCompany": "Account Company",
+      "accountCurrency": "Account Currency",
+      "accountEquity": "Account Equity",
+      "accountFreeMargin": "Account Free Margin",
+      "accountFreeMarginCheck": "Account Free Margin Check",
+      "accountFreeMarginMode": "Account Free Margin Mode",
+      "accountLeverage": "Account Leverage",
+      "accountMargin": "Account Margin",
+      "accountName": "Account Name",
+      "accountNumber": "Account Number",
+      "accountProfit": "Account Profit",
+      "accountServer": "Account Server",
+      "accountStopoutLevel": "Account Stopout Level",
+      "accountStopoutMode": "Account Stopout Mode",
+      "inActive": "In Active",
+      "inActiveDate": "In Active Date",
+      "tradeChallenge": "Trade Challenge",
+      "mt4Trade": "Mt 4 Trade",
+      "accountDataTimeSeries": "Account Data Time Series"
+    }
+  }
+}

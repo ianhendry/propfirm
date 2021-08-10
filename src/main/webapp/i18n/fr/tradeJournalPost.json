@@ -1,0 +1,36 @@
+{
+  "propfirmApp": {
+    "tradeJournalPost": {
+      "home": {
+        "title": "TradeJournalPosts",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Trade Journal Post",
+        "createOrEditLabel": "Créer ou éditer un Trade Journal Post",
+        "notFound": "Aucun Trade Journal Post trouvé"
+      },
+      "created": "Un nouveau Trade Journal Post a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Trade Journal Post avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Trade Journal Post avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Trade Journal Post {{ id }} ?"
+      },
+      "detail": {
+        "title": "Trade Journal Post"
+      },
+      "id": "ID",
+      "postTitle": "Post Title",
+      "dateAdded": "Date Added",
+      "thoughtsOnPsychology": "Thoughts On Psychology",
+      "thoughtsOnTradeProcessAccuracy": "Thoughts On Trade Process Accuracy",
+      "thoughtsOnAreasOfStrength": "Thoughts On Areas Of Strength",
+      "thoughtsOnAreasForImprovement": "Thoughts On Areas For Improvement",
+      "areaOfFocusForTomorrow": "Area Of Focus For Tomorrow",
+      "makePublicVisibleOnSite": "Make Public Visible On Site",
+      "anyMedia": "Any Media",
+      "anyImage": "Any Image",
+      "user": "User",
+      "mt4Trade": "Mt 4 Trade",
+      "userComment": "User Comment"
+    }
+  }
+}

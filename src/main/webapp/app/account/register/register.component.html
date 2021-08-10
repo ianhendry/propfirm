@@ -1,10 +1,10 @@
 <div>
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h1 jhiTranslate="register.title" data-cy="registerTitle">Registration</h1>
+      <h1>Registering for a {{this.pathway}}K Account</h1>
 
       <div class="alert alert-success" *ngIf="success" jhiTranslate="register.messages.success">
-        <strong>Registration saved!</strong> Please check your email for confirmation.
+        <strong>Registration sucessful!</strong> Please check your email for confirmation link to activate your account.
       </div>
 
       <div class="alert alert-danger" *ngIf="error" jhiTranslate="register.messages.error.fail">
@@ -212,25 +212,33 @@
           </div>
         </div>
 
-        <button
-          type="submit"
-          [disabled]="registerForm.invalid"
-          class="btn btn-primary"
-          jhiTranslate="register.form.button"
-          data-cy="submit"
-        >
-          Register
-        </button>
+		<!-- agree to the terms and conditions -->
+		<div class="mt-3 alert alert-warning">
+			<div class="form-group">
+				<label class="form-control-label" for="agreeDrawdownDefinition"
+					jhiTranslate="global.form.confirmdrawdown.label">Please confirm you understand and agree with
+					the rules</label>
+				<input type="checkbox" class="form-control" id="agreeDrawdownDefinition"
+					name="agreeDrawdownDefinition"
+					placeholder="{{ 'global.form.agreeDrawdownDefinition.placeholder' | translate }}"
+					formControlName="agreeDrawdownDefinition" />
+				Read this and confirm you agree with it
+			</div>
+		</div>
+		<!-- payment details -->
+		<div class="mt-3 alert alert-warning">
+			credit card details
+		
+		</div>
+		<button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary"
+			jhiTranslate="register.form.button" data-cy="submit">
+	      Register
+	    </button>
+
       </form>
 
-      <div class="mt-3 alert alert-warning">
-        <span jhiTranslate="global.messages.info.authenticated.prefix">If you want to </span>
-        <a class="alert-link" routerLink="/login" jhiTranslate="global.messages.info.authenticated.link">sign in</a
-        ><span jhiTranslate="global.messages.info.authenticated.suffix"
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
+	  
+
     </div>
   </div>
 </div>

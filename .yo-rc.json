@@ -43,7 +43,21 @@
     "devServerPort": 4200,
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": [
+      "SiteAccount",
+      "ChallengeType",
+      "Mt4Account",
+      "AddressDetails",
+      "TradeChallenge",
+      "TradeJournalPost",
+      "Instrument",
+      "DailyAnalysisPost",
+      "UserComment",
+      "Mt4Trade",
+      "AccountDataTimeSeries"
+    ],
+    "lastLiquibaseTimestamp": 1626653440000
   },
   "git-provider": "GitHub",
   "git-company": "ianhendry",
